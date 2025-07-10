@@ -48,7 +48,7 @@ cat ~/.ssh/id_ed25519.pub
 
 ```bash
 cd ~/ros2_ws/src
-git clone git@github.com:jack0682/LM_project_ver1.0.git
+git clone git@github.com:jack0682/ROKEY_D_1.git
 cd LM_project_ver1.0
 ```
 
