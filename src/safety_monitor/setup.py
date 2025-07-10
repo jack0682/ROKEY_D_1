@@ -1,25 +1,26 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 
 package_name = 'safety_monitor'
 
 setup(
     name=package_name,
-    version='0.0.0',
-    packages=find_packages(exclude=['test']),
+    version='0.0.1',
+    packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+         ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='jack',
-    maintainer_email='jack0682@github.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer_email='jack@example.com',
+    description='TurtleBot4 별 모양 이동 노드',
+    license='MIT',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'drive_star = safety_monitor.drive:main',
         ],
     },
 )

@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/jack/turtlebot_ws/build/safety_monitor",
+        "/home/jack/turtlebot_ws/install/safety_monitor/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/jack/turtlebot_ws/build/safety_monitor",
+        "/home/jack/turtlebot_ws/install/safety_monitor/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

@@ -28,7 +28,7 @@ class StarMover(Node):
 
     def draw_star(self, edges=5):
         for _ in range(edges):
-            self.move_forward(1.5)      # 0.3m 이동
+            self.move_forward(3.0)      # 0.3m 이동
             self.rotate(5.0)           # 144도 회전
 
 def main():

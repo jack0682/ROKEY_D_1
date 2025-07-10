@@ -1,16 +1,18 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>safety_monitor</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="jack0682@github.com">jack</maintainer>
-  <license>TODO: License declaration</license>
+  <version>0.0.1</version>
+  <description>TurtleBot4 별 모양 경로 주행 노드</description>
+  <maintainer email="jack@example.com">jack</maintainer>
+  <license>MIT</license>
 
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
   <export>
     <build_type>ament_python</build_type>
