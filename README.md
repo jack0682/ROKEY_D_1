@@ -58,14 +58,13 @@ TurtleBot4과 RGB-D 센서, 천장 고정형 웹캠을 활용하여 **실내 위
 
 ### (2) 하드웨어 구성
 
-#### 🤖 TurtleBot4
-- RGB-D 카메라
-- 내장 IMU
-- ROS 2 (Humble) 기반 자율주행 플랫폼
-
-#### 📷 고정형 웹캠
-- 천장 중앙 고정
-- 실시간 보조 시야 제공 (전역 맥락 파악)
+| 항목          | 내용                               |
+|---------------|------------------------------------|
+| OS            | Ubuntu 22.04                       |
+| ROS 2         | Humble Hawksbill                   |
+| 로봇 모델     | TurtleBot4 Burger                  |
+| 센서          | OAK-D pro / USB Webcam / RPLIDAR      |
+| 관련 패키지   | `realsense2_camera`, `nav2_bringup`, `tf2_ros` 등 |
 
 ---
 
