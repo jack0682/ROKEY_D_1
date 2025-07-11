@@ -1,0 +1,14 @@
+train: images/train
+val: images/val
+test: images/test
+
+nc: 1
+names: ['Puddle']
+
+
+roboflow:
+  workspace: ros2ws-zjf2p
+  project: puddles-detect-uthbd
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/ros2ws-zjf2p/puddles-detect-uthbd/dataset/1
