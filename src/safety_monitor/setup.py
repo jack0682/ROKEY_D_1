@@ -19,7 +19,7 @@ setup(
     license='MIT',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
+    'console_scripts': [
             'drive_star = safety_monitor.drive:main',
         ],
     },
