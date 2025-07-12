@@ -1,12 +1,11 @@
 
 ##  실험 자동화 시스템 설명서
 
-아래는 `/home/jack/yolo_experiments_ws/`를 기준으로,
+아래는 /home/jack/yolo_experiments_ws/를 기준으로,
 **실험 준비 → 빌드 → 실행 → 로그 분석**까지 전 과정을 안내하는 `README.md` 템플릿입니다:
 
 ---
 
-```markdown
 #  YOLOv7 / YOLOv8 / YOLOv11 ROS2 실험 자동화 시스템
 
 본 프로젝트는 YOLOv7, YOLOv8, YOLOv11 모델을 각각 ROS2 패키지로 구성하여,  
@@ -17,7 +16,7 @@ TurtleBot4의 OAK-D RGB 카메라로부터 실시간 영상을 입력받아 객�
 
 ##  디렉토리 구조
 
-```
+```bash
 
 yolo\_experiments\_ws/
 ├── src/
@@ -34,11 +33,11 @@ yolo\_experiments\_ws/
 ├── logs/                    # 프레임별 성능 로그 자동 저장
 └── README.md
 
-````
+```
 
 ---
 
-## ⚙️ 빌드 방법
+##  빌드 방법
 
 ROS2 Foxy 이상 환경에서 아래 명령어로 빌드합니다:
 
@@ -56,7 +55,7 @@ ros2 pkg list | grep yolov
 
 ---
 
-## 🚀 실험 실행 방법
+##  실험 실행 방법
 
 ### 1. 로봇 및 카메라 준비
 
@@ -80,7 +79,7 @@ ros2 launch yolo_experiments_ws batch_eval.launch.py
 
 ---
 
-## 📊 성능 결과 확인
+##  성능 결과 확인
 
 ### 1. 로그 위치
 
@@ -108,7 +107,7 @@ frame_id,timestamp,infer_time_ms,num_detections
 
 ---
 
-## 📌 주의 사항
+##  주의 사항
 
 * `image_topic`, `model_path`는 각 노드에서 파라미터로 선언되어 있으며, launch 파일에서 지정 가능합니다
 * 성능 평가는 **GPU 사양**, **입력 프레임 해상도**, **네트워크 지연** 등에 따라 달라질 수 있습니다
@@ -116,7 +115,7 @@ frame_id,timestamp,infer_time_ms,num_detections
 
 ---
 
-## 📈 확장 가능성
+##  확장 가능성
 
 * `/depth/image_raw`를 활용한 Crack 실면적 계산 (CrackEstimate.msg)
 * 로그 비교를 위한 시각화 스크립트 추가
@@ -125,7 +124,7 @@ frame_id,timestamp,infer_time_ms,num_detections
 
 ---
 
-## 🧠 저자
+##  저자
 
 * 실험 설계: \[jack\@turtlebot-lab]
 * 알고리즘: YOLOv7, YOLOv8, YOLOv11 (Ultralytics)
