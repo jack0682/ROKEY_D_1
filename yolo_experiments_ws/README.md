@@ -36,6 +36,46 @@ yolo\_experiments\_ws/
 
 ---
 
+### 📦 ROS2 Humble + YOLO 실험 환경 설치
+
+다음 명령어를 순서대로 실행하여 전체 의존성을 설치하세요:
+
+```bash
+# 1. ROS2 Humble 필수 패키지 설치 (CV + 메시지 통신 + rclpy)
+sudo apt update
+sudo apt install -y \
+  python3-pip \
+  python3-colcon-common-extensions \
+  python3-rosdep \
+  ros-humble-cv-bridge \
+  ros-humble-rclpy \
+  ros-humble-sensor-msgs \
+  ros-humble-std-msgs
+
+# 2. Python 패키지 설치 (YOLO + OpenCV + 로그 분석 등)
+pip3 install -r requirements.txt
+
+# 3. workspace 빌드
+cd ~/yolo_experiments_ws
+colcon build --symlink-install
+
+# 4. 환경 설정 (매 터미널에서 실행 필요)
+source install/setup.bash
+```
+
+---
+
+##  추가 팁: rosdep 사용 시
+
+처음 ROS2 워크스페이스를 설정할 경우 한 번은 `rosdep` 초기화가 필요합니다:
+
+```bash
+sudo rosdep init
+rosdep update
+```
+
+---
+
 ##  빌드 방법
 
 ROS2 Foxy 이상 환경에서 아래 명령어로 빌드합니다:
