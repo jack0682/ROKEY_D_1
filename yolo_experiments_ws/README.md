@@ -1,8 +1,7 @@
 
 ##  실험 자동화 시스템 설명서
 
-아래는 /home/jack/yolo_experiments_ws/를 기준으로,
-**실험 준비 → 빌드 → 실행 → 로그 분석**까지 전 과정을 안내하는 `README.md` 템플릿입니다:
+아래는 /home/jack/yolo_experiments_ws/를 기준으로, 만들어졌습니다. 환경에 맞게 세팅해주세요
 
 ---
 
