@@ -123,15 +123,5 @@ frame_id,timestamp,infer_time_ms,num_detections
 
 ---
 
-##  저자
 
-* 실험 설계: \[jack\@turtlebot-lab]
-* 알고리즘: YOLOv7, YOLOv8, YOLOv11 (Ultralytics)
-* ROS2 자동화: Python + launch API
-
-
-
-## 🔗 라이선스
-
-MIT License (모델 별도 라이선스 참고)
 
