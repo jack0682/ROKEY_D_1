@@ -94,3 +94,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+#[WARN] [1752496626.114247015] [robot1.tf_point_transform]: Cannot transform from base_link to map
+
