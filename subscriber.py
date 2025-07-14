@@ -39,28 +39,32 @@ class TfPointTransform(Node):
 
     def timer_callback(self):
         try:
-            # base_link 기준 포인트 생성
+            if self.latest_depth is None or self.latest_width is None:
+                self.get_logger().warn("아직 위치 데이터를 수신하지 못했습니다.")
+                return
+
             point_base = PointStamped()
-            point_base.header.stamp = rclpy.time.Time().to_msg()
+            point_base.header.stamp = self.get_clock().now().to_msg()
             point_base.header.frame_id = 'base_link'
-            point_base.point.x = 0.0 #1m 앞
+            point_base.point.x = 0.0
             point_base.point.y = 0.0
             point_base.point.z = 0.0
 
-            # base_link → map 변환
             try:
                 point_map = self.tf_buffer.transform(
                     point_base,
                     'map',
                     timeout=rclpy.duration.Duration(seconds=0.5)
                 )
+                # [TF 변환 성공 시]
                 self.get_logger().info(f"[Base_link] ({point_base.point.x:.2f}, {point_base.point.y:.2f}, {point_base.point.z:.2f})")
-                self.get_logger().info(f"[Map]       ({(point_map.point.x+self.latest_depth):.2f}, {(point_map.point.y+self.latest_width):.2f}, {point_map.point.z:.2f})")
+                self.get_logger().info(f"[Map]       ({(point_map.point.x + self.latest_depth):.2f}, {(point_map.point.y + self.latest_width):.2f}, {point_map.point.z:.2f})")
             except Exception as e:
-                self.get_logger().warn(f"TF transform to map failed: {e}")
+                self.get_logger().warn(f"⚠️ TF transform to map failed: {e}")
 
         except Exception as e:
             self.get_logger().warn(f"Unexpected error: {e}")
+
 
 def main():
     rclpy.init()
