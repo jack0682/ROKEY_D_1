@@ -13,7 +13,7 @@ from ultralytics import YOLO
 # ========================
 # 상수 정의
 # ========================
-MODEL_PATH        = '/home/okj1812/Downloads/best.pt'
+MODEL_PATH        = '/home/kunwookpark/rokey_ws/src/rokey_pjt/rokey_pjt/best.pt'
 COLOR_TOPIC       = '/robot1/oakd/rgb/preview/image_raw'
 DEPTH_TOPIC       = '/robot1/oakd/stereo/image_raw'
 TARGET_CLASS_ID   = 0       # 예: car=0
@@ -84,6 +84,17 @@ class YoloDepthNode(Node):
                 cv2.circle(img, (cx,cy), 4, (0,255,0), -1)
                 cv2.putText(img, f"{depth_m:.2f}m", (cx+5, cy-5),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
+
+#______________________________________________________________
+                width = abs(x2-x1)
+                hight = abs(y2-y1)
+                pixel_width = max(width, hight)
+                cm_per_pixel = 0.1 * depth_m + 0.002
+                real_width_cm = pixel_width * cm_per_pixel * 0.9
+                cv2.putText(img, f"distance:{depth_m:.2f}m width:{real_width_cm:.2f}cm", (x1, y2+25), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 1)
+                print(f"The distance to the crack is {depth_m:.2f}m")
+#______________________________________________________________
+
 
         # 화면에 표시
         cv2.imshow("YOLO+Depth", cv2.resize(img, (img.shape[1]*2, img.shape[0]*2)))
