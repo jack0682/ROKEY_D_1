@@ -1,0 +1,5 @@
+topo_moment_tracker:
+  ros__parameters:
+    input_topic: "/puddle_array"
+    output_topic: "/puddle_tracking"
+    distance_threshold: 1.5  # 총합 유사도 거리 임계값 (Hu + Euler + Geo)

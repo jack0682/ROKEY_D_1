@@ -1,0 +1,25 @@
+viz_node:
+  ros__parameters:
+
+    marker_namespace: "puddles"
+
+    color_safe:
+      r: 0.0
+      g: 1.0
+      b: 0.0
+      a: 0.7
+
+    color_risk:
+      r: 1.0
+      g: 0.0
+      b: 0.0
+      a: 0.8
+
+    marker_scale:
+      x: 0.3
+      y: 0.3
+      z: 0.05
+
+    text_scale: 0.2
+
+    lifetime_sec: 3.0

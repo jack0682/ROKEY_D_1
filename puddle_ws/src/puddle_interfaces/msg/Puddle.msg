@@ -1,0 +1,10 @@
+int32 id
+float64 x
+float64 y
+float64 z
+float64 area
+string shape_hash
+float64 euler_char
+float64[] hu_moments
+int32 risk_level
+builin_interfaces/Time timestamp
