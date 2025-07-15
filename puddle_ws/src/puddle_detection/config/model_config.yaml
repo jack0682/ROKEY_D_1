@@ -1,0 +1,5 @@
+agsenet_node:
+  ros__parameters:
+    image_topic: "/oakd/rgb/preview/image_raw"
+    model_path: "/home/jack/turtlebot4_ws/src/puddle_detection/models/best.pt"
+    threshold: 0.5
