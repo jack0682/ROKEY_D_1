@@ -4,7 +4,7 @@
 
 #  GitHub 협업 매뉴얼 (Ubuntu 22.04 + ROS2 Humble 개발 환경 기준)
 
-*LM\_project.ver1.0 팀 전용 Git 사용법*
+* 팀 전용 Git 사용법*
 
 ---
 
