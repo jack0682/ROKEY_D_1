@@ -15,6 +15,24 @@ from geometry_msgs.msg import PointStamped
 import tf2_ros
 import tf2_geometry_msgs  # 꼭 필요
 
+#7.16
+from rclpy.qos import QoSDurabilityPolicy
+from rclpy.qos import QoSHistoryPolicy
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSReliabilityPolicy
+
+MARKER_TOPIC = 'detected_objects_marker'
+MAP_TOPIC = 'map_points'
+
+
+qos_profile = QoSProfile(
+    reliability=QoSReliabilityPolicy.RELIABLE, 
+    history=QoSHistoryPolicy.KEEP_LAST,
+    depth=10, 
+    durability=QoSDurabilityPolicy.TRANSIENT_LOCAL
+    )
+
+
 
 # ========================
 # 설정
@@ -26,6 +44,7 @@ CAMERA_INFO_TOPIC = '/robot3/oakd/stereo/camera_info'
 TARGET_CLASS_ID = 0
 NORMALIZE_DEPTH_RANGE = 3.0
 WINDOW_NAME = 'YOLO Detection'
+
 
 # ========================
 # 노드 정의
@@ -69,6 +88,9 @@ class DetectWithDepthWithTf(Node):
         self.rgb_img_subscription = self.create_subscription(Image, IMAGE_TOPIC, self.image_callback, 10)
         self.stereo_img_subscription = self.create_subscription(Image, DEPTH_TOPIC, self.depth_callback, 10)
         self.camera_info_subscription = self.create_subscription(CameraInfo, CAMERA_INFO_TOPIC, self.camera_info_callback, 10)
+
+        # 7.16
+        self.map_point_pub = self.create_publisher(PointStamped, MAP_TOPIC, qos_profile)
 
         # 백그라운드 스레드 시작
         self.worker_thread = threading.Thread(target=self.visualization_loop)
@@ -131,13 +153,14 @@ class DetectWithDepthWithTf(Node):
             for r in results:
                 for box in r.boxes:
                     cls = int(box.cls[0])
-                    if cls not in [0, 1]:
+                    if cls not in [2]:
                         continue
 
                     x1, y1, x2, y2 = map(int, box.xyxy[0])
                     conf = math.ceil(box.conf[0] * 100) / 100
                     label = self.class_names[cls] if cls < len(self.class_names) else f"class_{cls}"
-
+                    if conf < 0.5:
+                        continue
                     self.detect_cx = int((x1 + x2) / 2)
                     self.detect_cy = int((y1 + y2) / 2)
 
@@ -149,6 +172,61 @@ class DetectWithDepthWithTf(Node):
                         cv2.circle(depth_colored, (self.detect_cx, self.detect_cy), 5, (0, 0, 0), -1)
                         cv2.putText(frame, f"{label}: {conf}, {distance_m:.2f}m", (x1, y1 - 10),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
+                        
+                                # camera_info
+                        fx = self.K[0,0]
+                        fy = self.K[1,1]
+                        cy = self.K[1,2]
+                        cx = self.K[0,2]
+                        depth_mm = self.depth_mm.copy()
+
+                        X = (self.detect_cx - cx) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fx
+                        Y = (self.detect_cy - cy) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fy
+                        Z = (depth_mm[self.detect_cy, self.detect_cx] / 1000.0)
+
+                        try:
+                            # base_link 기준 포인트 생성
+                            point_base = PointStamped()
+                            point_base.header.stamp = rclpy.time.Time().to_msg()
+                            point_base.header.frame_id = 'base_link'
+                            # point_base.point.x = 1.0 #1m 앞
+                            # point_base.point.y = 0.0
+                            # point_base.point.z = 0.0
+                            point_base.point.x = X
+                            point_base.point.y = Y
+                            point_base.point.z = Z
+
+                            # map point
+                            point_map_send_data = PointStamped()
+
+                            # base_link → map 변환
+                            try:
+                                point_map = self.tf_buffer.transform(
+                                    point_base,
+                                    'map',
+                                    timeout=rclpy.duration.Duration(seconds=0.5)
+                                )
+                                self.get_logger().info(f"[Base_link] ({point_base.point.x:.2f}, {point_base.point.y:.2f}, {point_base.point.z:.2f})")
+                                self.get_logger().info(f"[Map]       ({point_map.point.x:.2f}, {point_map.point.y:.2f}, {point_map.point.z:.2f})")
+
+
+
+                                point_map_send_data.header.stamp = rclpy.time.Time().to_msg()
+                                point_map_send_data.header.frame_id = 'map'
+                                point_map_send_data.point.x = point_map.point.x
+                                point_map_send_data.point.y = point_map.point.y
+                                point_map_send_data.point.z = point_map.point.z   
+                                
+                                self.map_point_pub.publish(point_map_send_data)
+                            except Exception as e:
+                                self.get_logger().warn(f"TF transform to map failed: {e}")
+
+                        except Exception as e:
+                            self.get_logger().warn(f"Unexpected error: {e}")
+
+
+
+
 
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
                     object_count += 1
@@ -169,51 +247,64 @@ class DetectWithDepthWithTf(Node):
         self.get_logger().info("TF Tree 안정화 완료. 변환 시작합니다.")
 
         # 주기적 변환 타이머 등록
-        self.transform_timer = self.create_timer(2.0, self.timer_callback)
+        # self.transform_timer = self.create_timer(2.0, self.timer_callback)
 
         # 시작 타이머 중지 (한 번만 실행)
         self.start_timer.cancel()
 
 
 
-    def timer_callback(self):
-        # camera_info
-        fx = self.K[0,0]
-        fy = self.K[1,1]
-        cy = self.K[1,2]
-        cx = self.K[0,2]
-        depth_mm = self.depth_mm.copy()
+    # def timer_callback(self):
+    #     # camera_info
+    #     fx = self.K[0,0]
+    #     fy = self.K[1,1]
+    #     cy = self.K[1,2]
+    #     cx = self.K[0,2]
+    #     depth_mm = self.depth_mm.copy()
 
-        X = (self.detect_cx - cx) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fx
-        Y = (self.detect_cy - cy) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fy
-        Z = (depth_mm[self.detect_cy, self.detect_cx] / 1000.0)
+    #     X = (self.detect_cx - cx) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fx
+    #     Y = (self.detect_cy - cy) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fy
+    #     Z = (depth_mm[self.detect_cy, self.detect_cx] / 1000.0)
 
-        try:
-            # base_link 기준 포인트 생성
-            point_base = PointStamped()
-            point_base.header.stamp = rclpy.time.Time().to_msg()
-            point_base.header.frame_id = 'base_link'
-            # point_base.point.x = 1.0 #1m 앞
-            # point_base.point.y = 0.0
-            # point_base.point.z = 0.0
-            point_base.point.x = X
-            point_base.point.y = Y
-            point_base.point.z = Z
+    #     try:
+    #         # base_link 기준 포인트 생성
+    #         point_base = PointStamped()
+    #         point_base.header.stamp = rclpy.time.Time().to_msg()
+    #         point_base.header.frame_id = 'base_link'
+    #         # point_base.point.x = 1.0 #1m 앞
+    #         # point_base.point.y = 0.0
+    #         # point_base.point.z = 0.0
+    #         point_base.point.x = X
+    #         point_base.point.y = Y
+    #         point_base.point.z = Z
 
-            # base_link → map 변환
-            try:
-                point_map = self.tf_buffer.transform(
-                    point_base,
-                    'map',
-                    timeout=rclpy.duration.Duration(seconds=0.5)
-                )
-                self.get_logger().info(f"[Base_link] ({point_base.point.x:.2f}, {point_base.point.y:.2f}, {point_base.point.z:.2f})")
-                self.get_logger().info(f"[Map]       ({point_map.point.x:.2f}, {point_map.point.y:.2f}, {point_map.point.z:.2f})")
-            except Exception as e:
-                self.get_logger().warn(f"TF transform to map failed: {e}")
+    #         # map point
+    #         point_map_send_data = PointStamped()
 
-        except Exception as e:
-            self.get_logger().warn(f"Unexpected error: {e}")
+    #         # base_link → map 변환
+    #         try:
+    #             point_map = self.tf_buffer.transform(
+    #                 point_base,
+    #                 'map',
+    #                 timeout=rclpy.duration.Duration(seconds=0.5)
+    #             )
+    #             self.get_logger().info(f"[Base_link] ({point_base.point.x:.2f}, {point_base.point.y:.2f}, {point_base.point.z:.2f})")
+    #             self.get_logger().info(f"[Map]       ({point_map.point.x:.2f}, {point_map.point.y:.2f}, {point_map.point.z:.2f})")
+
+
+
+    #             point_map_send_data.header.stamp = rclpy.time.Time().to_msg()
+    #             point_map_send_data.header.frame_id = 'map'
+    #             point_map_send_data.point.x = point_map.point.x
+    #             point_map_send_data.point.y = point_map.point.y
+    #             point_map_send_data.point.z = point_map.point.z   
+                
+    #             self.map_point_pub.publish(point_map_send_data)
+    #         except Exception as e:
+    #             self.get_logger().warn(f"TF transform to map failed: {e}")
+
+    #     except Exception as e:
+    #         self.get_logger().warn(f"Unexpected error: {e}")
 
 # ========================
 # 메인 함수
