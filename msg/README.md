@@ -22,3 +22,7 @@
         │       ├── PPEViolation.msg
         │       └── RoleAssignment.msg
         └── setup.cfg
+
+**node**
+    +
+    from your_ros_pkg.msg import PersonDetection, PPEViolation, RoleAssignment
