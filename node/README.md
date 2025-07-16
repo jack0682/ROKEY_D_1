@@ -18,8 +18,11 @@ package.xml에 아래의 코드를 추가해주세요.
 ros2 run your_pakage buzzer_alert --ros-args -r __ns:=/robot1
 ```
 
+## EMQX cloud
 
+```python
 broker = 'g11c1e1e.ala.eu-central-1.emqxsl.com'
 port = 8883
 username = 'okj1812'
 password = 'okj1812'
+```
