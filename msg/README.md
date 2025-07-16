@@ -1,13 +1,7 @@
-**package.xml**
-    +
-    <build_depend>std_msgs</build_depend>
-    <build_depend>geometry_msgs</build_depend>
-    <exec_depend>std_msgs</exec_depend>
-    <exec_depend>geometry_msgs</exec_depend>
+# PersonDetection.msg, PPEViolation.msg, RoleAssignment.msg
 
-
-**directory**
-
+## **directory**
+```
   ros2_ws/
   └─ src/
      └─ your_ros_pkg/
@@ -22,7 +16,23 @@
         │       ├── PPEViolation.msg
         │       └── RoleAssignment.msg
         └── setup.cfg
+```        
 
-**node**
-    +
-    from your_ros_pkg.msg import PersonDetection, PPEViolation, RoleAssignment
+## **package.xml**
+
+package.xml에 아래 코드를 추가해주세요.
+
+```python
+<build_depend>std_msgs</build_depend>
+<build_depend>geometry_msgs</build_depend>
+<exec_depend>std_msgs</exec_depend>
+<exec_depend>geometry_msgs</exec_depend>
+```
+
+## **node**
+
+메세지를 사용하는 노드에 아래 코드를 추가해주세요.
+
+```python
+from your_ros_pkg.msg import PersonDetection, PPEViolation, RoleAssignment
+```
