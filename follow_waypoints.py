@@ -107,6 +107,13 @@ class NamespacedRobotController:
                 elif payload == "0":
                     print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
                     self.reset_stop_flag()
+                
+                elif json.loads(payload).get('type') == 'crack':
+                    print('crack check 3s delay')
+                    self.set_stop_flag(True)
+                    time.sleep(3)
+                    self.reset_stop_flag()
+
                 else:
                     print(f"❓ [{self.namespace}] 알 수 없는 명령: {payload}")
                     
@@ -396,12 +403,12 @@ class NamespacedRobotController:
     def run_patrol_cycle(self):
         """패트롤 사이클 실행"""
         if not self.navigation_active:
-            print(f"❌ [{self.namespace}] 네비게이션이 활성화되지 않음")
+            print(f"❌ 네비게이션이 활성화되지 않음")
             return False
         
         # 패트롤 시작 전 언도킹 확인
         if not self.ensure_undocking():
-            print(f"❌ [{self.namespace}] 언도킹 실패로 패트롤 중단")
+            print(f"❌ 언도킹 실패로 패트롤 중단")
             return False
         
         cycle_count = 0
@@ -414,17 +421,17 @@ class NamespacedRobotController:
                 # 각 웨이포인트 순회
                 for i, (position, direction) in enumerate(ROBOT_CONFIG['waypoints'], start=1):
                     if self.is_stopped():
-                        print(f"🚫 [{self.namespace}] 정지 명령으로 인한 패트롤 중단")
+                        print(f"🚫 정지 명령으로 인한 패트롤 중단")
                         return True
                     
                     # 웨이포인트로 이동
                     if not self.navigate_to_waypoint(i, position, direction):
-                        print(f"❌ [{self.namespace}] 웨이포인트 {i} 이동 실패")
+                        print(f"❌ 웨이포인트 {i} 이동 실패")
                         continue
                     
                     # 360도 회전
                     if not self.perform_rotation(i):
-                        print(f"❌ [{self.namespace}] 웨이포인트 {i} 회전 실패")
+                        print(f"❌ 웨이포인트 {i} 회전 실패")
                         continue
                     
                     # 웨이포인트 간 짧은 대기
@@ -433,39 +440,39 @@ class NamespacedRobotController:
                 # 사이클 완료 이벤트
                 robot_pos = self.get_current_position()
                 self.publish_event("route_complete", cycle_count, robot_pos, robot_pos)
-                print(f"✅ [{self.namespace}] 패트롤 사이클 {cycle_count} 완료!\n")
+                print(f"✅ 패트롤 사이클 {cycle_count} 완료!\n")
                 
                 # 사이클 간 대기
                 time.sleep(1.0)
         
         except KeyboardInterrupt:
-            print(f"\n🛑 [{self.namespace}] 사용자 중단 요청")
+            print(f"\n🛑 사용자 중단 요청")
             return True
         except Exception as e:
-            print(f"\n❌ [{self.namespace}] 패트롤 중 오류 발생: {e}")
+            print(f"\n❌ 패트롤 중 오류 발생: {e}")
             return False
     
     def cleanup(self):
         """리소스 정리"""
-        print(f"🧹 [{self.namespace}] 시스템 정리 중...")
+        print(f"🧹 시스템 정리 중...")
         
         if self.mqtt_client:
             try:
                 self.publish_event("system_shutdown", 0, [0, 0], [0, 0])
                 self.mqtt_client.loop_stop()
                 self.mqtt_client.disconnect()
-                print(f"✅ [{self.namespace}] MQTT 연결 종료")
+                print(f"✅ MQTT 연결 종료")
             except Exception as e:
-                print(f"⚠️ [{self.namespace}] MQTT 정리 오류: {e}")
+                print(f"⚠️ MQTT 정리 오류: {e}")
         
         if self.navigator and rclpy.ok():
             try:
                 self.navigator.cancelTask()
-                print(f"✅ [{self.namespace}] 네비게이션 작업 취소")
+                print(f"✅ 네비게이션 작업 취소")
             except Exception as e:
-                print(f"⚠️ [{self.namespace}] 네비게이션 정리 오류: {e}")
+                print(f"⚠️ 네비게이션 정리 오류: {e}")
         
-        print(f"🏁 [{self.namespace}] 시스템 정리 완료")
+        print(f"🏁 시스템 정리 완료")
 
 def main():
     """메인 함수"""
