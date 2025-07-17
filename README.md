@@ -34,3 +34,6 @@
         카메라의 자동 초점 유지 실패 문제 확인됨
    
         주행 중 실시간 초점 재설정 또는 이미지 안정화 기법 적용 예정
+
+
+ros2 run rokey_pjt detect_with_depth_with_tf --ros-args -r /tf:=/robot1/tf -r /tf_static:=/robot1/tf_static -r __ns:=/robot1
