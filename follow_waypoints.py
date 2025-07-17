@@ -12,6 +12,13 @@ from turtlebot4_navigation.turtlebot4_navigator import (
 
 from paho.mqtt import client as mqtt_client
 
+#좌표
+from geometry_msgs.msg import PointStamped
+import tf2_ros
+import tf2_geometry_msgs
+import rclpy
+from rclpy.duration import Duration
+
 # ========== MQTT 설정 ==========
 MQTT_CONFIG = {
     'broker': 'p021f2cb.ala.asia-southeast1.emqxsl.com',
@@ -51,6 +58,11 @@ class NamespacedRobotController:
         self.navigation_active = False
         self._lock = threading.Lock()
         self.namespace = ROBOT_CONFIG['namespace']
+
+        #좌표
+        self.tf_buffer = None
+        self.tf_listener = None
+        self.tf_initialized = False
         
     def reset_stop_flag(self):
         """정지 플래그를 안전하게 초기화"""
@@ -108,11 +120,44 @@ class NamespacedRobotController:
                     print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
                     self.reset_stop_flag()
                 
+                #좌표
                 elif json.loads(payload).get('type') == 'crack':
-                    print('crack check 3s delay')
+                    print('Crack detected - processing location')
                     self.set_stop_flag(True)
-                    time.sleep(3)
-                    self.reset_stop_flag()
+                    
+                    try:
+                        # 크랙 위치 정보 추출 (MQTT 메시지에서)
+                        crack_data = json.loads(payload)
+                        crack_point_base = PointStamped()
+                        crack_point_base.header.stamp = rclpy.time.Time().to_msg()
+                        crack_point_base.header.frame_id = 'base_link'
+                      
+                        crack_point_base.point.x = crack_data['location'][0]   # MQTT 메시지에서 x 좌표 추출
+                        crack_point_base.point.y = crack_data['location'][1] # MQTT 메시지에서 y 좌표 추출
+                        crack_point_base.point.z = 0.0
+
+                        # base_link → map 좌표 변환
+                        crack_point_map = self.tf_buffer.transform(
+                            crack_point_base,
+                            'map',
+                            timeout=rclpy.duration.Duration(seconds=0.5)
+                        )
+                        
+                        # 변환된 좌표 출력
+                        self.get_logger().info(f"Crack location in base_link: ({crack_point_base.point.x:.2f}, {crack_point_base.point.y:.2f})")
+                        self.get_logger().info(f"Crack location in map: ({crack_point_map.point.x:.2f}, {crack_point_map.point.y:.2f})")
+                        
+                        # 3초 대기 후 재개
+                        #time.sleep(3)
+                        #self.reset_stop_flag()
+                        
+                        # 필요한 경우 변환된 좌표를 다른 곳에 저장하거나 추가 처리
+                        # 예: self.last_crack_location = [crack_point_map.point.x, crack_point_map.point.y]
+                        
+                    except Exception as e:
+                        self.get_logger().error(f"Error processing crack location: {e}")
+                        time.sleep(3)
+                        self.reset_stop_flag()
 
                 else:
                     print(f"❓ [{self.namespace}] 알 수 없는 명령: {payload}")
@@ -210,6 +255,18 @@ class NamespacedRobotController:
         # ROS2 초기화 (네임스페이스 고려)
         rclpy.init()
         
+        #좌표
+        # TF2 초기화
+        try:
+            self.tf_buffer = tf2_ros.Buffer()
+            self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self.navigator)
+            time.sleep(1.0)  # TF 트리 안정화 대기
+            self.tf_initialized = True
+            print(f"✅ TF2 초기화 완료")
+        except Exception as e:
+            print(f"⚠️ TF2 초기화 실패: {e}")
+            self.tf_initialized = False
+
         # TurtleBot4Navigator 초기화 (네임스페이스 지원)
         self.navigator = TurtleBot4Navigator(namespace='robot1')  # 슬래시 없이
         print(f"🗺️ [{self.namespace}] TurtleBot4 Navigator 초기화 완료")
