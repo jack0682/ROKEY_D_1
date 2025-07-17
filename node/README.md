@@ -1,4 +1,4 @@
-# **buzzer_alert.py**
+# buzzer_alert.py
 
 ## package.xml
 
@@ -18,13 +18,19 @@ package.xml에 아래의 코드를 추가해주세요.
 ros2 run your_pakage buzzer_alert --ros-args -r __ns:=/robot1
 ```
 
-## EMQX cloud
+# mqtt_logger.py
 
-```python
-broker = 'g11c1e1e.ala.eu-central-1.emqxsl.com'
-port = 8883
-username = 'okj1812'
-password = 'okj1812'
+## terminal
+
+터미널에서 실행 권한을 주고 실행하세요:
+
+```bash
+chmod +x mqtt_logger.py
+./mqtt_logger.py
 ```
 
-<img width="518" height="259" alt="image" src="https://github.com/user-attachments/assets/994dd79a-a837-438a-b79b-a0ade5159166" />
+여러 파일 동시 팔로우:
+```bash
+sudo apt install multitail
+multitail /home/okj1812/logs/*.log
+```
