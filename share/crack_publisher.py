@@ -28,7 +28,7 @@ client_id = f'python-mqtt-{random.randint(0, 100)}'
 # ========================
 # YOLO 설정
 # ========================
-MODEL_PATH        = '/home/rokey/crack_detect/model/best.pt1' 
+MODEL_PATH        = '/home/rokey/crack_detect/model/best.pt' 
 COLOR_TOPIC       = '/robot1/oakd/rgb/preview/image_raw'
 DEPTH_TOPIC       = '/robot1/oakd/stereo/image_raw'
 TARGET_CLASS_ID   = 0
