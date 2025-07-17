@@ -1,1 +1,1 @@
-string command
+string mapping
