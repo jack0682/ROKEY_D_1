@@ -34,5 +34,5 @@ package.xml에 아래 코드를 추가해주세요.
 메세지를 사용하는 노드에 아래 코드를 추가해주세요.
 
 ```python
-from your_ros_pkg.msg import PersonDetection, PPEViolation, RoleAssignment
+from your_ros_pkg.msg import MsgName
 ```
