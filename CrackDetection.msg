@@ -1,4 +1,4 @@
-# your_ros_pkg/msg/CrackDetection.msg
+# your_ros_pkg/msg/CPDetection.msg
 float64 x_m        # 전방 거리 (m)
 float64 y_m        # 좌우 거리 (m)
 float64 area_cm2   # 검출 영역 면적 (cm²)
