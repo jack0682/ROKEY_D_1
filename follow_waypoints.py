@@ -9,10 +9,10 @@ from turtlebot4_navigation.turtlebot4_navigator import (
 from paho.mqtt import client as mqtt_client
 
 # ========== MQTT 설정 ==========
-broker = 'g11c1e1e.ala.eu-central-1.emqxsl.com'
+broker = 'p021f2cb.ala.asia-southeast1.emqxsl.com'
 port = 8883
-username = 'okj1812'
-password = 'okj1812'
+username = 'Rokey'
+password = '1234567'
 topic = "python/mqtt"
 client_id = f'python-mqtt-{random.randint(0, 100)}'
 
