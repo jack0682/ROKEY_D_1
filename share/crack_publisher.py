@@ -28,7 +28,7 @@ client_id = f'python-mqtt-{random.randint(0, 100)}'
 # ========================
 # YOLO 설정
 # ========================
-MODEL_PATH        = '/home/rokey/crack_detect/model/best.pt' 
+MODEL_PATH        = '/home/hyojae/rokey_ws/model/my_best.pt' 
 COLOR_TOPIC       = '/robot1/oakd/rgb/preview/image_raw'
 DEPTH_TOPIC       = '/robot1/oakd/stereo/image_raw'
 TARGET_CLASS_ID   = 0
@@ -154,18 +154,19 @@ class YoloDepthNode(Node):
                 cv2.putText(img, f"Area: {int(area_cm2):,d}sq.cm", (x1, y2 + 25), 
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
 
-                # ✅ JSON 형식 MQTT 전송
-                msg_dict = {
-                    "robot_id": "robot1",
-                    "type": "crack",
-                    "location": [round(depth_m, 2), round(real_width_m, 2)],
-                    "depth": round(depth, 2),
-                    "area": int(area_cm2),
-                    "timestamp": datetime.now(timezone.utc).isoformat()
-                }
-                mqtt_json = json.dumps(msg_dict)
-                self.mqtt_client.publish(mqtt_topic, mqtt_json)
-                print(f"📡 MQTT Sent: {mqtt_json}")
+                if box.conf[0] > 0.5 : 
+                    # ✅ JSON 형식 MQTT 전송
+                    msg_dict = {
+                        "robot_id": "robot1",
+                        "type": "crack",
+                        "location": [round(depth_m, 2), round(real_width_m, 2)],
+                        "depth": round(depth, 2),
+                        "area": int(area_cm2),
+                        "timestamp": datetime.now(timezone.utc).isoformat()
+                    }
+                    mqtt_json = json.dumps(msg_dict)
+                    self.mqtt_client.publish(mqtt_topic, mqtt_json)
+                    print(f"📡 MQTT Sent: {mqtt_json}")
 
         cv2.imshow("YOLO+Depth", cv2.resize(img, (img.shape[1]*2, img.shape[0]*2)))
         if cv2.waitKey(1) & 0xFF == ord('q'):
