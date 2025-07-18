@@ -21,8 +21,24 @@ from rclpy.qos import QoSHistoryPolicy
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy
 
+#7.17 엔딩방향 
+from vision_msgs.msg import BaseCoordinate
+
+# 7.18
+# mqtt 슛 ~
+import json
+from paho.mqtt import client as mqtt_client
+import time
+broker = 'p021f2cb.ala.asia-southeast1.emqxsl.com'
+port = 8883
+username = 'Rokey'
+password = '1234567'
+topic = "person_detect"
+client_id = f'yolo_vision'
+
 MARKER_TOPIC = 'detected_objects_marker'
 MAP_TOPIC = 'map_points'
+BASE_TOPIC = "base_points"
 
 
 qos_profile = QoSProfile(
@@ -31,8 +47,6 @@ qos_profile = QoSProfile(
     depth=10, 
     durability=QoSDurabilityPolicy.TRANSIENT_LOCAL
     )
-
-
 
 # ========================
 # 설정
@@ -52,6 +66,11 @@ WINDOW_NAME = 'YOLO Detection'
 class DetectWithDepthWithTf(Node):
     def __init__(self):
         super().__init__('detect_with_depth_with_tf')
+                # mqtt setup
+        # MQTT 클라이언트 초기화
+        self.mqtt_client = None
+        self.mqtt_connected = False
+        self.setup_mqtt()
 
         self.K = None
         self.should_exit = False
@@ -92,10 +111,90 @@ class DetectWithDepthWithTf(Node):
         # 7.16
         self.map_point_pub = self.create_publisher(PointStamped, MAP_TOPIC, qos_profile)
 
+        #7.17
+        self.base_coor_pub = self.create_publisher(BaseCoordinate, BASE_TOPIC, qos_profile)
+
         # 백그라운드 스레드 시작
         self.worker_thread = threading.Thread(target=self.visualization_loop)
         self.worker_thread.daemon = True
         self.worker_thread.start()
+
+
+
+##############mqtt############################
+    def setup_mqtt(self):
+        """MQTT 클라이언트 설정"""
+        def on_connect(client, userdata, flags, rc):
+            if rc == 0:
+                self.mqtt_connected = True
+                print("✅ Connected to MQTT Broker!")
+                self.get_logger().info("MQTT Connected successfully!")
+            else:
+                self.mqtt_connected = False
+                print(f"❌ Failed to connect to MQTT, return code {rc}")
+                self.get_logger().error(f"MQTT Connection failed with code {rc}")
+
+        def on_disconnect(client, userdata, rc):
+            self.mqtt_connected = False
+            print(f"🔌 Disconnected from MQTT Broker with code {rc}")
+            self.get_logger().warn(f"MQTT Disconnected with code {rc}")
+
+        def on_publish(client, userdata, mid):
+            print(f"📤 Message {mid} published successfully")
+
+        try:
+            self.get_logger().info("🔄 Attempting to connect to MQTT broker...")
+            self.mqtt_client = mqtt_client.Client(client_id=client_id, protocol=mqtt_client.MQTTv311)
+            self.mqtt_client.tls_set()
+            self.mqtt_client.username_pw_set(username, password)
+            self.mqtt_client.on_connect = on_connect
+            self.mqtt_client.on_disconnect = on_disconnect
+            self.mqtt_client.on_publish = on_publish
+            
+            # 비동기 연결 시작
+            self.mqtt_client.connect_async(broker, port, keepalive=60)
+            self.mqtt_client.loop_start()
+            
+            # 연결 확인을 위한 짧은 대기
+            time.sleep(2)
+            
+        except Exception as e:
+            self.get_logger().error(f"MQTT setup error: {e}")
+            self.mqtt_client = None
+
+
+    def publish_mqtt_message(self, map_point):
+        """MQTT 메시지 발행"""
+        if not self.mqtt_client or not self.mqtt_connected:
+            self.get_logger().warn("MQTT not connected. Skipping message.")
+            return
+            
+        try:
+            # 현재 시간을 타임스탬프로 사용
+            current_time = time.time()
+            
+            msg = {
+                "person_id": "0",
+                "timestamp": f"{current_time}",
+                "map_coordinate_x": f"{map_point.point.x:.2f}",
+                "map_coordinate_y": f"{map_point.point.y:.2f}"
+            }
+            
+            msg_json = json.dumps(msg, indent=2)
+            
+            # 메시지 발행
+            result = self.mqtt_client.publish(topic, msg_json, qos=1, retain=True)
+            
+            if result.rc == mqtt_client.MQTT_ERR_SUCCESS:
+                print(f"📨 Sent message to topic `{topic}`")
+                self.get_logger().info(f"MQTT message sent: {msg}")
+            else:
+                print(f"❌ Failed to send message to topic {topic}, error: {result.rc}")
+                self.get_logger().error(f"MQTT publish failed with code {result.rc}")
+                
+        except Exception as e:
+            self.get_logger().error(f"MQTT publish error: {e}")
+##############################################
 
     def camera_info_callback(self, msg):
         if self.K is None:
@@ -166,8 +265,6 @@ class DetectWithDepthWithTf(Node):
                         detect_cx = int((x1 + x2) / 2)
                         detect_cy = int((y1 + y2) / 2)
                         
-
-                        
                         # 범위 체크
                         if 0 <= detect_cx < depth_mm.shape[1] and 0 <= detect_cy < depth_mm.shape[0]:
                             # 같은 좌표에서 depth 값 가져오기
@@ -230,7 +327,16 @@ class DetectWithDepthWithTf(Node):
                                     point_map_send_data.point.y = point_map.point.y
                                     point_map_send_data.point.z = point_map.point.z   
 
+                                    #7.17
                                     self.map_point_pub.publish(point_map_send_data)
+
+                                    base_msg = BaseCoordinate()
+                                    base_msg.x = point_base.point.x
+                                    base_msg.y = point_base.point.y
+                                    self.base_coor_pub.publish(base_msg)
+
+                                    self.publish_mqtt_message(point_map)
+
                                     
                                 except Exception as e:
                                     self.get_logger().warn(f"TF transform to map failed: {e}")
