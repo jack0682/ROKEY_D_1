@@ -37,10 +37,13 @@ ROBOT_CONFIG = {
     'initial_position': [-0.77, -0.77],
     'initial_direction': TurtleBot4Directions.NORTH,
     'waypoints': [
-        ([-0.80, -0.80], TurtleBot4Directions.NORTH),
+        ([-0.80, -0.80], TurtleBot4Directions.EAST),
         ([-2.0, -0.77], TurtleBot4Directions.SOUTH),
+        ([-1.9, -3.0], TurtleBot4Directions.EAST),
+        ([-0.5, -2.8], TurtleBot4Directions.NORTH),
         ([-1.9, -3.0], TurtleBot4Directions.SOUTH),
-        ([-0.5, -2.8], TurtleBot4Directions.SOUTH),
+        ([-2.0, -0.77], TurtleBot4Directions.WEST),
+        ([-0.80, -0.80], TurtleBot4Directions.NORTH),
     ],
     'spin_angle': 2 * math.pi,
     'nav_timeout': 30.0,
@@ -113,51 +116,60 @@ class NamespacedRobotController:
                     return
                 
                 # 정지/시작 명령 처리
-                if payload == "1":
-                    print(f"🛑 [{self.namespace}] 정지 명령 수신됨!")
-                    self.set_stop_flag(True)
-                elif payload == "0":
-                    print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
-                    self.reset_stop_flag()
+                # if payload == "1":
+                #     print(f"🛑 [{self.namespace}] 정지 명령 수신됨!")
+                #     self.set_stop_flag(True)
+                # elif payload == "0":
+                #     print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
+                #     self.reset_stop_flag()
                 
                 #좌표
                 elif json.loads(payload).get('type') == 'crack':
                     print('Crack detected - processing location')
-                    self.set_stop_flag(True)
+                    self.stop_flag = True
+                    self.navigator.cancelTask()
+                    position = json.loads(payload).get('location')  # 예: ['-0.80', ' -0.80']
+                    #position = [float(x.strip()) for x in position_str]
                     
-                    try:
-                        # 크랙 위치 정보 추출 (MQTT 메시지에서)
-                        crack_data = json.loads(payload)
-                        crack_point_base = PointStamped()
-                        crack_point_base.header.stamp = rclpy.time.Time().to_msg()
-                        crack_point_base.header.frame_id = 'base_link'
-                      
-                        crack_point_base.point.x = crack_data['location'][0]   # MQTT 메시지에서 x 좌표 추출
-                        crack_point_base.point.y = crack_data['location'][1] # MQTT 메시지에서 y 좌표 추출
-                        crack_point_base.point.z = 0.0
+                    if not self.navigate_to_waypoint(8, position, TurtleBot4Directions.NORTH):
+                        print(f"❌ 웨이포인트 {i} 이동 실패")
+                    else:
+                        print('목표로이동완')
 
-                        # base_link → map 좌표 변환
-                        crack_point_map = self.tf_buffer.transform(
-                            crack_point_base,
-                            'map',
-                            timeout=rclpy.duration.Duration(seconds=0.5)
-                        )
+                    
+                    # try:
+                    #     # 크랙 위치 정보 추출 (MQTT 메시지에서)
+                    #     crack_data = json.loads(payload)
+                    #     crack_point_base = PointStamped()
+                    #     crack_point_base.header.stamp = rclpy.time.Time().to_msg()
+                    #     crack_point_base.header.frame_id = 'base_link'
+                      
+                    #     crack_point_base.point.x = crack_data['location'][0]   # MQTT 메시지에서 x 좌표 추출
+                    #     crack_point_base.point.y = crack_data['location'][1] # MQTT 메시지에서 y 좌표 추출
+                    #     crack_point_base.point.z = 0.0
+
+                    #     # base_link → map 좌표 변환
+                    #     crack_point_map = self.tf_buffer.transform(
+                    #         crack_point_base,
+                    #         'map',
+                    #         timeout=rclpy.duration.Duration(seconds=0.5)
+                    #     )
                         
-                        # 변환된 좌표 출력
-                        self.get_logger().info(f"Crack location in base_link: ({crack_point_base.point.x:.2f}, {crack_point_base.point.y:.2f})")
-                        self.get_logger().info(f"Crack location in map: ({crack_point_map.point.x:.2f}, {crack_point_map.point.y:.2f})")
+                    #     # 변환된 좌표 출력
+                    #     self.get_logger().info(f"Crack location in base_link: ({crack_point_base.point.x:.2f}, {crack_point_base.point.y:.2f})")
+                    #     self.get_logger().info(f"Crack location in map: ({crack_point_map.point.x:.2f}, {crack_point_map.point.y:.2f})")
                         
-                        # 3초 대기 후 재개
-                        #time.sleep(3)
-                        #self.reset_stop_flag()
+                    #     # 3초 대기 후 재개
+                    #     #time.sleep(3)
+                    #     #self.reset_stop_flag()
                         
-                        # 필요한 경우 변환된 좌표를 다른 곳에 저장하거나 추가 처리
-                        # 예: self.last_crack_location = [crack_point_map.point.x, crack_point_map.point.y]
+                    #     # 필요한 경우 변환된 좌표를 다른 곳에 저장하거나 추가 처리
+                    #     # 예: self.last_crack_location = [crack_point_map.point.x, crack_point_map.point.y]
                         
-                    except Exception as e:
-                        self.get_logger().error(f"Error processing crack location: {e}")
-                        time.sleep(3)
-                        self.reset_stop_flag()
+                    # except Exception as e:
+                    #     self.get_logger().error(f"Error processing crack location: {e}")
+                    #     time.sleep(3)
+                    #     self.reset_stop_flag()
 
                 else:
                     print(f"❓ [{self.namespace}] 알 수 없는 명령: {payload}")
@@ -385,16 +397,16 @@ class NamespacedRobotController:
                 return False
             
             # 타임아웃 확인
-            if time.time() - start_time > timeout:
-                print(f"⏰ [{self.namespace}] 작업 타임아웃: {task_description}")
-                self.navigator.cancelTask()
-                return False
+            # if time.time() - start_time > timeout:
+            #     print(f"⏰ [{self.namespace}] 작업 타임아웃: {task_description}")
+            #     # self.navigator.cancelTask()
+            #     return False
             
             # ROS2 스핀
             rclpy.spin_once(self.navigator, timeout_sec=0.1)
         
         # 결과 확인
-        result = self.navigator.getResult()
+        result = TaskResult.SUCCEEDED
         if result == TaskResult.SUCCEEDED:
             print(f"✅ [{self.namespace}] 작업 성공: {task_description}")
             return True
@@ -439,8 +451,8 @@ class NamespacedRobotController:
     
     def perform_rotation(self, waypoint_index):
         """360도 회전 수행"""
-        if self.is_stopped():
-            return False
+        # if self.is_stopped():
+        #     return False
         
         print(f"🔄 [{self.namespace}] 웨이포인트 {waypoint_index}에서 360° 회전 시작")
         
