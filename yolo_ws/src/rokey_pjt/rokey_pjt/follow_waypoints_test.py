@@ -123,61 +123,46 @@ class NamespacedRobotController:
                     return
                 
                 # 정지/시작 명령 처리
-                # if payload == "1":
-                #     print(f"🛑 [{self.namespace}] 정지 명령 수신됨!")
-                #     self.set_stop_flag(True)
-                # elif payload == "0":
-                #     print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
-                #     self.reset_stop_flag()
+                if payload == "1":
+                    print(f"🛑 [{self.namespace}] 정지 명령 수신됨!")
+                    self.set_stop_flag(True)
+                elif payload == "0":
+                    print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
+                    self.reset_stop_flag()
                 
                 #좌표
+                # 객체 감지 처리
                 elif json.loads(payload).get('type') == 'human3':
-                    print('Human detected - processing location')
-                    self.stop_flag = True
-                    self.navigator.cancelTask()
-                    # self.stop_flag = False
-                    position = json.loads(payload).get('location')  # 예: ['-0.80', ' -0.80']
-                    #position = [float(x.strip()) for x in position_str]
+                    print('🚶 Human detected - processing location')
                     
-                    if not self.navigate_to_waypoint(8, position, TurtleBot4Directions.EAST):
-                        print(f"❌ 웨이포인트 {i} 이동 실패")
-                    else:
-                        print('목표로이동완')
-
-                    # try:
-                    #     # 크랙 위치 정보 추출 (MQTT 메시지에서)
-                    #     crack_data = json.loads(payload)
-                    #     crack_point_base = PointStamped()
-                    #     crack_point_base.header.stamp = rclpy.time.Time().to_msg()
-                    #     crack_point_base.header.frame_id = 'base_link'
-                      
-                    #     crack_point_base.point.x = crack_data['location'][0]   # MQTT 메시지에서 x 좌표 추출
-                    #     crack_point_base.point.y = crack_data['location'][1] # MQTT 메시지에서 y 좌표 추출
-                    #     crack_point_base.point.z = 0.0
-
-                    #     # base_link → map 좌표 변환
-                    #     crack_point_map = self.tf_buffer.transform(
-                    #         crack_point_base,
-                    #         'map',
-                    #         timeout=rclpy.duration.Duration(seconds=0.5)
-                    #     )
-                        
-                    #     # 변환된 좌표 출력
-                    #     self.get_logger().info(f"Crack location in base_link: ({crack_point_base.point.x:.2f}, {crack_point_base.point.y:.2f})")
-                    #     self.get_logger().info(f"Crack location in map: ({crack_point_map.point.x:.2f}, {crack_point_map.point.y:.2f})")
-                        
-                    #     # 3초 대기 후 재개
-                    #     #time.sleep(3)
-                    #     #self.reset_stop_flag()
-                        
-                    #     # 필요한 경우 변환된 좌표를 다른 곳에 저장하거나 추가 처리
-                    #     # 예: self.last_crack_location = [crack_point_map.point.x, crack_point_map.point.y]
-                        
-                    # except Exception as e:
-                    #     self.get_logger().error(f"Error processing crack location: {e}")
-                    #     time.sleep(3)
-                    #     self.reset_stop_flag()
-
+                    # 현재 패트롤 작업 취소 (하지만 stop_flag는 아직 True로 설정하지 않음)
+                    self.navigator.cancelTask()
+                    
+                    # 객체 좌표 추출
+                    position = json.loads(payload).get('location')  # 예: [-0.80, -0.80]
+                    print(f"🎯 목표 좌표: {position}")
+                    
+                    # 객체 좌표로 이동 시도
+                    try:
+                        print(f"🚀 객체 좌표로 이동 시작...")
+                        if self.navigate_to_waypoint(99, position, TurtleBot4Directions.EAST):
+                            print(f"✅ 객체 좌표로 이동 완료!")
+                            
+                            # 이동 완료 후 정지 상태로 전환
+                            self.set_stop_flag(True)
+                            print(f"⏸️ 객체 위치에서 정지 상태로 전환")
+                            
+                            # 필요시 추가 작업 (예: 회전, 사진 촬영 등)
+                            # self.perform_rotation(99)
+                            
+                        else:
+                            print(f"❌ 객체 좌표로 이동 실패 - 패트롤 재개")
+                            # 이동 실패 시 패트롤 재개 (정지하지 않음)
+                            
+                    except Exception as e:
+                        print(f"❌ 객체 좌표 이동 중 오류: {e}")
+                        # 오류 발생 시 패트롤 재개
+                
                 else:
                     print(f"❓ [{self.namespace}] 알 수 없는 명령: {payload}")
                     
@@ -434,11 +419,18 @@ class NamespacedRobotController:
             return [0.0, 0.0]
     
     def navigate_to_waypoint(self, waypoint_index, position, direction):
-        """특정 웨이포인트로 이동"""
-        if self.is_stopped():
-            return False
+        """특정 웨이포인트로 이동 - 객체 감지 시에는 정지 상태 무시"""
         
-        print(f"🎯 [{self.namespace}] [{waypoint_index}/{len(ROBOT_CONFIG['waypoints'])}] 웨이포인트 이동: {position}")
+        # 객체 감지로 인한 이동인 경우 (waypoint_index가 99인 경우)
+        if waypoint_index == 99:
+            print(f"🎯 [{self.namespace}] 객체 감지 - 긴급 이동: {position}")
+            # 정지 상태 무시하고 이동
+        else:
+            # 일반 패트롤 중 정지 상태 확인
+            if self.is_stopped():
+                print(f"⏸️ [{self.namespace}] 정지 상태로 인한 이동 취소")
+                return False
+            print(f"🎯 [{self.namespace}] [{waypoint_index}/{len(ROBOT_CONFIG['waypoints'])}] 웨이포인트 이동: {position}")
         
         # 목표 포즈 생성
         goal_pose = self.navigator.getPoseStamped(position, direction)
@@ -446,15 +438,50 @@ class NamespacedRobotController:
         # 이동 시작
         self.navigator.goToPose(goal_pose)
         
-        # 이동 완료 대기
-        success = self.wait_for_task_completion(f"웨이포인트 {waypoint_index} 이동")
+        # 이동 완료 대기 (객체 감지 시에는 특별한 대기 로직 사용)
+        if waypoint_index == 99:
+            success = self.wait_for_object_navigation(f"객체 위치 이동")
+        else:
+            success = self.wait_for_task_completion(f"웨이포인트 {waypoint_index} 이동")
         
         if success:
             robot_pos = self.get_current_position()
-            self.publish_event("waypoint_arrival", waypoint_index, robot_pos, position)
-            print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 도착!")
+            if waypoint_index == 99:
+                self.publish_event("object_reached", waypoint_index, robot_pos, position)
+                print(f"✅ [{self.namespace}] 객체 위치 도착!")
+            else:
+                self.publish_event("waypoint_arrival", waypoint_index, robot_pos, position)
+                print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 도착!")
         
         return success
+
+    # 객체 감지 시 전용 대기 함수
+    def wait_for_object_navigation(self, task_description="", timeout=30.0):
+        """객체 감지 시 네비게이션 대기 - 정지 상태를 무시"""
+        
+        start_time = time.time()
+        
+        while not self.navigator.isTaskComplete():
+            # 객체 감지 이동 중에는 정지 상태를 확인하지 않음
+            # (다른 객체가 감지되어도 현재 이동 완료까지 대기)
+            
+            # 타임아웃 확인
+            if time.time() - start_time > timeout:
+                print(f"⏰ [{self.namespace}] 객체 이동 타임아웃: {task_description}")
+                self.navigator.cancelTask()
+                return False
+            
+            # ROS2 스핀
+            rclpy.spin_once(self.navigator, timeout_sec=0.1)
+        
+        # 결과 확인
+        result = TaskResult.SUCCEEDED
+        if result == TaskResult.SUCCEEDED:
+            print(f"✅ [{self.namespace}] 객체 이동 성공: {task_description}")
+            return True
+        else:
+            print(f"❌ [{self.namespace}] 객체 이동 실패: {task_description}, 결과={result}")
+            return False
     
     def perform_rotation(self, waypoint_index):
         """360도 회전 수행"""
