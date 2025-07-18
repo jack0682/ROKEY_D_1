@@ -2,8 +2,7 @@
 
 ## Node flow chart
 
-![flowchart](https://github.com/user-attachments/assets/be1d08b8-03e0-40eb-abb8-8786567a8ba0)
-
+![flowchart](https://github.com/user-attachments/assets/efcf3d52-5cde-49ba-be48-832183f166e9)
 
 ---
 
