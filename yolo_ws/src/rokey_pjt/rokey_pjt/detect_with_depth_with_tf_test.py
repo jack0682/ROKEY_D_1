@@ -14,18 +14,54 @@ from rclpy.executors import MultiThreadedExecutor
 from geometry_msgs.msg import PointStamped
 import tf2_ros
 import tf2_geometry_msgs  # 꼭 필요
+from datetime import datetime, timezone
+#7.16
+from rclpy.qos import QoSDurabilityPolicy
+from rclpy.qos import QoSHistoryPolicy
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSReliabilityPolicy
+
+#7.17
+from vision_msgs.msg import BaseCoordinate
+
+# 7.18
+# mqtt 슛 ~
+import json
+from paho.mqtt import client as mqtt_client
+import time
+broker = 'p021f2cb.ala.asia-southeast1.emqxsl.com'
+port = 8883
+username = 'Rokey'
+password = '1234567'
+topic = "detect"
+client_id = f'yolo_vision'
+
+
+MARKER_TOPIC = 'detected_objects_marker'
+MAP_TOPIC = 'map_points'
+BASE_TOPIC = "base_points"
+
+
+qos_profile = QoSProfile(
+    reliability=QoSReliabilityPolicy.RELIABLE, 
+    history=QoSHistoryPolicy.KEEP_LAST,
+    depth=10, 
+    durability=QoSDurabilityPolicy.TRANSIENT_LOCAL
+    )
+
 
 
 # ========================
 # 설정
 # ========================
-MODEL_PATH = '/home/rokey/Downloads/best5n.pt'
+MODEL_PATH = '/home/jsj2204/Downloads/yolov5n_4classes.pt'
 IMAGE_TOPIC = '/robot3/oakd/rgb/preview/image_raw'
 DEPTH_TOPIC = '/robot3/oakd/stereo/image_raw'
 CAMERA_INFO_TOPIC = '/robot3/oakd/stereo/camera_info'
-TARGET_CLASS_ID = 0
+TARGET_CLASS_ID = 2
 NORMALIZE_DEPTH_RANGE = 3.0
 WINDOW_NAME = 'YOLO Detection'
+
 
 # ========================
 # 노드 정의
@@ -33,6 +69,12 @@ WINDOW_NAME = 'YOLO Detection'
 class DetectWithDepthWithTf(Node):
     def __init__(self):
         super().__init__('detect_with_depth_with_tf')
+
+        # mqtt setup
+        # MQTT 클라이언트 초기화
+        self.mqtt_client = None
+        self.mqtt_connected = False
+        self.setup_mqtt()
 
         self.K = None
         self.should_exit = False
@@ -69,6 +111,12 @@ class DetectWithDepthWithTf(Node):
         self.rgb_img_subscription = self.create_subscription(Image, IMAGE_TOPIC, self.image_callback, 10)
         self.stereo_img_subscription = self.create_subscription(Image, DEPTH_TOPIC, self.depth_callback, 10)
         self.camera_info_subscription = self.create_subscription(CameraInfo, CAMERA_INFO_TOPIC, self.camera_info_callback, 10)
+
+        # 7.16
+        self.map_point_pub = self.create_publisher(PointStamped, MAP_TOPIC, qos_profile)
+
+        #7.17
+        self.base_coor_pub = self.create_publisher(BaseCoordinate, BASE_TOPIC, qos_profile)
 
         # 백그라운드 스레드 시작
         self.worker_thread = threading.Thread(target=self.visualization_loop)
@@ -126,34 +174,203 @@ class DetectWithDepthWithTf(Node):
                 depth_mm = self.depth_mm.copy()
                 depth_colored = self.depth_colored.copy()
 
-            object_count = 0
+                object_count = 0
+                
+                # 모든 detection된 객체들을 저장할 리스트
+                all_detections = []
+                class_2_boxes = []  # class 2 (person) 바운딩 박스들
+                
+                # 첫 번째 패스: 모든 detection 수집
+                for r in results:
+                    for box in r.boxes:
+                        cls = int(box.cls[0])
+                        x1, y1, x2, y2 = map(int, box.xyxy[0])
+                        conf = float(box.conf[0])
+                        
+                        # confidence threshold 확인
+                        if conf < 0.65:
+                            continue
+                        
+                        detection = {
+                            'class': cls,
+                            'bbox': (x1, y1, x2, y2),
+                            'confidence': conf,
+                            'center': ((x1 + x2) // 2, (y1 + y2) // 2)
+                        }
+                        
+                        all_detections.append(detection)
+                        
+                        # class 2 (person) 박스들 별도 저장
+                        if cls == 2:
+                            class_2_boxes.append(detection)
 
-            for r in results:
-                for box in r.boxes:
-                    cls = int(box.cls[0])
-                    if cls not in [0, 1]:
-                        continue
+                # 두 번째 패스: class 2 박스에 대해 조건 확인 및 처리
+                for person_detection in class_2_boxes:
+                    person_bbox = person_detection['bbox']
+                    person_x1, person_y1, person_x2, person_y2 = person_bbox
+                    person_center = person_detection['center']
+                    person_conf = person_detection['confidence']
+                    
+                    # 이 person 박스 안에 있는 다른 클래스들 찾기
+                    classes_inside = set()
+                    
+                    for detection in all_detections:
+                        if detection['class'] == 2:  # person 자체는 제외
+                            continue
+                        
+                        obj_center_x, obj_center_y = detection['center']
+                        
+                        # 객체의 중심점이 person 바운딩 박스 안에 있는지 확인
+                        if (person_x1 <= obj_center_x <= person_x2 and 
+                            person_y1 <= obj_center_y <= person_y2):
+                            classes_inside.add(detection['class'])
+                            
+                            # 디버깅을 위한 로그
+                            self.get_logger().debug(f"Class {detection['class']} found inside person box at ({obj_center_x}, {obj_center_y})")
 
-                    x1, y1, x2, y2 = map(int, box.xyxy[0])
-                    conf = math.ceil(box.conf[0] * 100) / 100
-                    label = self.class_names[cls] if cls < len(self.class_names) else f"class_{cls}"
+                    # 조건 확인: class 0, 1, 3 중 하나라도 없는지 확인
+                    required_classes = {0, 1, 3}
+                    condition_met = not required_classes.issubset(classes_inside)  # 조건 반전!
+                    
+                    missing_classes = required_classes - classes_inside
+                    self.get_logger().info(f"Person box: classes inside = {classes_inside}, missing = {missing_classes}, condition met = {condition_met}")
+                    
+                    # 시각화 - person 바운딩 박스 그리기
+                    color = (0, 255, 0) if condition_met else (0, 0, 255)  # 초록색 = 조건 만족(누락 있음), 빨간색 = 조건 불만족(모두 있음)
+                    thickness = 3 if condition_met else 2
+                    cv2.rectangle(frame, (person_x1, person_y1), (person_x2, person_y2), color, thickness)
+                    
+                    # 조건이 만족될 때만 메시지 퍼블리시 진행
+                    if condition_met:
+                        detect_cx, detect_cy = person_center
+                        
+                        # 범위 체크
+                        if 0 <= detect_cx < depth_mm.shape[1] and 0 <= detect_cy < depth_mm.shape[0]:
+                            # depth 값 가져오기
+                            distance_mm = depth_mm[detect_cy, detect_cx]
+                            distance_m = distance_mm / 1000.0
+                            
+                            # depth 값이 유효한지 확인
+                            if distance_m <= 0 or distance_m > NORMALIZE_DEPTH_RANGE:
+                                self.get_logger().warn(f"Invalid depth value: {distance_m:.2f}m at ({detect_cx}, {detect_cy})")
+                                continue
+                                
+                            self.get_logger().info(f"✅ CONDITION MET! Person detected with missing objects: {missing_classes}")
+                            self.get_logger().info(f"center at (u={detect_cx}, v={detect_cy}) → Distance = {distance_m:.2f} meters")
 
-                    self.detect_cx = int((x1 + x2) / 2)
-                    self.detect_cy = int((y1 + y2) / 2)
+                            # depth 이미지에 중심점 표시
+                            cv2.circle(depth_colored, (detect_cx, detect_cy), 5, (0, 0, 0), -1)
+                            
+                            # 레이블 텍스트
+                            label = self.class_names[2] if 2 < len(self.class_names) else "person"
+                            status_text = f"{label}: {person_conf:.2f}, {distance_m:.2f}m [MISSING: {missing_classes}]"
+                            cv2.putText(frame, status_text, (person_x1, person_y1 - 10),
+                                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+                            
+                            # 카메라 파라미터
+                            fx = self.K[0,0]
+                            fy = self.K[1,1]
+                            cx = self.K[0,2]
+                            cy = self.K[1,2]
+                            
+                            # 3D 좌표 변환
+                            X = (detect_cx - cx) * distance_m / fx
+                            Y = (detect_cy - cy) * distance_m / fy
+                            Z = distance_m
+                            
+                            self.get_logger().info(f"3D coordinates: X={X:.3f}, Y={Y:.3f}, Z={Z:.3f}")
 
-                    if 0 <= self.detect_cx < depth_mm.shape[1] and 0 <= self.detect_cy < depth_mm.shape[0]:
-                        distance_mm = depth_mm[self.detect_cy, self.detect_cx]
-                        distance_m = distance_mm / 1000.0
-                        self.get_logger().info(f"center at (u={self.detect_cx}, v={self.detect_cy}) → Distance = {distance_m:.2f} meters")
+                            try:
+                                # base_link 기준 포인트 생성
+                                point_base = PointStamped()
+                                point_base.header.stamp = rclpy.time.Time().to_msg()
+                                point_base.header.frame_id = 'base_link'
+                                point_base.point.x = Z  # 카메라 좌표계에서 Z는 전방 거리
+                                point_base.point.y = -X  # 카메라 좌표계에서 X는 좌우 (부호 주의)
+                                point_base.point.z = -Y  # 카메라 좌표계에서 Y는 상하 (부호 주의)
 
-                        cv2.circle(depth_colored, (self.detect_cx, self.detect_cy), 5, (0, 0, 0), -1)
-                        cv2.putText(frame, f"{label}: {conf}, {distance_m:.2f}m", (x1, y1 - 10),
-                                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
+                                # for end direction
+                                point_base_ = PointStamped()
+                                point_base_.header.stamp = point_base.header.stamp
+                                point_base_.header.frame_id = 'base_link'
+                                point_base_.point.x = 0.0
+                                point_base_.point.y = 0.0
+                                point_base_.point.z = 0.0
 
-                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
+
+                                # base_link → map 변환
+                                try:
+                                    point_map = self.tf_buffer.transform(
+                                        point_base,
+                                        'map',
+                                        timeout=rclpy.duration.Duration(seconds=0.5)
+                                    )
+                                    self.get_logger().info(f"[Base_link] ({point_base.point.x:.2f}, {point_base.point.y:.2f}, {point_base.point.z:.2f})")
+                                    self.get_logger().info(f"[Map]       ({point_map.point.x:.2f}, {point_map.point.y:.2f}, {point_map.point.z:.2f})")
+
+                                    point_map_ = self.tf_buffer.transform(
+                                        point_base_,
+                                        'map',
+                                        timeout=rclpy.duration.Duration(seconds=0.5)
+                                    )
+
+                                    base_vector = [(point_map.point.x - point_map_.point.x), 
+                                                   (point_map.point.y - point_map_.point.y)]
+                                    unit_base_vector = [(base_vector[0]/((base_vector[0]**2 + base_vector[1]**2))**(1/2)),
+                                                        (base_vector[1]/((base_vector[0]**2 + base_vector[1]**2))**(1/2))]
+                                    
+                                    angle_radians = math.atan2(unit_base_vector[1], unit_base_vector[0])
+                                    # angle_degrees = int(math.degrees(angle_radians))
+                                    angle_degrees = math.degrees(angle_radians)
+                                    
+                                    
+                                    # 맵 포인트 데이터 준비
+                                    point_map_send_data = PointStamped()
+                                    point_map_send_data.header.stamp = rclpy.time.Time().to_msg()
+                                    point_map_send_data.header.frame_id = 'map'
+                                    point_map_send_data.point.x = point_map.point.x
+                                    point_map_send_data.point.y = point_map.point.y
+                                    # point_map_send_data.point.z = point_map.point.z
+                                    point_map_send_data.point.z = angle_degrees
+
+                                    base_msg = BaseCoordinate()
+                                    base_msg.x = point_base.point.x
+                                    base_msg.y = point_base.point.y
+                                    self.base_coor_pub.publish(base_msg)
+
+                                    # # MQTT 메시지도 조건이 만족될 때만 전송
+                                    self.publish_mqtt_message(point_map, distance_m)
+                                    
+                                    self.get_logger().info("📤 Messages published successfully!")
+                                    
+                                except Exception as e:
+                                    self.get_logger().warn(f"TF transform to map failed: {e}")
+
+                            except Exception as e:
+                                self.get_logger().warn(f"Unexpected error: {e}")
+                    else:
+                        # 조건이 만족되지 않을 때 (모든 객체가 다 있을 때)
+                        label = self.class_names[2] if 2 < len(self.class_names) else "person"
+                        status_text = f"{label}: {person_conf:.2f} [ALL OBJECTS PRESENT - NOT PUBLISHING]"
+                        cv2.putText(frame, status_text, (person_x1, person_y1 - 10),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
+
                     object_count += 1
 
-            cv2.putText(frame, f"Objects: {object_count}", (10, 30),
+                # 다른 클래스들도 시각화 (참고용)
+                for detection in all_detections:
+                    if detection['class'] != 2:  # person이 아닌 객체들
+                        cls = detection['class']
+                        x1, y1, x2, y2 = detection['bbox']
+                        conf = detection['confidence']
+                        label = self.class_names[cls] if cls < len(self.class_names) else f"class_{cls}"
+                        
+                        # 작은 바운딩 박스로 표시 (파란색)
+                        cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 1)
+                        cv2.putText(frame, f"{label}: {conf:.2f}", (x1, y1 - 5),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
+
+            cv2.putText(frame, f"Persons: {len(class_2_boxes)}", (10, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
             display_img = cv2.resize(frame, (frame.shape[1] * 2, frame.shape[0] * 2))
@@ -169,51 +386,89 @@ class DetectWithDepthWithTf(Node):
         self.get_logger().info("TF Tree 안정화 완료. 변환 시작합니다.")
 
         # 주기적 변환 타이머 등록
-        self.transform_timer = self.create_timer(2.0, self.timer_callback)
+        # self.transform_timer = self.create_timer(2.0, self.timer_callback)
 
         # 시작 타이머 중지 (한 번만 실행)
         self.start_timer.cancel()
 
+##############mqtt############################
+    def setup_mqtt(self):
+        """MQTT 클라이언트 설정"""
+        def on_connect(client, userdata, flags, rc):
+            if rc == 0:
+                self.mqtt_connected = True
+                print("✅ Connected to MQTT Broker!")
+                self.get_logger().info("MQTT Connected successfully!")
+            else:
+                self.mqtt_connected = False
+                print(f"❌ Failed to connect to MQTT, return code {rc}")
+                self.get_logger().error(f"MQTT Connection failed with code {rc}")
 
+        def on_disconnect(client, userdata, rc):
+            self.mqtt_connected = False
+            print(f"🔌 Disconnected from MQTT Broker with code {rc}")
+            self.get_logger().warn(f"MQTT Disconnected with code {rc}")
 
-    def timer_callback(self):
-        # camera_info
-        fx = self.K[0,0]
-        fy = self.K[1,1]
-        cy = self.K[1,2]
-        cx = self.K[0,2]
-        depth_mm = self.depth_mm.copy()
-
-        X = (self.detect_cx - cx) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fx
-        Y = (self.detect_cy - cy) * (depth_mm[self.detect_cy, self.detect_cx] / 1000.0) / fy
-        Z = (depth_mm[self.detect_cy, self.detect_cx] / 1000.0)
+        def on_publish(client, userdata, mid):
+            print(f"📤 Message {mid} published successfully")
 
         try:
-            # base_link 기준 포인트 생성
-            point_base = PointStamped()
-            point_base.header.stamp = rclpy.time.Time().to_msg()
-            point_base.header.frame_id = 'base_link'
-            # point_base.point.x = 1.0 #1m 앞
-            # point_base.point.y = 0.0
-            # point_base.point.z = 0.0
-            point_base.point.x = X
-            point_base.point.y = Y
-            point_base.point.z = Z
-
-            # base_link → map 변환
-            try:
-                point_map = self.tf_buffer.transform(
-                    point_base,
-                    'map',
-                    timeout=rclpy.duration.Duration(seconds=0.5)
-                )
-                self.get_logger().info(f"[Base_link] ({point_base.point.x:.2f}, {point_base.point.y:.2f}, {point_base.point.z:.2f})")
-                self.get_logger().info(f"[Map]       ({point_map.point.x:.2f}, {point_map.point.y:.2f}, {point_map.point.z:.2f})")
-            except Exception as e:
-                self.get_logger().warn(f"TF transform to map failed: {e}")
-
+            self.get_logger().info("🔄 Attempting to connect to MQTT broker...")
+            self.mqtt_client = mqtt_client.Client(client_id=client_id, protocol=mqtt_client.MQTTv311)
+            self.mqtt_client.tls_set()
+            self.mqtt_client.username_pw_set(username, password)
+            self.mqtt_client.on_connect = on_connect
+            self.mqtt_client.on_disconnect = on_disconnect
+            self.mqtt_client.on_publish = on_publish
+            
+            # 비동기 연결 시작
+            self.mqtt_client.connect_async(broker, port, keepalive=60)
+            self.mqtt_client.loop_start()
+            
+            # 연결 확인을 위한 짧은 대기
+            time.sleep(2)
+            
         except Exception as e:
-            self.get_logger().warn(f"Unexpected error: {e}")
+            self.get_logger().error(f"MQTT setup error: {e}")
+            self.mqtt_client = None
+
+
+    def publish_mqtt_message(self, map_point, distance_m):
+        """MQTT 메시지 발행"""
+        if not self.mqtt_client or not self.mqtt_connected:
+            self.get_logger().warn("MQTT not connected. Skipping message.")
+            return
+            
+        try:
+            # 현재 시간을 타임스탬프로 사용
+            stamp = time.time()
+            
+            msg = {
+                "robot_id": "robot3",
+                "type": "human3",
+                "location": [round(map_point.point.x, 2), round(map_point.point.y, 2)],
+                "depth": round(distance_m, 2),
+                "area": 0,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # msg_json = json.dumps(msg, indent=2)
+            msg_json = json.dumps(msg)
+            
+            # 메시지 발행
+            result = self.mqtt_client.publish(topic, msg_json)
+            
+            if result.rc == mqtt_client.MQTT_ERR_SUCCESS:
+                print(f"📨 Sent message to topic `{topic}`")
+                self.get_logger().info(f"MQTT message sent: {msg}")
+            else:
+                print(f"❌ Failed to send message to topic {topic}, error: {result.rc}")
+                self.get_logger().error(f"MQTT publish failed with code {result.rc}")
+                
+        except Exception as e:
+            self.get_logger().error(f"MQTT publish error: {e}")
+##############################################
+
 
 # ========================
 # 메인 함수
@@ -226,7 +481,7 @@ def main():
 
     try:
         while rclpy.ok() and not node.should_shutdown:
-            executor.spin()
+            executor.spin_once(timeout_sec=0.1)
     except KeyboardInterrupt:
         pass
     finally:
