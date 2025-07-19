@@ -37,24 +37,15 @@ ROBOT_CONFIG = {
     'initial_position': [-3.9, 1.5],
     'initial_direction': TurtleBot4Directions.WEST,
     'waypoints': [
-        # ([-0.80, -0.80], TurtleBot4Directions.EAST),
-        # ([-2.0, -0.77], TurtleBot4Directions.SOUTH),
-        # ([-1.9, -3.0], TurtleBot4Directions.EAST),
-        # ([-0.5, -2.8], TurtleBot4Directions.NORTH),
-        # ([-1.9, -3.0], TurtleBot4Directions.SOUTH),
-        # ([-2.0, -0.77], TurtleBot4Directions.WEST),
-        # ([-0.80, -0.80], TurtleBot4Directions.NORTH),
-
-        # add point
+        # 웨이포인트 설정
         ([-4.1, 0.85], TurtleBot4Directions.WEST),
         ([-5.67, 0.8], TurtleBot4Directions.SOUTH),
         ([-5.9, -0.8], TurtleBot4Directions.EAST),
         ([-3.6, -0.6], TurtleBot4Directions.NORTH), 
-         
     ],
     'spin_angle': 2 * math.pi,
     'nav_timeout': 30.0,
-    'skip_docking': False  # 도킹 기능 활성화 (dock_status 토픽 존재함)
+    'skip_docking': False  # 도킹 기능 활성화
 }
 
 class NamespacedRobotController:
@@ -68,8 +59,16 @@ class NamespacedRobotController:
         self.navigation_active = False
         self._lock = threading.Lock()
         self.namespace = ROBOT_CONFIG['namespace']
+        
+        # 객체 감지 처리 상태 관리
+        self.object_processing = False
+        self.object_processing_lock = threading.Lock()
+        
+        # 객체 위치 저장
+        self.target_object_location = None
+        self.object_detected = False
 
-        #좌표
+        # TF2 초기화는 Navigator 생성 후로 이동
         self.tf_buffer = None
         self.tf_listener = None
         self.tf_initialized = False
@@ -112,63 +111,6 @@ class NamespacedRobotController:
                 print(f"❌ [{self.namespace}] MQTT 연결 실패, return code: {rc}")
                 self.mqtt_connected = False
 
-        def on_message(client, userdata, msg):
-            try:
-                payload = msg.payload.decode().strip()
-                print(f"📩 [{self.namespace}] MQTT 메시지 수신: '{payload}' from '{msg.topic}'")
-                
-                # 빈 메시지는 무시
-                if not payload:
-                    print(f"📝 [{self.namespace}] 빈 메시지 무시 (retained 클리어)")
-                    return
-                
-                # 정지/시작 명령 처리
-                if payload == "1":
-                    print(f"🛑 [{self.namespace}] 정지 명령 수신됨!")
-                    self.set_stop_flag(True)
-                elif payload == "0":
-                    print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
-                    self.reset_stop_flag()
-                
-                #좌표
-                # 객체 감지 처리
-                elif json.loads(payload).get('type') == 'human3':
-                    print('🚶 Human detected - processing location')
-                    
-                    # 현재 패트롤 작업 취소 (하지만 stop_flag는 아직 True로 설정하지 않음)
-                    self.navigator.cancelTask()
-                    
-                    # 객체 좌표 추출
-                    position = json.loads(payload).get('location')  # 예: [-0.80, -0.80]
-                    print(f"🎯 목표 좌표: {position}")
-                    
-                    # 객체 좌표로 이동 시도
-                    try:
-                        print(f"🚀 객체 좌표로 이동 시작...")
-                        if self.navigate_to_waypoint(99, position, TurtleBot4Directions.EAST):
-                            print(f"✅ 객체 좌표로 이동 완료!")
-                            
-                            # 이동 완료 후 정지 상태로 전환
-                            self.set_stop_flag(True)
-                            print(f"⏸️ 객체 위치에서 정지 상태로 전환")
-                            
-                            # 필요시 추가 작업 (예: 회전, 사진 촬영 등)
-                            # self.perform_rotation(99)
-                            
-                        else:
-                            print(f"❌ 객체 좌표로 이동 실패 - 패트롤 재개")
-                            # 이동 실패 시 패트롤 재개 (정지하지 않음)
-                            
-                    except Exception as e:
-                        print(f"❌ 객체 좌표 이동 중 오류: {e}")
-                        # 오류 발생 시 패트롤 재개
-                
-                else:
-                    print(f"❓ [{self.namespace}] 알 수 없는 명령: {payload}")
-                    
-            except Exception as e:
-                print(f"❌ [{self.namespace}] MQTT 메시지 처리 오류: {e}")
-
         def on_disconnect(client, userdata, rc):
             print(f"🔌 [{self.namespace}] MQTT 연결 끊어짐, code: {rc}")
             self.mqtt_connected = False
@@ -188,7 +130,7 @@ class NamespacedRobotController:
         
         # 콜백 설정
         self.mqtt_client.on_connect = on_connect
-        self.mqtt_client.on_message = on_message
+        self.mqtt_client.on_message = self.on_message  # 메서드 바인딩
         self.mqtt_client.on_disconnect = on_disconnect
         
         # 연결 시도
@@ -213,6 +155,58 @@ class NamespacedRobotController:
         except Exception as e:
             print(f"❌ [{self.namespace}] MQTT 연결 오류: {e}")
             print(f"⚠️ [{self.namespace}] MQTT 없이 계속 진행")
+
+    def on_message(self, client, userdata, msg):
+        try:
+            payload = msg.payload.decode().strip()
+            print(f"📩 [{self.namespace}] MQTT 메시지 수신: '{payload}' from '{msg.topic}'")
+            
+            # 빈 메시지는 무시
+            if not payload:
+                print(f"📝 [{self.namespace}] 빈 메시지 무시 (retained 클리어)")
+                return
+            
+            # JSON 파싱
+            try:
+                data = json.loads(payload)
+            except json.JSONDecodeError:
+                print(f"❌ [{self.namespace}] JSON 파싱 실패: {payload}")
+                return
+            
+            # 자신의 메시지는 무시 (robot_id 또는 namespace 체크)
+            if (data.get('type') != "human3"):
+                print(f"📝 [{self.namespace}] 자신의 메시지 무시")
+                return
+            
+            # 수동 정지/재시작 명령 처리
+            if data.get('command') == "stop":
+                print(f"🛑 [{self.namespace}] 수동 정지 명령 수신됨!")
+                self.set_stop_flag(True)
+                return
+            elif data.get('command') == "resume" or data.get('command') == "start":
+                print(f"▶️ [{self.namespace}] 수동 재시작 명령 수신됨!")
+                self.reset_stop_flag()
+                return
+            
+            # 객체 감지 처리 (패트롤 루프에서 처리하도록 플래그만 설정)
+            if data.get('type') == 'human3':
+                with self.object_processing_lock:
+                    if self.object_processing:
+                        print(f"⚠️ [{self.namespace}] 객체 처리 중 - 새로운 객체 감지 무시")
+                        return
+                    
+                    position = data.get('location')
+                    if position:
+                        print(f"🚶 Human detected at: {position}")
+                        self.target_object_location = position
+                        self.object_detected = True
+                        self.object_processing = True
+                        
+                        # 현재 네비게이션 작업 취소
+                        self.navigator.cancelTask()
+                        
+        except Exception as e:
+            print(f"❌ [{self.namespace}] MQTT 메시지 처리 오류: {e}")
     
     def publish_event(self, event_type, waypoint_index, robot_pos, target_pos):
         """MQTT 이벤트 발행"""
@@ -243,8 +237,6 @@ class NamespacedRobotController:
     def check_docking_support(self):
         """도킹 기능 지원 여부 확인"""
         try:
-            # 도킹 관련 토픽이 존재하는지 확인
-            # 이것은 실제로는 더 복잡한 체크가 필요하지만, 간단히 시도해봄
             status = self.navigator.getDockedStatus()
             print(f"✅ [{self.namespace}] 도킹 기능 지원됨")
             return True
@@ -256,11 +248,14 @@ class NamespacedRobotController:
         """네비게이션 시스템 초기화"""
         print(f"🤖 [{self.namespace}] ROS2 노드 초기화 중...")
         
-        # ROS2 초기화 (네임스페이스 고려)
+        # ROS2 초기화
         rclpy.init()
+
+        # TurtleBot4Navigator 초기화 먼저
+        self.navigator = TurtleBot4Navigator(namespace='robot3')
+        print(f"🗺️ [{self.namespace}] TurtleBot4 Navigator 초기화 완료")
         
-        #좌표
-        # TF2 초기화
+        # Navigator 생성 후 TF2 초기화
         try:
             self.tf_buffer = tf2_ros.Buffer()
             self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self.navigator)
@@ -271,10 +266,6 @@ class NamespacedRobotController:
             print(f"⚠️ TF2 초기화 실패: {e}")
             self.tf_initialized = False
 
-        # TurtleBot4Navigator 초기화 (네임스페이스 지원)
-        self.navigator = TurtleBot4Navigator(namespace='robot3')  # 슬래시 없이
-        print(f"🗺️ [{self.namespace}] TurtleBot4 Navigator 초기화 완료")
-        
         # 도킹 기능 확인 및 처리
         if not ROBOT_CONFIG['skip_docking']:
             docking_supported = self.check_docking_support()
@@ -305,7 +296,7 @@ class NamespacedRobotController:
         return True
     
     def ensure_docking(self):
-        """도킹 상태 확인 및 보장 (네임스페이스 버전)"""
+        """도킹 상태 확인 및 보장"""
         print(f"🔌 [{self.namespace}] 도킹 상태 확인 중...")
         
         try:
@@ -337,7 +328,7 @@ class NamespacedRobotController:
             return False
     
     def ensure_undocking(self):
-        """언도킹 확인 및 보장 (네임스페이스 버전)"""
+        """언도킹 확인 및 보장"""
         if ROBOT_CONFIG['skip_docking']:
             print(f"⏭️ [{self.namespace}] 언도킹 스킵됨")
             return True
@@ -373,7 +364,6 @@ class NamespacedRobotController:
         except Exception as e:
             print(f"⚠️ [{self.namespace}] 언도킹 오류: {e}")
             return False
-    
 
     def wait_for_task_completion(self, task_description="", timeout=None):
         """작업 완료 대기 - 정지 시 즉시 취소"""
@@ -389,82 +379,23 @@ class NamespacedRobotController:
                 self.navigator.cancelTask()
                 return False
             
-            # 타임아웃 확인 (주석 처리하여 무한 대기)
-            # if time.time() - start_time > timeout:
-            #     print(f"⏰ [{self.namespace}] 작업 타임아웃: {task_description}")
-            #     return False
-            
             # ROS2 스핀
             rclpy.spin_once(self.navigator, timeout_sec=0.1)
         
         # 결과 확인
-        result = TaskResult.SUCCEEDED
+        result = self.navigator.getResult()
         if result == TaskResult.SUCCEEDED:
             print(f"✅ [{self.namespace}] 작업 성공: {task_description}")
             return True
         else:
-            print(f"❌ [{self.namespace}] 작업 실패: {task_description}, 결과={result}")
+            print(f"❌ [{self.namespace}] 작업 실패: {task_description}")
             return False
-    
-    def get_current_position(self):
-        """현재 로봇 위치 반환"""
-        try:
-            pose = self.navigator.getCurrentPose()
-            if pose:
-                return [pose.pose.position.x, pose.pose.position.y]
-            else:
-                return [0.0, 0.0]
-        except Exception as e:
-            print(f"⚠️ [{self.namespace}] 현재 위치 획득 실패: {e}")
-            return [0.0, 0.0]
-    
-    def navigate_to_waypoint(self, waypoint_index, position, direction):
-        """특정 웨이포인트로 이동 - 객체 감지 시에는 정지 상태 무시"""
-        
-        # 객체 감지로 인한 이동인 경우 (waypoint_index가 99인 경우)
-        if waypoint_index == 99:
-            print(f"🎯 [{self.namespace}] 객체 감지 - 긴급 이동: {position}")
-            # 정지 상태 무시하고 이동
-        else:
-            # 일반 패트롤 중 정지 상태 확인
-            if self.is_stopped():
-                print(f"⏸️ [{self.namespace}] 정지 상태로 인한 이동 취소")
-                return False
-            print(f"🎯 [{self.namespace}] [{waypoint_index}/{len(ROBOT_CONFIG['waypoints'])}] 웨이포인트 이동: {position}")
-        
-        # 목표 포즈 생성
-        goal_pose = self.navigator.getPoseStamped(position, direction)
-        
-        # 이동 시작
-        self.navigator.goToPose(goal_pose)
-        
-        # 이동 완료 대기 (객체 감지 시에는 특별한 대기 로직 사용)
-        if waypoint_index == 99:
-            success = self.wait_for_object_navigation(f"객체 위치 이동")
-        else:
-            success = self.wait_for_task_completion(f"웨이포인트 {waypoint_index} 이동")
-        
-        if success:
-            robot_pos = self.get_current_position()
-            if waypoint_index == 99:
-                self.publish_event("object_reached", waypoint_index, robot_pos, position)
-                print(f"✅ [{self.namespace}] 객체 위치 도착!")
-            else:
-                self.publish_event("waypoint_arrival", waypoint_index, robot_pos, position)
-                print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 도착!")
-        
-        return success
 
-    # 객체 감지 시 전용 대기 함수
     def wait_for_object_navigation(self, task_description="", timeout=30.0):
-        """객체 감지 시 네비게이션 대기 - 정지 상태를 무시"""
-        
+        """객체 감지 시 네비게이션 대기"""
         start_time = time.time()
         
         while not self.navigator.isTaskComplete():
-            # 객체 감지 이동 중에는 정지 상태를 확인하지 않음
-            # (다른 객체가 감지되어도 현재 이동 완료까지 대기)
-            
             # 타임아웃 확인
             if time.time() - start_time > timeout:
                 print(f"⏰ [{self.namespace}] 객체 이동 타임아웃: {task_description}")
@@ -475,19 +406,70 @@ class NamespacedRobotController:
             rclpy.spin_once(self.navigator, timeout_sec=0.1)
         
         # 결과 확인
-        result = TaskResult.SUCCEEDED
+        result = self.navigator.getResult()
         if result == TaskResult.SUCCEEDED:
             print(f"✅ [{self.namespace}] 객체 이동 성공: {task_description}")
             return True
         else:
-            print(f"❌ [{self.namespace}] 객체 이동 실패: {task_description}, 결과={result}")
+            print(f"❌ [{self.namespace}] 객체 이동 실패: {task_description}")
+            return False
+    
+    def get_current_position(self):
+        """현재 로봇 위치 반환"""
+        try:
+            # 임시로 기본값 반환 (getCurrentPose 메서드 오류 때문에)
+            return [0.0, 0.0]
+        except Exception as e:
+            print(f"⚠️ [{self.namespace}] 현재 위치 획득 실패: {e}")
+            return [0.0, 0.0]
+    
+    def navigate_to_waypoint(self, waypoint_index, position, direction):
+        """특정 웨이포인트로 이동"""
+        print(f"🎯 [{self.namespace}] [{waypoint_index}/{len(ROBOT_CONFIG['waypoints'])}] 웨이포인트 이동: {position}")
+        
+        # 목표 포즈 생성
+        goal_pose = self.navigator.getPoseStamped(position, direction)
+        
+        # 이동 시작
+        self.navigator.goToPose(goal_pose)
+        
+        # 이동 완료 대기
+        success = self.wait_for_task_completion(f"웨이포인트 {waypoint_index} 이동")
+        
+        if success:
+            robot_pos = self.get_current_position()
+            self.publish_event("waypoint_arrival", waypoint_index, robot_pos, position)
+            print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 도착!")
+        
+        return success
+
+    def navigate_to_object(self, position):
+        """객체 좌표로 이동"""
+        try:
+            print(f"🎯 [{self.namespace}] 객체 위치로 이동: {position}")
+            
+            # 목표 포즈 생성
+            goal_pose = self.navigator.getPoseStamped(position, TurtleBot4Directions.EAST)
+            
+            # 이동 시작
+            self.navigator.goToPose(goal_pose)
+            
+            # 이동 완료 대기
+            success = self.wait_for_object_navigation("객체 위치 이동")
+            
+            if success:
+                robot_pos = self.get_current_position()
+                self.publish_event("object_reached", 99, robot_pos, position)
+                print(f"✅ [{self.namespace}] 객체 위치 도착!")
+            
+            return success
+            
+        except Exception as e:
+            print(f"❌ [{self.namespace}] 객체 이동 중 오류: {e}")
             return False
     
     def perform_rotation(self, waypoint_index):
         """360도 회전 수행"""
-        # if self.is_stopped():
-        #     return False
-        
         print(f"🔄 [{self.namespace}] 웨이포인트 {waypoint_index}에서 360° 회전 시작")
         
         # 회전 시작
@@ -504,7 +486,7 @@ class NamespacedRobotController:
         return success
     
     def run_patrol_cycle(self):
-        """패트롤 사이클 실행 - 정지 상태에서도 노드 유지"""
+        """패트롤 사이클 실행 - 객체 감지 처리 통합"""
         if not self.navigation_active:
             print(f"❌ 네비게이션이 활성화되지 않음")
             return False
@@ -515,13 +497,40 @@ class NamespacedRobotController:
             return False
         
         cycle_count = 0
+        current_waypoint = 0
         
-        try:
-            while rclpy.ok():  # 무한 루프로 변경
+        while rclpy.ok():
+            try:
+                # 객체 감지 처리 우선
+                if self.object_detected and self.target_object_location:
+                    try:
+                        print(f"🎯 객체 감지 - 패트롤 중단하고 객체 위치로 이동")
+                        
+                        # 객체 위치로 이동
+                        if self.navigate_to_object(self.target_object_location):
+                            print(f"✅ 객체 위치 도착 - 정지 상태로 전환")
+                            self.set_stop_flag(True)
+                        else:
+                            print(f"❌ 객체 위치 이동 실패")
+                        
+                        # 객체 처리 완료
+                        with self.object_processing_lock:
+                            self.object_detected = False
+                            self.target_object_location = None
+                            self.object_processing = False
+                            
+                    except Exception as e:
+                        print(f"❌ 객체 처리 중 오류: {e}")
+                        with self.object_processing_lock:
+                            self.object_detected = False
+                            self.target_object_location = None
+                            self.object_processing = False
+                
                 # 정지 상태일 때 대기
                 if self.is_stopped():
                     print(f"⏸️  [{self.namespace}] 정지 상태 - 대기 중...")
                     while self.is_stopped() and rclpy.ok():
+                        # 대기 중에도 객체 감지 메시지 처리
                         rclpy.spin_once(self.navigator, timeout_sec=0.1)
                         time.sleep(0.1)
                     
@@ -532,48 +541,55 @@ class NamespacedRobotController:
                     # 패트롤 재개 시 언도킹 다시 확인
                     if not self.ensure_undocking():
                         print(f"❌ 언도킹 실패로 패트롤 재시작 불가")
-                        time.sleep(5)  # 5초 후 다시 시도
+                        time.sleep(5)
                         continue
                 
-                cycle_count += 1
-                print(f"\n🔄 [{self.namespace}] === 패트롤 사이클 {cycle_count} 시작 ===")
+                # 정상 패트롤 진행
+                if current_waypoint == 0:
+                    cycle_count += 1
+                    print(f"\n🔄 [{self.namespace}] === 패트롤 사이클 {cycle_count} 시작 ===")
                 
-                # 각 웨이포인트 순회
-                patrol_success = True
-                for i, (position, direction) in enumerate(ROBOT_CONFIG['waypoints'], start=1):
-                    if self.is_stopped():
-                        print(f"🚫 웨이포인트 {i} 이동 중 정지 명령 수신")
-                        patrol_success = False
-                        break
+                # 현재 웨이포인트 처리
+                if current_waypoint < len(ROBOT_CONFIG['waypoints']):
+                    position, direction = ROBOT_CONFIG['waypoints'][current_waypoint]
+                    waypoint_num = current_waypoint + 1
                     
                     # 웨이포인트로 이동
-                    if not self.navigate_to_waypoint(i, position, direction):
-                        print(f"❌ 웨이포인트 {i} 이동 실패")
-                        continue
-                    
-                    # 360도 회전
-                    if not self.perform_rotation(i):
-                        print(f"❌ 웨이포인트 {i} 회전 실패")
-                        continue
-                    
-                    # 웨이포인트 간 짧은 대기
-                    time.sleep(0.5)
+                    if self.navigate_to_waypoint(waypoint_num, position, direction):
+                        # 360도 회전
+                        if self.perform_rotation(waypoint_num):
+                            current_waypoint += 1
+                        else:
+                            print(f"❌ 웨이포인트 {waypoint_num} 회전 실패")
+                            current_waypoint += 1  # 실패해도 다음으로
+                    else:
+                        print(f"❌ 웨이포인트 {waypoint_num} 이동 실패")
+                        current_waypoint += 1  # 실패해도 다음으로
                 
-                # 사이클 완료 이벤트 (정지되지 않은 경우에만)
-                if patrol_success and not self.is_stopped():
+                else:
+                    # 모든 웨이포인트 완료
                     robot_pos = self.get_current_position()
                     self.publish_event("route_complete", cycle_count, robot_pos, robot_pos)
                     print(f"✅ 패트롤 사이클 {cycle_count} 완료!\n")
                     
-                    # 사이클 간 대기
+                    current_waypoint = 0  # 다음 사이클 시작
                     time.sleep(1.0)
+                
+                # 짧은 대기 (MQTT 메시지 처리를 위해)
+                rclpy.spin_once(self.navigator, timeout_sec=0.1)
+                time.sleep(0.1)
+                    
+            except KeyboardInterrupt:
+                print(f"\n🛑 사용자 중단 요청")
+                break
+            except Exception as e:
+                print(f"\n⚠️ [{self.namespace}] 패트롤 중 오류 발생: {e}")
+                print(f"🔄 [{self.namespace}] 5초 후 패트롤 재시작...")
+                time.sleep(5)
+                continue
         
-        except KeyboardInterrupt:
-            print(f"\n🛑 사용자 중단 요청")
-            return True
-        except Exception as e:
-            print(f"\n❌ 패트롤 중 오류 발생: {e}")
-            return False
+        print(f"\n🏁 [{self.namespace}] 패트롤 루프 종료")
+        return True
     
     def cleanup(self):
         """리소스 정리"""
@@ -598,7 +614,7 @@ class NamespacedRobotController:
         print(f"🏁 시스템 정리 완료")
 
 def main():
-    """메인 함수"""
+    """메인 함수 - 예외 발생 시에도 프로그램 유지"""
     controller = NamespacedRobotController()
     
     try:
@@ -613,13 +629,33 @@ def main():
             print(f"❌ [{ROBOT_CONFIG['namespace']}] 네비게이션 초기화 실패")
             return
         
-        # 3. 패트롤 실행
+        # 3. 패트롤 실행 (예외 발생해도 계속)
         print(f"🎯 [{ROBOT_CONFIG['namespace']}] 패트롤 시작!")
-        controller.run_patrol_cycle()
         
+        # 무한 루프로 패트롤 실행 - 예외 발생해도 재시작
+        while True:
+            try:
+                controller.run_patrol_cycle()
+                # 정상적으로 종료된 경우 (KeyboardInterrupt)
+                break
+            except KeyboardInterrupt:
+                print(f"\n🛑 사용자 중단 요청")
+                break
+            except Exception as e:
+                print(f"\n⚠️ [{ROBOT_CONFIG['namespace']}] 시스템 오류: {e}")
+                print(f"🔄 [{ROBOT_CONFIG['namespace']}] 10초 후 시스템 재시작...")
+                time.sleep(10)
+                continue  # 다시 패트롤 시작
+        
+        # 여기에 도달하면 정상적인 종료 (KeyboardInterrupt)
+        print(f"🏁 [{ROBOT_CONFIG['namespace']}] 패트롤 정상 종료")
+        
+    except KeyboardInterrupt:
+        print(f"\n🛑 [{ROBOT_CONFIG['namespace']}] 사용자 중단 요청")
     except Exception as e:
-        print(f"❌ [{ROBOT_CONFIG['namespace']}] 시스템 오류: {e}")
+        print(f"❌ [{ROBOT_CONFIG['namespace']}] 초기화 오류: {e}")
     finally:
+        # KeyboardInterrupt 또는 초기화 실패 시에만 cleanup 실행
         controller.cleanup()
         print(f"👋 [{ROBOT_CONFIG['namespace']}] 프로그램 종료")
 
