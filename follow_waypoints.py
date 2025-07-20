@@ -25,7 +25,7 @@ MQTT_CONFIG = {
     'port': 8883,
     'username': 'Rokey',
     'password': '1234567',
-    'topic': "crack",
+    'topic': "detect",
     'client_id': f'python-mqtt-{random.randint(0, 100)}',
     'keepalive': 60
 }
@@ -44,6 +44,30 @@ ROBOT_CONFIG = {
         ([-1.9, -3.0], TurtleBot4Directions.SOUTH),
         ([-2.0, -0.77], TurtleBot4Directions.WEST),
         ([-0.80, -0.80], TurtleBot4Directions.NORTH),
+    ],
+    'spin_angle': 2 * math.pi,
+    'nav_timeout': 30.0,
+    'skip_docking': False  # 도킹 기능 활성화 (dock_status 토픽 존재함)
+}
+
+ROBOT_CONFIG2 = {
+    'namespace': '/robot1',  # 실제 네임스페이스로 수정
+    'robot_id': 'robot1',
+    'initial_position': [-3.0, -0.5],
+    'initial_direction': TurtleBot4Directions.NORTH,
+    'waypoints': [
+        ([-3.6, -0.6], TurtleBot4Directions.EAST),
+        ([-4.0, 1.2], TurtleBot4Directions.SOUTH),
+        ([-5.67, 0.8], TurtleBot4Directions.EAST),
+        ([-5.33, -0.746], TurtleBot4Directions.NORTH),
+        # ([-5.3, -0.4], TurtleBot4Directions.EAST),
+        # ([-4.5, -0.6], TurtleBot4Directions.NORTH),
+        ([-2.0, -0.77], TurtleBot4Directions.SOUTH),
+        ([-1.9, -3.0], TurtleBot4Directions.EAST),
+        ([-0.5, -2.8], TurtleBot4Directions.NORTH),
+        ([-1.9, -3.0], TurtleBot4Directions.SOUTH),
+        ([-2.0, -0.77], TurtleBot4Directions.WEST),
+        ([-0.80, -0.80], TurtleBot4Directions.NORTH)
     ],
     'spin_angle': 2 * math.pi,
     'nav_timeout': 30.0,
@@ -92,7 +116,7 @@ class NamespacedRobotController:
                 self.mqtt_connected = True
                 
                 # retained 메시지 클리어
-                client.publish(MQTT_CONFIG['topic'], "", retain=True)
+                #client.publish(MQTT_CONFIG['topic'], "", retain=True)
                 print(f"🧹 [{self.namespace}] 기존 retained 메시지 클리어 완료")
                 
                 # 토픽 구독
@@ -100,7 +124,7 @@ class NamespacedRobotController:
                 print(f"📡 [{self.namespace}] 토픽 구독 완료: {MQTT_CONFIG['topic']}")
                 
                 # 연결 완료 메시지 발송
-                self.publish_event("system_ready", 0, [0, 0], [0, 0])
+                #self.publish_event("system_ready", 0, [0, 0], [0, 0])
             else:
                 print(f"❌ [{self.namespace}] MQTT 연결 실패, return code: {rc}")
                 self.mqtt_connected = False
@@ -124,53 +148,68 @@ class NamespacedRobotController:
                 #     self.reset_stop_flag()
                 
                 #좌표
-                elif json.loads(payload).get('type') == 'crack':
+                elif json.loads(payload).get('type') == 'crack1':
                     print('Crack detected - processing location')
                     self.stop_flag = True
                     self.navigator.cancelTask()
                     position = json.loads(payload).get('location')  # 예: ['-0.80', ' -0.80']
                     #position = [float(x.strip()) for x in position_str]
-                    
+
+
                     if not self.navigate_to_waypoint(8, position, TurtleBot4Directions.NORTH):
                         print(f"❌ 웨이포인트 {i} 이동 실패")
                     else:
                         print('목표로이동완')
+                        # self.stop_flag = False                      #######################
+                        # self.run_patrol_cycle()                     #######################
+                        # print("경로 재시작")                     ###################################
 
-                    
-                    # try:
-                    #     # 크랙 위치 정보 추출 (MQTT 메시지에서)
-                    #     crack_data = json.loads(payload)
-                    #     crack_point_base = PointStamped()
-                    #     crack_point_base.header.stamp = rclpy.time.Time().to_msg()
-                    #     crack_point_base.header.frame_id = 'base_link'
-                      
-                    #     crack_point_base.point.x = crack_data['location'][0]   # MQTT 메시지에서 x 좌표 추출
-                    #     crack_point_base.point.y = crack_data['location'][1] # MQTT 메시지에서 y 좌표 추출
-                    #     crack_point_base.point.z = 0.0
+                elif json.loads(payload).get('type') == 'human11':
+                    print('Crack detected - processing location')
+                    self.stop_flag = True
+                    self.navigator.cancelTask()
+                    self.stop_flag = False
+                    position = json.loads(payload).get('location')  # 예: ['-0.80', ' -0.80']
+                    #position = [float(x.strip()) for x in position_str]
 
-                    #     # base_link → map 좌표 변환
-                    #     crack_point_map = self.tf_buffer.transform(
-                    #         crack_point_base,
-                    #         'map',
-                    #         timeout=rclpy.duration.Duration(seconds=0.5)
-                    #     )
-                        
-                    #     # 변환된 좌표 출력
-                    #     self.get_logger().info(f"Crack location in base_link: ({crack_point_base.point.x:.2f}, {crack_point_base.point.y:.2f})")
-                    #     self.get_logger().info(f"Crack location in map: ({crack_point_map.point.x:.2f}, {crack_point_map.point.y:.2f})")
-                        
-                    #     # 3초 대기 후 재개
-                    #     #time.sleep(3)
-                    #     #self.reset_stop_flag()
-                        
-                    #     # 필요한 경우 변환된 좌표를 다른 곳에 저장하거나 추가 처리
-                    #     # 예: self.last_crack_location = [crack_point_map.point.x, crack_point_map.point.y]
-                        
-                    # except Exception as e:
-                    #     self.get_logger().error(f"Error processing crack location: {e}")
-                    #     time.sleep(3)
-                    #     self.reset_stop_flag()
 
+                    if not self.navigate_to_waypoint(8, position, TurtleBot4Directions.NORTH):
+                        print(f"❌ 웨이포인트 {i} 이동 실패")
+                    else:
+                        print('목표로이동완')
+                        # self.stop_flag = False                      #######################
+                        # self.run_patrol_cycle()                     #######################
+                        # print("경로 재시작")                     ###################################
+
+                elif json.loads(payload).get('type') == 'human3':
+                        self.stop_flag = True
+                        self.navigator.cancelTask()
+                        time.sleep(0.5)
+                        self.stop_flag = False
+                        goal_pose = self.navigator.getPoseStamped([-3.0, -0.5], TurtleBot4Directions.SOUTH)
+                        time.sleep(0.5)
+                        
+                        # 이동 시작
+                        self.navigator.goToPose(goal_pose)
+                        self.wait_for_task_completion("안전 불감증 인간 발견")
+                        
+                        for i, (position, direction) in enumerate(ROBOT_CONFIG2['waypoints'], start=1):
+                            if self.is_stopped():
+                                print(f"🚫 정지 명령으로 인한 패트롤 중단")
+                                return True
+                            
+                            # 웨이포인트로 이동
+                            if not self.navigate_to_waypoint(i, position, direction):
+                                print(f"❌ 웨이포인트 {i} 이동 실패")
+                                continue
+                            
+                            # 360도 회전
+                            if not self.perform_rotation(i):
+                                print(f"❌ 웨이포인트 {i} 회전 실패")
+                                continue
+                            
+                            # 웨이포인트 간 짧은 대기
+                            time.sleep(0.5)
                 else:
                     print(f"❓ [{self.namespace}] 알 수 없는 명령: {payload}")
                     
@@ -239,11 +278,11 @@ class NamespacedRobotController:
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
             
-            result = self.mqtt_client.publish(MQTT_CONFIG['topic'], json.dumps(msg))
-            if result.rc == mqtt_client.MQTT_ERR_SUCCESS:
-                print(f"📤 [{self.namespace}] MQTT 이벤트 발행 성공: {event_type}")
-            else:
-                print(f"📤 [{self.namespace}] MQTT 이벤트 발행 실패: {event_type}, rc={result.rc}")
+            # result = self.mqtt_client.publish(MQTT_CONFIG['topic'], json.dumps(msg))
+            # if result.rc == mqtt_client.MQTT_ERR_SUCCESS:
+            #     print(f"📤 [{self.namespace}] MQTT 이벤트 발행 성공: {event_type}")
+            # else:
+            #     print(f"📤 [{self.namespace}] MQTT 이벤트 발행 실패: {event_type}, rc={result.rc}")
                 
         except Exception as e:
             print(f"❌ [{self.namespace}] MQTT 발행 오류: {e}")
@@ -444,7 +483,7 @@ class NamespacedRobotController:
         
         if success:
             robot_pos = self.get_current_position()
-            self.publish_event("waypoint_arrival", waypoint_index, robot_pos, position)
+            #self.publish_event("waypoint_arrival", waypoint_index, robot_pos, position)
             print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 도착!")
         
         return success
@@ -464,7 +503,7 @@ class NamespacedRobotController:
         
         if success:
             robot_pos = self.get_current_position()
-            self.publish_event("rotation_complete", waypoint_index, robot_pos, robot_pos)
+            #self.publish_event("rotation_complete", waypoint_index, robot_pos, robot_pos)
             print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 회전 완료!")
         
         return success
@@ -508,7 +547,7 @@ class NamespacedRobotController:
                 
                 # 사이클 완료 이벤트
                 robot_pos = self.get_current_position()
-                self.publish_event("route_complete", cycle_count, robot_pos, robot_pos)
+                #self.publish_event("route_complete", cycle_count, robot_pos, robot_pos)
                 print(f"✅ 패트롤 사이클 {cycle_count} 완료!\n")
                 
                 # 사이클 간 대기
@@ -527,7 +566,7 @@ class NamespacedRobotController:
         
         if self.mqtt_client:
             try:
-                self.publish_event("system_shutdown", 0, [0, 0], [0, 0])
+                #self.publish_event("system_shutdown", 0, [0, 0], [0, 0])
                 self.mqtt_client.loop_stop()
                 self.mqtt_client.disconnect()
                 print(f"✅ MQTT 연결 종료")
