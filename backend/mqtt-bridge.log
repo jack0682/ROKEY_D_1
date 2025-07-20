@@ -1,0 +1,175 @@
+2025-07-21 00:40:26 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:42:11 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:44:32 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:44:32 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 00:44:33 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail
+2025-07-21 00:44:33 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 00:45:29 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:45:29 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 00:45:30 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail
+2025-07-21 00:45:30 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 00:49:01 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:49:01 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 00:49:02 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail
+2025-07-21 00:49:02 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 00:49:49 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:49:49 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 00:49:49 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail
+2025-07-21 00:49:49 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 00:58:37 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:58:37 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 00:58:38 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail
+2025-07-21 00:58:38 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 00:58:43 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 00:58:43 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 00:58:44 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail
+2025-07-21 00:58:44 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:01:56 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:03:18 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:03:18 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:03:18 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:03:18 | INFO     | InfluxDBManager      | 조직: rokey, 버킷: ROKEY
+2025-07-21 01:03:19 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:03:19 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:03:19 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:04:22 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:04:22 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:04:22 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:04:22 | INFO     | InfluxDBManager      | 조직: rokey, 버킷: ROKEY
+2025-07-21 01:04:23 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:04:23 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:04:23 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:09:01 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:09:01 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:09:01 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:09:01 | INFO     | InfluxDBManager      | 조직: rokey, 버킷: ROKEY
+2025-07-21 01:09:02 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:09:02 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:09:02 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:12:27 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:12:27 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:12:27 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:12:27 | INFO     | InfluxDBManager      | 조직: rokey, 버킷: ROKEY
+2025-07-21 01:12:28 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:12:28 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:12:28 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:21:26 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:21:26 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:21:26 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:21:26 | INFO     | InfluxDBManager      | 조직: rokey, 버킷: ROKEY
+2025-07-21 01:21:26 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:21:26 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:21:26 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:22:32 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:23:13 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:23:13 | ERROR    | __main__             | 브리지 실행 중 치명적 오류: 'MQTTInfluxBridge' object has no attribute 'config'
+2025-07-21 01:24:25 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:24:25 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:24:25 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:24:25 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:24:25 | INFO     | InfluxDBManager      | 조직: rokey, 버킷: ROKEY
+2025-07-21 01:24:26 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:24:26 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:24:26 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:28:49 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:28:49 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:28:49 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:28:49 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:28:49 | INFO     | InfluxDBManager      | 조직: rokeyjack, 버킷: ROKEY
+2025-07-21 01:28:50 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:28:50 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:28:50 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:29:28 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:29:28 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:29:28 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:29:28 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: us-east-1-1.aws.cloud2.influxdata.com"
+2025-07-21 01:29:28 | INFO     | InfluxDBManager      | 조직: rokeyjack, 버킷: ROKEY
+2025-07-21 01:29:28 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=<urllib3.connection.HTTPConnection object at 0x7f21fed7af50>: Failed to resolve 'us-east-1-1.aws.cloud2.influxdata.com"' ([Errno -2] Name or service not known)
+2025-07-21 01:29:28 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - <urllib3.connection.HTTPConnection object at 0x7f21fed7af50>: Failed to resolve 'us-east-1-1.aws.cloud2.influxdata.com"' ([Errno -2] Name or service not known)
+2025-07-21 01:29:28 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:29:39 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:29:39 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:29:39 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:29:39 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: us-east-1-1.aws.cloud2.influxdata.com"
+2025-07-21 01:29:39 | INFO     | InfluxDBManager      | 조직: rokey, 버킷: ROKEY
+2025-07-21 01:29:39 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=<urllib3.connection.HTTPConnection object at 0x7f0ab66b2f50>: Failed to resolve 'us-east-1-1.aws.cloud2.influxdata.com"' ([Errno -2] Name or service not known)
+2025-07-21 01:29:39 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - <urllib3.connection.HTTPConnection object at 0x7f0ab66b2f50>: Failed to resolve 'us-east-1-1.aws.cloud2.influxdata.com"' ([Errno -2] Name or service not known)
+2025-07-21 01:29:39 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:35:10 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:35:10 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:35:10 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:35:10 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: us-east-1-1.aws.cloud2.influxdata.com"
+2025-07-21 01:35:10 | INFO     | InfluxDBManager      | 조직: 2167da61d810d30e, 버킷: ROKEY
+2025-07-21 01:35:10 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=<urllib3.connection.HTTPConnection object at 0x7fa848892f50>: Failed to resolve 'us-east-1-1.aws.cloud2.influxdata.com"' ([Errno -2] Name or service not known)
+2025-07-21 01:35:10 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - <urllib3.connection.HTTPConnection object at 0x7fa848892f50>: Failed to resolve 'us-east-1-1.aws.cloud2.influxdata.com"' ([Errno -2] Name or service not known)
+2025-07-21 01:35:10 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:35:43 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:35:43 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:35:43 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:35:43 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:35:43 | INFO     | InfluxDBManager      | 조직: 2167da61d810d30e, 버킷: ROKEY
+2025-07-21 01:35:43 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=(308)
+Reason: Permanent Redirect
+HTTP response headers: HTTPHeaderDict({'Date': 'Sun, 20 Jul 2025 16:35:43 GMT', 'Content-Type': 'text/html', 'Content-Length': '164', 'Connection': 'keep-alive', 'Location': 'https://us-east-1-1.aws.cloud2.influxdata.com/health', 'X-Influxdb-Request-ID': 'fd360e3148acfb8e2d876382ffdba734', 'X-Influxdb-Build': 'Cloud'})
+HTTP response body: <html>
+<head><title>308 Permanent Redirect</title></head>
+<body>
+<center><h1>308 Permanent Redirect</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+
+2025-07-21 01:35:43 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - (308)
+Reason: Permanent Redirect
+HTTP response headers: HTTPHeaderDict({'Date': 'Sun, 20 Jul 2025 16:35:43 GMT', 'Content-Type': 'text/html', 'Content-Length': '164', 'Connection': 'keep-alive', 'Location': 'https://us-east-1-1.aws.cloud2.influxdata.com/health', 'X-Influxdb-Request-ID': 'fd360e3148acfb8e2d876382ffdba734', 'X-Influxdb-Build': 'Cloud'})
+HTTP response body: <html>
+<head><title>308 Permanent Redirect</title></head>
+<body>
+<center><h1>308 Permanent Redirect</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+
+2025-07-21 01:35:43 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:36:17 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:36:17 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:36:17 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:36:17 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:36:17 | INFO     | InfluxDBManager      | 조직: 2167da61d810d30e, 버킷: ROKEY
+2025-07-21 01:36:18 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:36:18 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:36:18 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:37:08 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:37:08 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:37:08 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:37:08 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:37:08 | INFO     | InfluxDBManager      | 조직: 2167da61d810d30e, 버킷: ROKEY
+2025-07-21 01:37:09 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:37:09 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:37:09 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:37:13 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:37:13 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:37:13 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:37:13 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:37:13 | INFO     | InfluxDBManager      | 조직: 2167da61d810d30e, 버킷: ROKEY
+2025-07-21 01:37:13 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:37:13 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:37:13 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:37:13 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:37:13 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:37:13 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:37:13 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:37:13 | INFO     | InfluxDBManager      | 조직: 2167da61d810d30e, 버킷: ROKEY
+2025-07-21 01:37:14 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:37:14 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:37:14 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
+2025-07-21 01:37:38 | INFO     | __main__             | === MQTT-InfluxDB 정밀 브리지 시작 ===
+2025-07-21 01:37:38 | INFO     | MQTTInfluxBridge     | ✅ 설정 파일 로드 성공
+2025-07-21 01:37:38 | INFO     | MQTTInfluxBridge     | MQTT-InfluxDB 브리지 시작 중...
+2025-07-21 01:37:38 | INFO     | InfluxDBManager      | InfluxDB 연결 시도: https://us-east-1-1.aws.cloud2.influxdata.com
+2025-07-21 01:37:38 | INFO     | InfluxDBManager      | 조직: 2167da61d810d30e, 버킷: ROKEY
+2025-07-21 01:37:39 | INFO     | InfluxDBManager      | Health check 결과: status=fail, message=Invalid value for `name`, must not be `None`
+2025-07-21 01:37:39 | ERROR    | InfluxDBManager      | InfluxDB 상태 불량: fail - Invalid value for `name`, must not be `None`
+2025-07-21 01:37:39 | ERROR    | MQTTInfluxBridge     | InfluxDB 연결 실패 - 브리지를 시작할 수 없습니다
