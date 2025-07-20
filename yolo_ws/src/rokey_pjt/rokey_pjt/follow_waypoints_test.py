@@ -38,15 +38,31 @@ ROBOT_CONFIG = {
     'initial_direction': TurtleBot4Directions.WEST,
     'waypoints': [
         # 웨이포인트 설정
-        ([-4.1, 0.85], TurtleBot4Directions.WEST),
+        [([-4.1, 0.85], TurtleBot4Directions.WEST),
         ([-5.67, 0.8], TurtleBot4Directions.SOUTH),
         ([-5.9, -0.8], TurtleBot4Directions.EAST),
-        ([-3.6, -0.6], TurtleBot4Directions.NORTH), 
+        ([-3.6, -0.6], TurtleBot4Directions.NORTH)],
+        [
+        ([-3.6, -0.6], TurtleBot4Directions.EAST),
+        ([-4.0, 1.2], TurtleBot4Directions.SOUTH),
+        ([-5.67, 0.8], TurtleBot4Directions.EAST),
+        ([-5.33, -0.746], TurtleBot4Directions.NORTH),
+        ([-2.0, -0.77], TurtleBot4Directions.SOUTH),
+        ([-1.9, -3.0], TurtleBot4Directions.EAST),
+        ([-0.5, -2.8], TurtleBot4Directions.NORTH),
+        ([-1.9, -3.0], TurtleBot4Directions.SOUTH),
+        ([-2.0, -0.77], TurtleBot4Directions.WEST),
+        ([-0.80, -0.80], TurtleBot4Directions.NORTH)
+        ] 
     ],
     'spin_angle': 2 * math.pi,
     'nav_timeout': 30.0,
     'skip_docking': False  # 도킹 기능 활성화
 }
+
+way_points_flag = 0
+cycle_count = 0
+current_waypoint = 0
 
 class NamespacedRobotController:
     """네임스페이스를 지원하는 로봇 네비게이션 컨트롤러"""
@@ -157,6 +173,11 @@ class NamespacedRobotController:
             print(f"⚠️ [{self.namespace}] MQTT 없이 계속 진행")
 
     def on_message(self, client, userdata, msg):
+        
+        global way_points_flag
+        global cycle_count
+        global current_waypoint
+
         try:
             payload = msg.payload.decode().strip()
             print(f"📩 [{self.namespace}] MQTT 메시지 수신: '{payload}' from '{msg.topic}'")
@@ -173,9 +194,9 @@ class NamespacedRobotController:
                 print(f"❌ [{self.namespace}] JSON 파싱 실패: {payload}")
                 return
             
-            # 자신의 메시지는 무시 (robot_id 또는 namespace 체크)
-            if (data.get('type') != "human3"):
-                print(f"📝 [{self.namespace}] 자신의 메시지 무시")
+            # 무시 처리
+            if data.get('type') not in ["human3", "crack1"]:
+                print(f"📝 관심없는 메시지 타입 무시: {data.get('type')}")
                 return
             
             # 수동 정지/재시작 명령 처리
@@ -183,8 +204,18 @@ class NamespacedRobotController:
                 print(f"🛑 [{self.namespace}] 수동 정지 명령 수신됨!")
                 self.set_stop_flag(True)
                 return
-            elif data.get('command') == "resume" or data.get('command') == "start":
+            elif data.get('type') == "human3" and data.get('command') == "start":
                 print(f"▶️ [{self.namespace}] 수동 재시작 명령 수신됨!")
+                self.reset_stop_flag()
+                return
+            
+            elif data.get('type') == "crack1" and data.get('command') == "start":
+                print(f"▶️ [{self.namespace}] 수동 재시작 명령 수신됨!")
+                self.navigator.cancelTask()
+                self.object_processing = False
+                way_points_flag = 0
+                cycle_count = 0
+                current_waypoint = 0
                 self.reset_stop_flag()
                 return
             
@@ -204,6 +235,22 @@ class NamespacedRobotController:
                         
                         # 현재 네비게이션 작업 취소
                         self.navigator.cancelTask()
+            if data.get('type') == 'crack1':
+                with self.object_processing_lock:
+                    if self.object_processing:
+                        print(f"⚠️ [{self.namespace}] 객체 처리 중 - 새로운 객체 감지 무시")
+                        return
+                    
+                    self.object_processing = True
+                        
+                        # 현재 네비게이션 작업 취소
+                    self.navigator.cancelTask()
+                    way_points_flag = 1
+                    cycle_count = 0
+                    current_waypoint = 0
+                    self.reset_stop_flag()
+
+            
                         
         except Exception as e:
             print(f"❌ [{self.namespace}] MQTT 메시지 처리 오류: {e}")
@@ -425,7 +472,7 @@ class NamespacedRobotController:
     
     def navigate_to_waypoint(self, waypoint_index, position, direction):
         """특정 웨이포인트로 이동"""
-        print(f"🎯 [{self.namespace}] [{waypoint_index}/{len(ROBOT_CONFIG['waypoints'])}] 웨이포인트 이동: {position}")
+        print(f"🎯 [{self.namespace}] [{waypoint_index}/{len(ROBOT_CONFIG['waypoints'][way_points_flag])}] 웨이포인트 이동: {position}")
         
         # 목표 포즈 생성
         goal_pose = self.navigator.getPoseStamped(position, direction)
@@ -486,6 +533,10 @@ class NamespacedRobotController:
         return success
     
     def run_patrol_cycle(self):
+        global way_points_flag
+        global cycle_count
+        global current_waypoint
+
         """패트롤 사이클 실행 - 객체 감지 처리 통합"""
         if not self.navigation_active:
             print(f"❌ 네비게이션이 활성화되지 않음")
@@ -496,8 +547,7 @@ class NamespacedRobotController:
             print(f"❌ 언도킹 실패로 패트롤 중단")
             return False
         
-        cycle_count = 0
-        current_waypoint = 0
+
         
         while rclpy.ok():
             try:
@@ -550,8 +600,8 @@ class NamespacedRobotController:
                     print(f"\n🔄 [{self.namespace}] === 패트롤 사이클 {cycle_count} 시작 ===")
                 
                 # 현재 웨이포인트 처리
-                if current_waypoint < len(ROBOT_CONFIG['waypoints']):
-                    position, direction = ROBOT_CONFIG['waypoints'][current_waypoint]
+                if current_waypoint < len(ROBOT_CONFIG['waypoints'][way_points_flag]):
+                    position, direction = ROBOT_CONFIG['waypoints'][way_points_flag][current_waypoint]
                     waypoint_num = current_waypoint + 1
                     
                     # 웨이포인트로 이동
