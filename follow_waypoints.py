@@ -19,6 +19,7 @@ import tf2_geometry_msgs
 import rclpy
 from rclpy.duration import Duration
 
+
 # ========== MQTT 설정 ==========
 MQTT_CONFIG = {
     'broker': 'p021f2cb.ala.asia-southeast1.emqxsl.com',
@@ -59,14 +60,7 @@ ROBOT_CONFIG2 = {
         ([-3.6, -0.6], TurtleBot4Directions.EAST),
         ([-4.0, 1.2], TurtleBot4Directions.SOUTH),
         ([-5.67, 0.8], TurtleBot4Directions.EAST),
-        ([-5.33, -0.746], TurtleBot4Directions.NORTH),
-        # ([-5.3, -0.4], TurtleBot4Directions.EAST),
-        # ([-4.5, -0.6], TurtleBot4Directions.NORTH),
-        ([-2.0, -0.77], TurtleBot4Directions.SOUTH),
-        ([-1.9, -3.0], TurtleBot4Directions.EAST),
-        ([-0.5, -2.8], TurtleBot4Directions.NORTH),
-        ([-1.9, -3.0], TurtleBot4Directions.SOUTH),
-        ([-2.0, -0.77], TurtleBot4Directions.WEST),
+        ([-5.77, -0.911], TurtleBot4Directions.NORTH),
         ([-0.80, -0.80], TurtleBot4Directions.NORTH)
     ],
     'spin_angle': 2 * math.pi,
@@ -85,6 +79,8 @@ class NamespacedRobotController:
         self.navigation_active = False
         self._lock = threading.Lock()
         self.namespace = ROBOT_CONFIG['namespace']
+
+        self.flag = 0
 
         #좌표
         self.tf_buffer = None
@@ -181,7 +177,7 @@ class NamespacedRobotController:
                         # self.run_patrol_cycle()                     #######################
                         # print("경로 재시작")                     ###################################
 
-                elif json.loads(payload).get('type') == 'human3':
+                elif json.loads(payload).get('type') == 'human4':
                         self.stop_flag = True
                         self.navigator.cancelTask()
                         time.sleep(0.5)
@@ -209,7 +205,10 @@ class NamespacedRobotController:
                                 continue
                             
                             # 웨이포인트 간 짧은 대기
+                            
                             time.sleep(0.5)
+                        self.flag = 0
+                        time.sleep(0.5)
                 else:
                     print(f"❓ [{self.namespace}] 알 수 없는 명령: {payload}")
                     
@@ -600,7 +599,13 @@ def main():
         
         # 3. 패트롤 실행
         print(f"🎯 [{ROBOT_CONFIG['namespace']}] 패트롤 시작!")
-        controller.run_patrol_cycle()
+
+        while 1:
+            if controller.flag == 0:
+                controller.run_patrol_cycle()
+                controller.flag = 1
+                time.sleep(1.0)
+
         
     except Exception as e:
         print(f"❌ [{ROBOT_CONFIG['namespace']}] 시스템 오류: {e}")
