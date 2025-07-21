@@ -79,7 +79,7 @@ class NamespacedRobotController:
         self._lock = threading.Lock()
         self.namespace = ROBOT_CONFIG['namespace']
 
-        self.flag = 0
+        self.flag = 1
 
         #좌표
         self.tf_buffer = None
@@ -145,6 +145,17 @@ class NamespacedRobotController:
                         print(f"❌ 웨이포인트 {i} 이동 실패")
                     else:
                         print('목표로이동완')
+
+                elif json.loads(payload).get('command') == '1':
+                    self.flag = 0
+                    time.sleep(0.5)
+
+                elif json.loads(payload).get('command') == '2':
+                    self.flag = 2
+                    self.stop_flag = True
+                    self.navigator.cancelTask()
+                    time.sleep(0.5)
+
 
 
                 elif json.loads(payload).get('type') == 'human11':
@@ -569,6 +580,9 @@ def main():
                 controller.run_patrol_cycle()
                 controller.flag = 1
                 time.sleep(1.0)
+            
+            elif controller.flag == 2:
+                break
 
         
     except Exception as e:
