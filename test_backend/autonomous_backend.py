@@ -23,7 +23,7 @@ from contextlib import asynccontextmanager
 import paho.mqtt.client as mqtt
 from fastapi import FastAPI, HTTPException, Query, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response, FileResponse
 import uvicorn
 from pydantic import BaseModel
 import time
@@ -487,14 +487,17 @@ async def lifespan(app: FastAPI):
 
 
 # FastAPI 앱 생성
+
 app = FastAPI(
     title="Autonomous ROS2 Data Backend",
     description="완전 자율적 로컬 ROS2 데이터 저장 및 조회 시스템",
-    version="1.0.0",
-    lifespan=lifespan
+    version="1.0.2",
+    lifespan=lifespan,
+    docs_url="/docs",
+    redoc_url="/redoc"
 )
 
-# CORS 설정
+# CORS 설정 (기존과 동일)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -505,6 +508,30 @@ app.add_middleware(
 
 
 # ==================== API 엔드포인트들 ====================
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """
+    존재하지 않는 시각적 정체성의 구현
+    브라우저의 아이콘 요청에 대한 철학적 응답
+    """
+    # 방법 1: 실제 favicon 파일이 있다면 사용
+    favicon_path = Path("favicon.ico")
+    if favicon_path.exists():
+        return FileResponse(favicon_path)
+    
+    # 방법 2: 투명한 1x1 픽셀 PNG 반환 (존재하지 않는 존재)
+    transparent_png = bytes([
+        0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D,
+        0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
+        0x08, 0x06, 0x00, 0x00, 0x00, 0x1F, 0x15, 0xC4, 0x89, 0x00, 0x00, 0x00,
+        0x0A, 0x49, 0x44, 0x41, 0x54, 0x78, 0x9C, 0x63, 0x00, 0x01, 0x00, 0x00,
+        0x05, 0x00, 0x01, 0x0D, 0x0A, 0x2D, 0xB4, 0x00, 0x00, 0x00, 0x00, 0x49,
+        0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82
+    ])
+    
+    return Response(content=transparent_png, media_type="image/png")
+
 
 @app.get("/")
 async def root():
@@ -648,6 +675,7 @@ async def get_topic_history(
         "messages": results,
         "count": len(results)
     }
+
 
 
 # ==================== 메인 실행 ====================
