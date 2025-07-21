@@ -38,22 +38,22 @@ ROBOT_CONFIG = {
     'initial_direction': TurtleBot4Directions.WEST,
     'waypoints': [
         # 웨이포인트 설정
-        [([-4.1, 0.85], TurtleBot4Directions.WEST),
-        ([-5.67, 0.8], TurtleBot4Directions.SOUTH),
-        ([-5.9, -0.8], TurtleBot4Directions.EAST),
-        ([-3.6, -0.6], TurtleBot4Directions.NORTH)],
+        [([-4.1, 0.94], TurtleBot4Directions.WEST),
+        ([-5.32, 0.72], TurtleBot4Directions.SOUTH),
+        ([-5.35, -0.74], TurtleBot4Directions.EAST),
+        ([-3.6, -0.48], TurtleBot4Directions.NORTH)],
         [
-        ([-3.6, -0.6], TurtleBot4Directions.EAST),
-        ([-4.0, 1.2], TurtleBot4Directions.SOUTH),
-        ([-5.67, 0.8], TurtleBot4Directions.EAST),
-        ([-5.33, -0.746], TurtleBot4Directions.NORTH),
+        ([-3.6, -0.48], TurtleBot4Directions.EAST),
+        ([-4.1, 0.94], TurtleBot4Directions.SOUTH),
+        ([-5.32, 0.72], TurtleBot4Directions.EAST),
+        ([-5.35, -0.74], TurtleBot4Directions.NORTH),
         ([-2.0, -0.77], TurtleBot4Directions.SOUTH),
         ([-1.9, -3.0], TurtleBot4Directions.EAST),
         ([-0.5, -2.8], TurtleBot4Directions.NORTH),
         ([-1.9, -3.0], TurtleBot4Directions.SOUTH),
         ([-2.0, -0.77], TurtleBot4Directions.WEST),
         ([-0.80, -0.80], TurtleBot4Directions.NORTH)
-        ] 
+        ]
     ],
     'spin_angle': 2 * math.pi,
     'nav_timeout': 30.0,
