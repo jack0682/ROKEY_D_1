@@ -12,6 +12,8 @@ from turtlebot4_navigation.turtlebot4_navigator import (
 
 from paho.mqtt import client as mqtt_client
 
+from std_msgs.msg import String
+
 #좌표
 from geometry_msgs.msg import PointStamped
 import tf2_ros
@@ -340,6 +342,8 @@ class NamespacedRobotController:
         
         self.navigation_active = True
         print(f"✅ [{self.namespace}] 네비게이션 시스템 준비 완료!")
+
+        self.buffer = self.navigator.create_publisher(String, 'ppe/allive_complete', 10)
         return True
     
     def ensure_docking(self):
@@ -560,6 +564,11 @@ class NamespacedRobotController:
                         if self.navigate_to_object(self.target_object_location):
                             print(f"✅ 객체 위치 도착 - 정지 상태로 전환")
                             self.set_stop_flag(True)
+                            msg = String()
+                            msg.data = 'object_reached'
+                            self.buzzer.publish(msg)
+                            print(f"msg pulish - {msg.data}")
+                            
                         else:
                             print(f"❌ 객체 위치 이동 실패")
                         
