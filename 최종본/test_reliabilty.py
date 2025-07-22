@@ -254,308 +254,7 @@ class EnhancedDetectWithDepthWithTf(Node):
         self.reliability_tracker = MQTTReliabilityTracker()
         
         # MQTT 클라이언트 설정
-        self.setup_mqtt_subscriber()
-        
-        # 메트릭 출력 타이머
-        self.metrics_timer = self.create_timer(5.0, self.print_subscriber_metrics)
-        
-        # 데이터 로깅 설정
-        self.setup_data_logging()
-        
-        self.get_logger().info("MQTT Reliability Subscriber started")
-    
-    def setup_mqtt_subscriber(self):
-        """MQTT 구독자 설정"""
-        try:
-            self.mqtt_client = mqtt.Client(
-                client_id=self.client_id,
-                protocol=mqtt.MQTTv311
-            )
-            self.mqtt_client.tls_set()
-            self.mqtt_client.username_pw_set(self.username, self.password)
-            self.mqtt_client.on_connect = self.on_mqtt_connect
-            self.mqtt_client.on_message = self.on_mqtt_message
-            self.mqtt_client.on_disconnect = self.on_mqtt_disconnect
-            
-            self.mqtt_client.connect(self.broker, self.port)
-            self.mqtt_client.loop_start()
-            
-        except Exception as e:
-            self.get_logger().error(f"MQTT subscriber setup failed: {e}")
-    
-    def on_mqtt_connect(self, client, userdata, flags, rc):
-        """MQTT 연결 콜백"""
-        if rc == 0:
-            self.get_logger().info("✅ MQTT Subscriber connected successfully")
-            client.subscribe(self.mqtt_topic)
-            self.get_logger().info(f"📡 Subscribed to topic: {self.mqtt_topic}")
-        else:
-            self.get_logger().error(f"❌ MQTT Subscriber connection failed: {rc}")
-    
-    def on_mqtt_message(self, client, userdata, msg):
-        """MQTT 메시지 수신 콜백"""
-        try:
-            payload = msg.payload.decode('utf-8')
-            msg_dict = json.loads(payload)
-            
-            # 신뢰성 추적 처리
-            latency = self.reliability_tracker.process_received_message(msg_dict)
-            
-            if latency is not None:
-                self.get_logger().debug(f"📨 Received message with latency: {latency:.2f}ms")
-                
-                # 메시지 타입별 로깅
-                msg_type = msg_dict.get('type', 'unknown')
-                robot_id = msg_dict.get('robot_id', 'unknown')
-                location = msg_dict.get('location', [0, 0])
-                
-                self.log_received_message(msg_type, robot_id, location, latency)
-            
-        except json.JSONDecodeError as e:
-            self.get_logger().warning(f"JSON decode error: {e}")
-        except Exception as e:
-            self.get_logger().error(f"Message processing error: {e}")
-    
-    def on_mqtt_disconnect(self, client, userdata, rc):
-        """MQTT 연결 해제 콜백"""
-        if rc != 0:
-            self.get_logger().warning(f"⚠️ MQTT Subscriber unexpected disconnection: {rc}")
-    
-    def setup_data_logging(self):
-        """데이터 로깅 설정"""
-        self.log_file_path = f"mqtt_reliability_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-        self.message_log = []
-        
-        # CSV 헤더 작성
-        import csv
-        with open(self.log_file_path, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([
-                'timestamp', 'message_type', 'robot_id', 'location_x', 'location_y',
-                'latency_ms', 'sequence_number', 'confidence', 'area'
-            ])
-    
-    def log_received_message(self, msg_type, robot_id, location, latency):
-        """수신된 메시지 로깅"""
-        import csv
-        timestamp = datetime.now().isoformat()
-        
-        try:
-            with open(self.log_file_path, 'a', newline='') as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow([
-                    timestamp, msg_type, robot_id, 
-                    location[0] if len(location) > 0 else 0,
-                    location[1] if len(location) > 1 else 0,
-                    latency, '', '', ''  # sequence_number, confidence, area는 추후 추가
-                ])
-        except Exception as e:
-            self.get_logger().error(f"Logging error: {e}")
-    
-    def print_subscriber_metrics(self):
-        """구독자 메트릭 출력"""
-        metrics = self.reliability_tracker.get_current_metrics()
-        
-        self.get_logger().info(f"""
-╔══════════════════════════════════════════════════════════════════╗
-║                  MQTT Subscriber Metrics                        ║
-╠══════════════════════════════════════════════════════════════════╣
-║ Received Messages: {metrics.total_received:>6}                                ║
-║ Lost Messages:     {metrics.total_lost:>6}                                ║
-║ Success Rate:      {metrics.delivery_success_rate:>6.2f}%                        ║
-║ Avg Latency:       {metrics.avg_latency_ms:>6.2f} ms                           ║
-║ P95 Latency:       {metrics.p95_latency_ms:>6.2f} ms                           ║
-║ P99 Latency:       {metrics.p99_latency_ms:>6.2f} ms                           ║
-║ Max Latency:       {metrics.max_latency_ms:>6.2f} ms                           ║
-║ Min Latency:       {metrics.min_latency_ms:>6.2f} ms                           ║
-║ Jitter:            {metrics.jitter_ms:>6.2f} ms                              ║
-║ Message Rate:      {metrics.message_rate_per_sec:>6.2f} msg/s                    ║
-║ Throughput:        {metrics.throughput_kbps:>6.2f} kbps                        ║
-║ Duplicates:        {metrics.duplicate_count:>4}                                  ║
-║ Out of Order:      {metrics.out_of_order_count:>4}                                  ║
-║ Log File:          {self.log_file_path:<30}                 ║
-╚══════════════════════════════════════════════════════════════════╝
-        """)
-
-# ========================
-# 성능 분석 도구
-# ========================
-class MQTTPerformanceAnalyzer:
-    """MQTT 성능 분석 도구"""
-    
-    def __init__(self, log_file_path: str):
-        self.log_file_path = log_file_path
-        self.data = []
-        self.load_data()
-    
-    def load_data(self):
-        """로그 파일에서 데이터 로드"""
-        import pandas as pd
-        try:
-            self.data = pd.read_csv(self.log_file_path)
-            print(f"✅ Loaded {len(self.data)} records from {self.log_file_path}")
-        except Exception as e:
-            print(f"❌ Failed to load data: {e}")
-    
-    def analyze_latency_distribution(self):
-        """지연 시간 분포 분석"""
-        if self.data.empty:
-            return
-        
-        latencies = self.data['latency_ms'].dropna()
-        
-        print("\n📊 Latency Distribution Analysis:")
-        print(f"   Total Messages: {len(latencies)}")
-        print(f"   Mean Latency:   {latencies.mean():.2f} ms")
-        print(f"   Median Latency: {latencies.median():.2f} ms")
-        print(f"   Std Deviation:  {latencies.std():.2f} ms")
-        print(f"   Min Latency:    {latencies.min():.2f} ms")
-        print(f"   Max Latency:    {latencies.max():.2f} ms")
-        print(f"   P90 Latency:    {latencies.quantile(0.90):.2f} ms")
-        print(f"   P95 Latency:    {latencies.quantile(0.95):.2f} ms")
-        print(f"   P99 Latency:    {latencies.quantile(0.99):.2f} ms")
-    
-    def analyze_message_types(self):
-        """메시지 타입별 분석"""
-        if self.data.empty:
-            return
-        
-        type_counts = self.data['message_type'].value_counts()
-        
-        print("\n📊 Message Type Analysis:")
-        for msg_type, count in type_counts.items():
-            type_data = self.data[self.data['message_type'] == msg_type]
-            avg_latency = type_data['latency_ms'].mean()
-            print(f"   {msg_type}: {count} messages, Avg Latency: {avg_latency:.2f} ms")
-    
-    def analyze_time_patterns(self):
-        """시간대별 패턴 분석"""
-        if self.data.empty:
-            return
-        
-        import pandas as pd
-        
-        # 타임스탬프를 datetime으로 변환
-        self.data['timestamp'] = pd.to_datetime(self.data['timestamp'])
-        self.data['hour'] = self.data['timestamp'].dt.hour
-        self.data['minute'] = self.data['timestamp'].dt.minute
-        
-        # 시간대별 메시지 수 분석
-        hourly_counts = self.data.groupby('hour').size()
-        hourly_latency = self.data.groupby('hour')['latency_ms'].mean()
-        
-        print("\n📊 Hourly Pattern Analysis:")
-        for hour in hourly_counts.index:
-            count = hourly_counts[hour]
-            avg_latency = hourly_latency[hour]
-            print(f"   Hour {hour:02d}: {count} messages, Avg Latency: {avg_latency:.2f} ms")
-    
-    def generate_report(self, output_file: str = None):
-        """종합 리포트 생성"""
-        if output_file is None:
-            output_file = f"mqtt_performance_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
-        
-        with open(output_file, 'w') as f:
-            f.write("MQTT Performance Analysis Report\n")
-            f.write("=" * 50 + "\n")
-            f.write(f"Generated: {datetime.now().isoformat()}\n")
-            f.write(f"Data Source: {self.log_file_path}\n\n")
-            
-            # 각 분석 결과를 파일에 기록
-            import sys
-            from io import StringIO
-            
-            # stdout을 임시로 StringIO로 리다이렉트
-            old_stdout = sys.stdout
-            sys.stdout = captured_output = StringIO()
-            
-            self.analyze_latency_distribution()
-            self.analyze_message_types()
-            self.analyze_time_patterns()
-            
-            # stdout 복원
-            sys.stdout = old_stdout
-            
-            # 캡처된 출력을 파일에 쓰기
-            f.write(captured_output.getvalue())
-        
-        print(f"📄 Performance report saved to: {output_file}")
-
-# ========================
-# 메인 실행 함수들
-# ========================
-def main_publisher():
-    """Crack Detection Publisher 실행"""
-    rclpy.init()
-    node = EnhancedDetectWithDepthWithTf()
-    
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.should_shutdown = True
-        node.destroy_node()
-        rclpy.shutdown()
-        cv2.destroyAllWindows()
-        print("Enhanced Crack Detector shutdown complete.")
-
-def main_subscriber():
-    """MQTT Reliability Subscriber 실행"""
-    rclpy.init()
-    node = MQTTReliabilitySubscriber()
-    
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
-        print("MQTT Reliability Subscriber shutdown complete.")
-
-def main_analyzer():
-    """성능 분석기 실행"""
-    import sys
-    
-    if len(sys.argv) < 2:
-        print("Usage: python script.py <log_file_path>")
-        return
-    
-    log_file = sys.argv[1]
-    analyzer = MQTTPerformanceAnalyzer(log_file)
-    
-    print("🔍 Starting MQTT Performance Analysis...")
-    analyzer.analyze_latency_distribution()
-    analyzer.analyze_message_types()
-    analyzer.analyze_time_patterns()
-    analyzer.generate_report()
-    print("✅ Analysis complete!")
-
-# ========================
-# 통합 실행 스크립트
-# ========================
-if __name__ == '__main__':
-    import sys
-    
-    if len(sys.argv) < 2:
-        print("Usage:")
-        print("  python script.py publisher    # Run Crack Detection Publisher")
-        print("  python script.py subscriber   # Run MQTT Reliability Subscriber")
-        print("  python script.py analyzer <log_file>  # Run Performance Analyzer")
-        sys.exit(1)
-    
-    mode = sys.argv[1]
-    
-    if mode == 'publisher':
-        main_publisher()
-    elif mode == 'subscriber':
-        main_subscriber()
-    elif mode == 'analyzer':
-        main_analyzer()
-    else:
-        print(f"Unknown mode: {mode}")
-        sys.exit(1)_mqtt_client()
+        self.setup_mqtt_client()
         
         # ROS2 설정
         self.setup_ros2_components()
@@ -952,4 +651,481 @@ class MQTTReliabilitySubscriber(Node):
         self.client_id = f'reliability-subscriber-{np.random.randint(0, 1000)}'
         
         # MQTT 클라이언트 설정
-        self.setup
+        self.setup_mqtt_subscriber()
+        
+        # 메트릭 출력 타이머
+        self.metrics_timer = self.create_timer(5.0, self.print_subscriber_metrics)
+        
+        # 데이터 로깅 설정
+        self.setup_data_logging()
+        
+        self.get_logger().info("MQTT Reliability Subscriber started")
+    
+    def setup_mqtt_subscriber(self):
+        """MQTT 구독자 설정"""
+        try:
+            self.mqtt_client = mqtt.Client(
+                client_id=self.client_id,
+                protocol=mqtt.MQTTv311
+            )
+            self.mqtt_client.tls_set()
+            self.mqtt_client.username_pw_set(self.username, self.password)
+            self.mqtt_client.on_connect = self.on_mqtt_connect
+            self.mqtt_client.on_message = self.on_mqtt_message
+            self.mqtt_client.on_disconnect = self.on_mqtt_disconnect
+            
+            self.mqtt_client.connect(self.broker, self.port)
+            self.mqtt_client.loop_start()
+            
+        except Exception as e:
+            self.get_logger().error(f"MQTT subscriber setup failed: {e}")
+    
+    def on_mqtt_connect(self, client, userdata, flags, rc):
+        """MQTT 연결 콜백"""
+        if rc == 0:
+            self.get_logger().info("✅ MQTT Subscriber connected successfully")
+            client.subscribe(self.mqtt_topic)
+            self.get_logger().info(f"📡 Subscribed to topic: {self.mqtt_topic}")
+        else:
+            self.get_logger().error(f"❌ MQTT Subscriber connection failed: {rc}")
+    
+    def on_mqtt_message(self, client, userdata, msg):
+        """MQTT 메시지 수신 콜백"""
+        try:
+            payload = msg.payload.decode('utf-8')
+            msg_dict = json.loads(payload)
+            
+            # 신뢰성 추적 처리
+            latency = self.reliability_tracker.process_received_message(msg_dict)
+            
+            if latency is not None:
+                self.get_logger().debug(f"📨 Received message with latency: {latency:.2f}ms")
+                
+                # 메시지 타입별 로깅
+                msg_type = msg_dict.get('type', 'unknown')
+                robot_id = msg_dict.get('robot_id', 'unknown')
+                location = msg_dict.get('location', [0, 0])
+                confidence = msg_dict.get('confidence', 0.0)
+                area = msg_dict.get('area', 0.0)
+                sequence_number = msg_dict.get('sequence_number', 0)
+                
+                self.log_received_message(msg_type, robot_id, location, latency, 
+                                        sequence_number, confidence, area)
+            
+        except json.JSONDecodeError as e:
+            self.get_logger().warning(f"JSON decode error: {e}")
+        except Exception as e:
+            self.get_logger().error(f"Message processing error: {e}")
+    
+    def on_mqtt_disconnect(self, client, userdata, rc):
+        """MQTT 연결 해제 콜백"""
+        if rc != 0:
+            self.get_logger().warning(f"⚠️ MQTT Subscriber unexpected disconnection: {rc}")
+    
+    def setup_data_logging(self):
+        """데이터 로깅 설정"""
+        self.log_file_path = f"mqtt_reliability_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        self.message_log = []
+        
+        # CSV 헤더 작성
+        import csv
+        with open(self.log_file_path, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([
+                'timestamp', 'message_type', 'robot_id', 'location_x', 'location_y',
+                'latency_ms', 'sequence_number', 'confidence', 'area'
+            ])
+    
+    def log_received_message(self, msg_type, robot_id, location, latency, 
+                           sequence_number, confidence, area):
+        """수신된 메시지 로깅"""
+        import csv
+        timestamp = datetime.now().isoformat()
+        
+        try:
+            with open(self.log_file_path, 'a', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow([
+                    timestamp, msg_type, robot_id, 
+                    location[0] if len(location) > 0 else 0,
+                    location[1] if len(location) > 1 else 0,
+                    latency, sequence_number, confidence, area
+                ])
+        except Exception as e:
+            self.get_logger().error(f"Logging error: {e}")
+    
+    def print_subscriber_metrics(self):
+        """구독자 메트릭 출력"""
+        metrics = self.reliability_tracker.get_current_metrics()
+        
+        self.get_logger().info(f"""
+╔══════════════════════════════════════════════════════════════════╗
+║                  MQTT Subscriber Metrics                        ║
+╠══════════════════════════════════════════════════════════════════╣
+║ Received Messages: {metrics.total_received:>6}                                ║
+║ Lost Messages:     {metrics.total_lost:>6}                                ║
+║ Success Rate:      {metrics.delivery_success_rate:>6.2f}%                        ║
+║ Avg Latency:       {metrics.avg_latency_ms:>6.2f} ms                           ║
+║ P95 Latency:       {metrics.p95_latency_ms:>6.2f} ms                           ║
+║ P99 Latency:       {metrics.p99_latency_ms:>6.2f} ms                           ║
+║ Max Latency:       {metrics.max_latency_ms:>6.2f} ms                           ║
+║ Min Latency:       {metrics.min_latency_ms:>6.2f} ms                           ║
+║ Jitter:            {metrics.jitter_ms:>6.2f} ms                              ║
+║ Message Rate:      {metrics.message_rate_per_sec:>6.2f} msg/s                    ║
+║ Throughput:        {metrics.throughput_kbps:>6.2f} kbps                        ║
+║ Duplicates:        {metrics.duplicate_count:>4}                                  ║
+║ Out of Order:      {metrics.out_of_order_count:>4}                                  ║
+║ Log File:          {self.log_file_path:<40}║
+╚══════════════════════════════════════════════════════════════════╝
+        """)
+
+# ========================
+# 성능 분석 도구
+# ========================
+class MQTTPerformanceAnalyzer:
+    """MQTT 성능 분석 도구"""
+    
+    def __init__(self, log_file_path: str):
+        self.log_file_path = log_file_path
+        self.data = None
+        self.load_data()
+    
+    def load_data(self):
+        """로그 파일에서 데이터 로드"""
+        try:
+            import pandas as pd
+            self.data = pd.read_csv(self.log_file_path)
+            print(f"✅ Loaded {len(self.data)} records from {self.log_file_path}")
+        except Exception as e:
+            print(f"❌ Failed to load data: {e}")
+            self.data = None
+    
+    def analyze_latency_distribution(self):
+        """지연 시간 분포 분석"""
+        if self.data is None or self.data.empty:
+            print("❌ No data available for analysis")
+            return
+        
+        latencies = self.data['latency_ms'].dropna()
+        
+        if len(latencies) == 0:
+            print("❌ No latency data found")
+            return
+        
+        print("\n📊 Latency Distribution Analysis:")
+        print(f"   Total Messages: {len(latencies)}")
+        print(f"   Mean Latency:   {latencies.mean():.2f} ms")
+        print(f"   Median Latency: {latencies.median():.2f} ms")
+        print(f"   Std Deviation:  {latencies.std():.2f} ms")
+        print(f"   Min Latency:    {latencies.min():.2f} ms")
+        print(f"   Max Latency:    {latencies.max():.2f} ms")
+        print(f"   P90 Latency:    {latencies.quantile(0.90):.2f} ms")
+        print(f"   P95 Latency:    {latencies.quantile(0.95):.2f} ms")
+        print(f"   P99 Latency:    {latencies.quantile(0.99):.2f} ms")
+    
+    def analyze_message_types(self):
+        """메시지 타입별 분석"""
+        if self.data is None or self.data.empty:
+            return
+        
+        type_counts = self.data['message_type'].value_counts()
+        
+        print("\n📊 Message Type Analysis:")
+        for msg_type, count in type_counts.items():
+            type_data = self.data[self.data['message_type'] == msg_type]
+            avg_latency = type_data['latency_ms'].mean()
+            avg_confidence = type_data['confidence'].mean()
+            avg_area = type_data['area'].mean()
+            
+            print(f"   {msg_type}:")
+            print(f"     Count: {count} messages")
+            print(f"     Avg Latency: {avg_latency:.2f} ms")
+            print(f"     Avg Confidence: {avg_confidence:.2f}")
+            print(f"     Avg Area: {avg_area:.3f} m²")
+    
+    def analyze_time_patterns(self):
+        """시간대별 패턴 분석"""
+        if self.data is None or self.data.empty:
+            return
+        
+        try:
+            import pandas as pd
+            
+            # 타임스탬프를 datetime으로 변환
+            self.data['timestamp'] = pd.to_datetime(self.data['timestamp'])
+            self.data['hour'] = self.data['timestamp'].dt.hour
+            self.data['minute'] = self.data['timestamp'].dt.minute
+            
+            # 시간대별 메시지 수 분석
+            hourly_counts = self.data.groupby('hour').size()
+            hourly_latency = self.data.groupby('hour')['latency_ms'].mean()
+            
+            print("\n📊 Hourly Pattern Analysis:")
+            for hour in hourly_counts.index:
+                count = hourly_counts[hour]
+                avg_latency = hourly_latency[hour]
+                print(f"   Hour {hour:02d}: {count} messages, Avg Latency: {avg_latency:.2f} ms")
+                
+        except Exception as e:
+            print(f"❌ Time pattern analysis failed: {e}")
+    
+    def analyze_spatial_distribution(self):
+        """공간적 분포 분석"""
+        if self.data is None or self.data.empty:
+            return
+        
+        print("\n📊 Spatial Distribution Analysis:")
+        
+        # 위치 데이터 분석
+        x_coords = self.data['location_x'].dropna()
+        y_coords = self.data['location_y'].dropna()
+        
+        if len(x_coords) > 0 and len(y_coords) > 0:
+            print(f"   X coordinates: min={x_coords.min():.2f}, max={x_coords.max():.2f}, mean={x_coords.mean():.2f}")
+            print(f"   Y coordinates: min={y_coords.min():.2f}, max={y_coords.max():.2f}, mean={y_coords.mean():.2f}")
+            
+            # 구역별 분포 (간단한 그리드 기반)
+            x_bins = 5
+            y_bins = 5
+            
+            x_range = x_coords.max() - x_coords.min()
+            y_range = y_coords.max() - y_coords.min()
+            
+            if x_range > 0 and y_range > 0:
+                self.data['x_bin'] = pd.cut(self.data['location_x'], bins=x_bins, labels=False)
+                self.data['y_bin'] = pd.cut(self.data['location_y'], bins=y_bins, labels=False)
+                
+                spatial_counts = self.data.groupby(['x_bin', 'y_bin']).size()
+                
+                print(f"   Detection hotspots (top 5):")
+                top_spots = spatial_counts.nlargest(5)
+                for (x_bin, y_bin), count in top_spots.items():
+                    print(f"     Grid[{x_bin},{y_bin}]: {count} detections")
+    
+    def generate_report(self, output_file: str = None):
+        """종합 리포트 생성"""
+        if output_file is None:
+            output_file = f"mqtt_performance_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        
+        try:
+            with open(output_file, 'w') as f:
+                f.write("MQTT Performance Analysis Report\n")
+                f.write("=" * 50 + "\n")
+                f.write(f"Generated: {datetime.now().isoformat()}\n")
+                f.write(f"Data Source: {self.log_file_path}\n\n")
+                
+                # 각 분석 결과를 파일에 기록
+                import sys
+                from io import StringIO
+                
+                # stdout을 임시로 StringIO로 리다이렉트
+                old_stdout = sys.stdout
+                sys.stdout = captured_output = StringIO()
+                
+                self.analyze_latency_distribution()
+                self.analyze_message_types()
+                self.analyze_time_patterns()
+                self.analyze_spatial_distribution()
+                
+                # stdout 복원
+                sys.stdout = old_stdout
+                
+                # 캡처된 출력을 파일에 쓰기
+                f.write(captured_output.getvalue())
+            
+            print(f"📄 Performance report saved to: {output_file}")
+            
+        except Exception as e:
+            print(f"❌ Failed to generate report: {e}")
+
+# ========================
+# 실시간 모니터링 대시보드
+# ========================
+class MQTTRealtimeMonitor:
+    """실시간 MQTT 모니터링 대시보드"""
+    
+    def __init__(self, subscriber_node):
+        self.subscriber_node = subscriber_node
+        self.running = False
+        
+    def start_monitoring(self):
+        """모니터링 시작"""
+        self.running = True
+        monitor_thread = threading.Thread(target=self._monitor_loop)
+        monitor_thread.daemon = True
+        monitor_thread.start()
+        
+    def stop_monitoring(self):
+        """모니터링 중지"""
+        self.running = False
+        
+    def _monitor_loop(self):
+        """모니터링 루프"""
+        while self.running:
+            try:
+                # 터미널 화면 클리어
+                os.system('clear' if os.name == 'posix' else 'cls')
+                
+                # 현재 메트릭 가져오기
+                metrics = self.subscriber_node.reliability_tracker.get_current_metrics()
+                
+                # 시스템 정보
+                cpu_percent = psutil.cpu_percent(interval=1)
+                memory = psutil.virtual_memory()
+                
+                # 대시보드 출력
+                print("🔴 MQTT Reliability Real-time Monitor")
+                print("=" * 80)
+                print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+                print(f"System CPU: {cpu_percent:.1f}% | Memory: {memory.percent:.1f}%")
+                print("-" * 80)
+                
+                print("📡 MQTT Statistics:")
+                print(f"  Published:    {metrics.total_published:>8}")
+                print(f"  Received:     {metrics.total_received:>8}")
+                print(f"  Lost:         {metrics.total_lost:>8}")
+                print(f"  Success Rate: {metrics.delivery_success_rate:>7.2f}%")
+                print()
+                
+                print("⏱️ Latency Metrics:")
+                print(f"  Average:      {metrics.avg_latency_ms:>7.2f} ms")
+                print(f"  P95:          {metrics.p95_latency_ms:>7.2f} ms")
+                print(f"  P99:          {metrics.p99_latency_ms:>7.2f} ms")
+                print(f"  Max:          {metrics.max_latency_ms:>7.2f} ms")
+                print(f"  Jitter:       {metrics.jitter_ms:>7.2f} ms")
+                print()
+                
+                print("🚀 Performance:")
+                print(f"  Message Rate: {metrics.message_rate_per_sec:>7.2f} msg/s")
+                print(f"  Throughput:   {metrics.throughput_kbps:>7.2f} kbps")
+                print()
+                
+                print("⚠️ Issues:")
+                print(f"  Duplicates:   {metrics.duplicate_count:>8}")
+                print(f"  Out of Order: {metrics.out_of_order_count:>8}")
+                print()
+                
+                # 최근 메시지 정보
+                if hasattr(self.subscriber_node, 'log_file_path'):
+                    print(f"📁 Log File: {self.subscriber_node.log_file_path}")
+                
+                print("\n💡 Press Ctrl+C to stop monitoring")
+                
+                time.sleep(2)  # 2초마다 업데이트
+                
+            except KeyboardInterrupt:
+                self.running = False
+                break
+            except Exception as e:
+                print(f"❌ Monitor error: {e}")
+                time.sleep(5)
+
+# ========================
+# 메인 실행 함수들
+# ========================
+def main_publisher():
+    """Crack Detection Publisher 실행"""
+    rclpy.init()
+    node = EnhancedDetectWithDepthWithTf()
+    
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.should_shutdown = True
+        node.destroy_node()
+        rclpy.shutdown()
+        cv2.destroyAllWindows()
+        print("Enhanced Crack Detector shutdown complete.")
+
+def main_subscriber():
+    """MQTT Reliability Subscriber 실행"""
+    rclpy.init()
+    node = MQTTReliabilitySubscriber()
+    
+    # 실시간 모니터 시작
+    monitor = MQTTRealtimeMonitor(node)
+    monitor.start_monitoring()
+    
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        monitor.stop_monitoring()
+        node.destroy_node()
+        rclpy.shutdown()
+        print("MQTT Reliability Subscriber shutdown complete.")
+
+def main_analyzer():
+    """성능 분석기 실행"""
+    import sys
+    
+    if len(sys.argv) < 3:
+        print("Usage: python script.py analyzer <log_file_path>")
+        return
+    
+    log_file = sys.argv[2]
+    
+    if not os.path.exists(log_file):
+        print(f"❌ Log file not found: {log_file}")
+        return
+    
+    analyzer = MQTTPerformanceAnalyzer(log_file)
+    
+    print("🔍 Starting MQTT Performance Analysis...")
+    analyzer.analyze_latency_distribution()
+    analyzer.analyze_message_types()
+    analyzer.analyze_time_patterns()
+    analyzer.analyze_spatial_distribution()
+    analyzer.generate_report()
+    print("✅ Analysis complete!")
+
+def main_monitor_only():
+    """모니터링 전용 실행"""
+    rclpy.init()
+    node = MQTTReliabilitySubscriber()
+    
+    monitor = MQTTRealtimeMonitor(node)
+    
+    print("🚀 Starting MQTT Real-time Monitor...")
+    monitor.start_monitoring()
+    
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        monitor.stop_monitoring()
+        node.destroy_node()
+        rclpy.shutdown()
+        print("Monitor shutdown complete.")
+
+# ========================
+# 통합 실행 스크립트
+# ========================
+if __name__ == '__main__':
+    import sys
+    
+    if len(sys.argv) < 2:
+        print("Usage:")
+        print("  python script.py publisher         # Run Crack Detection Publisher")
+        print("  python script.py subscriber        # Run MQTT Reliability Subscriber")
+        print("  python script.py analyzer <log>    # Run Performance Analyzer")
+        print("  python script.py monitor           # Run Real-time Monitor Only")
+        sys.exit(1)
+    
+    mode = sys.argv[1]
+    
+    if mode == 'publisher':
+        main_publisher()
+    elif mode == 'subscriber':
+        main_subscriber()
+    elif mode == 'analyzer':
+        main_analyzer()
+    elif mode == 'monitor':
+        main_monitor_only()
+    else:
+        print(f"Unknown mode: {mode}")
+        sys.exit(1)
