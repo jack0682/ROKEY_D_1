@@ -133,7 +133,7 @@ class NamespacedRobotController:
                 
                 
                 #좌표
-                elif json.loads(payload).get('type') == 'crack1':
+                elif json.loads(payload).get('type') == 'crack11':
                     print('Crack detected - processing location')
                     self.stop_flag = True
                     self.navigator.cancelTask()
