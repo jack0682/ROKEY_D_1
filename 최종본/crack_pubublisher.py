@@ -230,7 +230,6 @@ class DetectWithDepthWithTf(Node):
                                 'map',
                                 timeout=rclpy.duration.Duration(seconds=0.5)
                             )
-                            #self.get_logger().info(f"[Base_link] ({point_base.point.x:.2f}, {point_base.point.y:.2f}, {point_base.point.z:.2f})")
                             self.get_logger().info(f"[Map]       ({point_map1.point.x:.2f}, {point_map1.point.y:.2f}, {point_map1.point.z:.2f})")
                             msg_dict = {
                                 "type" : 'tf',
@@ -240,7 +239,6 @@ class DetectWithDepthWithTf(Node):
                                 ]
                             }
                             self.mqtt_client.publish('detect', json.dumps(msg_dict))
-                            self.get_logger().info(f"📡 MQTT Published (TF Pose): {msg_dict}")
 
                         except Exception as e:
                             self.get_logger().warn(f"TF transform to map failed: {e}")
