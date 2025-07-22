@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🤖 Robot Dashboard</title>
+    <style>
+        /* ==================== 기본 스타일 ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ==================== 레이아웃 ==================== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* ==================== 맵 컨테이너 ==================== */
+        #map-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #robot-marker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4444;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        #robot-marker::before {
+            content: '🤖';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+        }
+
+        /* ==================== 연결 상태 ==================== */
+        .connection-status {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .connected {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .disconnected {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .connecting {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        /* ==================== 토픽 리스트 ==================== */
+        #topics-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .topic-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .topic-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .topic-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topic-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .topic-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.inactive {
+            background: #dc3545;
+            animation: none;
+        }
+
+        .message-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        .topic-content {
+            padding: 15px;
+            background: #f8f9fa;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .topic-content.collapsed {
+            display: none;
+        }
+
+        .topic-data {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 8px;
+        }
+
+        .timestamp {
+            color: #666;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .data-json {
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* ==================== 로봇 상태 패널 ==================== */
+        .robot-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .status-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* ==================== 애니메이션 ==================== */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ==================== 반응형 ==================== */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+                padding: 15px;
+            }
+            
+            #map-container {
+                height: 250px;
+            }
+            
+            .robot-status {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🤖 Robot Dashboard</h1>
+    
+    <div class="dashboard-grid">
+        <!-- 왼쪽: 맵 및 로봇 상태 -->
+        <div class="panel">
+            <h2>🗺️ Robot Location & Status</h2>
+            
+            <!-- 연결 상태 -->
+            <div id="connection-status" class="connection-status connecting">
+                🔄 Connecting to Robot...
+            </div>
+            
+            <!-- 로봇 상태 카드들 -->
+            <div class="robot-status">
+                <div class="status-card">
+                    <div id="battery-level" class="status-value">--</div>
+                    <div class="status-label">🔋 Battery</div>
+                </div>
+                <div class="status-card">
+                    <div id="robot-ip" class="status-value">--</div>
+                    <div class="status-label">🌐 IP Address</div>
+                </div>
+                <div class="status-card">
+                    <div id="dock-status" class="status-value">--</div>
+                    <div class="status-label">🏠 Dock Status</div>
+                </div>
+                <div class="status-card">
+                    <div id="waypoint-count" class="status-value">--</div>
+                    <div class="status-label">📍 Waypoints</div>
+                </div>
+            </div>
+            
+            <!-- 맵 시각화 영역 -->
+            <div id="map-container">
+                <div id="map-placeholder" style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666;">
+                    🗺️ Map will be displayed here<br>
+                    <small>Place your map.png in assets/ folder</small>
+                </div>
+                <img src="assets/map.png" id="map" style="display: none;" />
+                <!-- 임시 테스트용 대체 이미지 -->
+                <img src="https://via.placeholder.com/600x400/e8e8e8/666666?text=🗺️+Robot+Map" 
+                     id="map-backup" style="display: none;" />
+                <div id="robot-marker" style="left: 50%; top: 50%;"></div>
+            </div>
+        </div>
+        
+        <!-- 오른쪽: 토픽별 메시지 로그 -->
+        <div class="panel">
+            <h2>📡 Live Topic Data</h2>
+            <div id="topics-list">
+                <!-- JavaScript로 동적 생성 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script>
+        // ==================== 전역 변수 정의 (가장 먼저) ====================
+        
+        // 예상 토픽 목록
+        const expectedTopics = [
+            "/robot1/battery_state",
+            "/robot1/ip", 
+            "/robot1/cmd_vel",
+            "/robot1/dock_status",
+            "/robot1/waypoints",
+            "/robot1/imu",
+            "/robot1/goal_pose"
+        ];
+
+        // MQTT 설정
+        const MQTT_CONFIG = {
+            brokerUrl: 'wss://p021f2cb.ala.asia-southeast1.emqxsl.com:8084/mqtt',
+            options: {
+                username: 'Rokey',
+                password: '1234567',
+                clientId: 'robot-dashboard-' + Math.floor(Math.random() * 1000),
+                reconnectPeriod: 1000,
+                clean: true,
+            },
+            topic: 'tb4'
+        };
+
+        // ==================== 맵 메타데이터 (map.yaml 기반) ====================
+        const MAP_METADATA = {
+            resolution: 0.05,          // meters per pixel (1픽셀 = 0.05미터)
+            origin: {                  // map 좌표계 원점 (왼쪽 하단 기준)
+                x: -6.7,              // meters
+                y: -3.71,             // meters  
+                theta: 0.0            // radians
+            }
+        };
+
+        // 전역 상태 변수들
+        let robotData = {};
+        let topicMessageCounts = {};
+        let isConnected = false;
+        let mqttClient = null;
+
+        // ==================== 초기화 함수 ====================
+        function initializeDashboard() {
+            console.log('🤖 Robot Dashboard 초기화 시작');
+            console.log('📡 모니터링할 토픽들:', expectedTopics);
+            console.log('🗺️ 맵 메타데이터:', MAP_METADATA);
+            
+            // 토픽 리스트 초기화
+            initializeTopicsList();
+            
+            // 맵 이미지 체크
+            checkMapImage();
+            
+            // MQTT 연결 시작
+            startMQTTConnection();
+            
+            // 맵 클릭 디버거 활성화
+            addMapClickDebugger();
+        }
+
+        // ==================== 토픽 리스트 초기화 ====================
+        function initializeTopicsList() {
+            console.log('📋 토픽 리스트 초기화 중...');
+            const topicsList = document.getElementById('topics-list');
+            
+            expectedTopics.forEach(topic => {
+                const topicElement = createTopicElement(topic);
+                topicsList.appendChild(topicElement);
+                topicMessageCounts[topic] = 0;
+            });
+            
+            console.log('✅ 토픽 리스트 초기화 완료');
+        }
+
+        function createTopicElement(topicName) {
+            const topicItem = document.createElement('div');
+            topicItem.className = 'topic-item';
+            topicItem.id = `topic-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            
+            topicItem.innerHTML = `
+                <div class="topic-header" onclick="toggleTopicContent('${topicName}')">
+                    <span class="topic-name">${topicName}</span>
+                    <div class="topic-status">
+                        <div class="status-indicator inactive" id="indicator-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}"></div>
+                        <span class="message-count" id="count-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}">0</span>
+                    </div>
+                </div>
+                <div class="topic-content collapsed" id="content-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}">
+                    <div class="topic-data">
+                        <div class="timestamp">Waiting for data...</div>
+                        <div class="data-json">No messages received yet</div>
+                    </div>
+                </div>
+            `;
+            
+            return topicItem;
+        }
+
+        // ==================== 토픽 컨텐츠 토글 ====================
+        function toggleTopicContent(topicName) {
+            const contentId = `content-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            const content = document.getElementById(contentId);
+            if (content) {
+                content.classList.toggle('collapsed');
+            }
+        }
+
+        // ==================== 맵 이미지 체크 ====================
+        function checkMapImage() {
+            const mapImg = document.getElementById('map');
+            const mapBackup = document.getElementById('map-backup');
+            const placeholder = document.getElementById('map-placeholder');
+            
+            mapImg.onload = function() {
+                console.log('✅ 로컬 맵 이미지 로드 성공');
+                placeholder.style.display = 'none';
+                mapImg.style.display = 'block';
+                mapBackup.style.display = 'none';
+            };
+            
+            mapImg.onerror = function() {
+                console.log('❌ 로컬 맵 이미지 로드 실패, 대체 이미지 시도 중...');
+                
+                // 대체 이미지 시도
+                mapBackup.onload = function() {
+                    console.log('✅ 대체 이미지 로드 성공');
+                    placeholder.style.display = 'none';
+                    mapImg.style.display = 'none';
+                    mapBackup.style.display = 'block';
+                };
+                
+                mapBackup.onerror = function() {
+                    console.log('❌ 대체 이미지도 로드 실패');
+                    placeholder.style.display = 'flex';
+                    mapImg.style.display = 'none';
+                    mapBackup.style.display = 'none';
+                };
+                
+                // 대체 이미지 로드 시작
+                if (!mapBackup.src) {
+                    mapBackup.src = mapBackup.src; // 강제 로드 트리거
+                }
+            };
+            
+            // 초기 로드 시도
+            console.log('🔄 맵 이미지 로드 시도 중...');
+            
+            // 강제 새로고침을 위해 타임스탬프 추가
+            const timestamp = new Date().getTime();
+            mapImg.src = `assets/map.png?t=${timestamp}`;
+        }
+
+        // ==================== 로봇 위치 좌표 변환 (TF → 픽셀) - 수정된 부분 ====================
+        function updateRobotPose({ x, y, theta = 0 }) {
+            const marker = document.getElementById('robot-marker');
+            const container = document.getElementById('map-container');
+            const mapImg = document.getElementById('map') || document.getElementById('map-backup');
+            
+            // 컨테이너 크기 확인
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            
+            // 1단계: TF 좌표를 맵 픽셀 좌표로 변환
+            const mapPixelX = (x - MAP_METADATA.origin.x) / MAP_METADATA.resolution;
+            const mapPixelY = (y - MAP_METADATA.origin.y) / MAP_METADATA.resolution;
+            
+            // 2단계: 맵 이미지의 실제 크기 구하기
+            let mapImageWidth = containerWidth;
+            let mapImageHeight = containerHeight;
+            
+            if (mapImg && mapImg.naturalWidth > 0) {
+                mapImageWidth = mapImg.naturalWidth;
+                mapImageHeight = mapImg.naturalHeight;
+            }
+            
+            // 3단계: 맵 픽셀을 화면 픽셀로 스케일링 (좌표계 보정)
+            const scaleX = containerWidth / mapImageWidth;
+            const scaleY = containerHeight / mapImageHeight;
+            
+            // X축: 그대로, Y축: 반전 (ROS Y+ = 북쪽, 웹 Y+ = 아래쪽)
+            const screenX = mapPixelX * scaleX;
+            const screenY = containerHeight - (mapPixelY * scaleY);
+            
+            // 4단계: 마커 위치 업데이트
+            marker.style.left = `${screenX}px`;
+            marker.style.top = `${screenY}px`;
+            
+            // 5단계: 로봇 방향 표시 (선택사항)
+            if (theta !== undefined && theta !== 0) {
+                const rotationDeg = (theta * 180 / Math.PI) - 90; // ROS → CSS 회전 보정
+                marker.style.transform = `translate(-50%, -50%) rotate(${rotationDeg}deg)`;
+            } else {
+                marker.style.transform = 'translate(-50%, -50%)';
+            }
+            
+            // 6단계: 경계 검사 및 로그
+            const isInBounds = screenX >= 0 && screenX <= containerWidth && 
+                             screenY >= 0 && screenY <= containerHeight;
+            
+            console.log(`🗺️ 좌표 변환 완료:
+                TF좌표: (${x.toFixed(2)}, ${y.toFixed(2)})m
+                맵픽셀: (${mapPixelX.toFixed(1)}, ${mapPixelY.toFixed(1)})px  
+                화면픽셀: (${screenX.toFixed(0)}, ${screenY.toFixed(0)})px
+                맵내부: ${isInBounds ? '✅' : '❌'}`);
+            
+            // 경계 밖일 경우 경고 표시
+            if (!isInBounds) {
+                marker.style.border = '3px solid orange';
+                marker.title = `로봇이 맵 경계 밖에 있습니다. TF: (${x.toFixed(2)}, ${y.toFixed(2)})`;
+            } else {
+                marker.style.border = '3px solid white';
+                marker.title = `로봇 위치: (${x.toFixed(2)}, ${y.toFixed(2)})m`;
+            }
+        }
+
+        // ==================== 맵 좌표 디버깅 도구 ====================
+        function addMapClickDebugger() {
+            const container = document.getElementById('map-container');
+            
+            container.addEventListener('click', (event) => {
+                const rect = container.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const clickY = event.clientY - rect.top;
+                
+                // 화면 픽셀을 TF 좌표로 역변환
+                const mapImg = document.getElementById('map') || document.getElementById('map-backup');
+                const scaleX = container.offsetWidth / (mapImg?.naturalWidth || container.offsetWidth);
+                const scaleY = container.offsetHeight / (mapImg?.naturalHeight || container.offsetHeight);
+                
+                const mapPixelX = clickX / scaleX;
+                const mapPixelY = (container.offsetHeight - clickY) / scaleY; // Y축 반전
+                
+                const tfX = mapPixelX * MAP_METADATA.resolution + MAP_METADATA.origin.x;
+                const tfY = mapPixelY * MAP_METADATA.resolution + MAP_METADATA.origin.y;
+                
+                console.log(`🎯 맵 클릭 디버그:
+                    화면픽셀: (${clickX.toFixed(0)}, ${clickY.toFixed(0)})
+                    맵픽셀: (${mapPixelX.toFixed(1)}, ${mapPixelY.toFixed(1)})  
+                    TF좌표: (${tfX.toFixed(2)}, ${tfY.toFixed(2)})m`);
+                
+                // 임시 마커 생성
+                const debugMarker = document.createElement('div');
+                debugMarker.style.cssText = `
+                    position: absolute;
+                    left: ${clickX}px;
+                    top: ${clickY}px;
+                    width: 8px;
+                    height: 8px;
+                    background: lime;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 100;
+                `;
+                container.appendChild(debugMarker);
+                
+                // 3초 후 제거
+                setTimeout(() => debugMarker.remove(), 3000);
+            });
+        }
+
+        // ==================== MQTT 연결 시작 ====================
+        function startMQTTConnection() {
+            console.log('🔄 MQTT 연결 시작...');
+            
+            try {
+                mqttClient = mqtt.connect(MQTT_CONFIG.brokerUrl, MQTT_CONFIG.options);
+                
+                mqttClient.on('connect', () => {
+                    console.log('✅ MQTT 브로커 연결 성공');
+                    updateConnectionStatus(true);
+                    
+                    mqttClient.subscribe(MQTT_CONFIG.topic, (err) => {
+                        if (!err) {
+                            console.log(`📡 토픽 구독 성공: ${MQTT_CONFIG.topic}`);
+                        } else {
+                            console.error('❌ 구독 실패:', err);
+                        }
+                    });
+                });
+
+                mqttClient.on('message', (topic, message) => {
+                    try {
+                        const payload = JSON.parse(message.toString());
+                        processMQTTMessage(payload);
+                    } catch (err) {
+                        console.error('❌ MQTT 메시지 파싱 오류:', err);
+                    }
+                });
+
+                mqttClient.on('error', (error) => {
+                    console.error('❌ MQTT 연결 오류:', error);
+                    updateConnectionStatus(false);
+                });
+
+                mqttClient.on('close', () => {
+                    console.log('🔌 MQTT 연결 종료');
+                    updateConnectionStatus(false);
+                });
+
+            } catch (error) {
+                console.error('❌ MQTT 연결 시작 실패:', error);
+                updateConnectionStatus(false);
+            }
+        }
+
+        // ==================== MQTT 메시지 처리 ====================
+        function processMQTTMessage(payload) {
+            console.log('🔍 수신된 MQTT 메시지:', payload);
+            
+            // 1. 통합 메시지 형태 (topics 객체 포함)
+            if (payload.topics && typeof payload.topics === 'object') {
+                console.log('✅ 통합 메시지 처리:', Object.keys(payload.topics));
+                Object.entries(payload.topics).forEach(([topicName, data]) => {
+                    if (expectedTopics.includes(topicName)) {
+                        console.log(`📡 토픽 처리: ${topicName}`, data);
+                        updateTopicFromMQTT(topicName, data, payload.timestamp);
+                    } else {
+                        console.log(`❓ 예상하지 못한 토픽: ${topicName}`);
+                    }
+                });
+            } 
+            // 2. 개별 토픽 메시지 (topic + data) - 우선 처리
+            else if (payload.topic && payload.data) {
+                const rosTopic = payload.topic;
+                console.log(`📍 개별 토픽 처리: ${rosTopic}`, payload.data);
+                if (expectedTopics.includes(rosTopic)) {
+                    updateTopicFromMQTT(rosTopic, payload.data, payload.timestamp);
+                } else {
+                    console.log(`❓ 예상 토픽 목록에 없음: ${rosTopic}`);
+                }
+            }
+            // 3. TF 데이터 직접 처리 (중요: 이제 무시하지 않음!)
+            else if (payload.translation && payload.rotation) {
+                console.log('🤖 TF 위치 데이터 처리 중:', payload.translation);
+                
+                // TF 데이터를 직접 updateRobotPose로 전달
+                updateRobotPose({
+                    x: payload.translation.x,
+                    y: payload.translation.y,
+                    theta: calculateYawFromQuaternion(payload.rotation)
+                });
+                
+                console.log(`🎯 TF 좌표로 로봇 위치 업데이트: (${payload.translation.x.toFixed(2)}, ${payload.translation.y.toFixed(2)})`);
+            }
+            // 4. 기타 알 수 없는 데이터 형태
+            else {
+                console.log('⚠️ 알 수 없는 메시지 형태 - 무시됨');
+                console.log('🔍 사용 가능한 키들:', Object.keys(payload));
+            }
+        }
+
+        // ==================== 쿼터니언을 Yaw 각도로 변환 ====================
+        function calculateYawFromQuaternion(rotation) {
+            if (!rotation) return 0;
+            
+            const { x, y, z, w } = rotation;
+            // 쿼터니언에서 Z축 회전(Yaw) 추출
+            return Math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z));
+        }
+
+        // ==================== MQTT에서 토픽 업데이트 ====================
+        function updateTopicFromMQTT(topicName, data, timestamp) {
+            // 메시지 카운트 증가
+            topicMessageCounts[topicName] = (topicMessageCounts[topicName] || 0) + 1;
+            
+            // 메시지 데이터 구성
+            const messageData = {
+                timestamp: timestamp || new Date().toISOString(),
+                data: data,
+                robot_id: 'robot1'
+            };
+            
+            // UI 업데이트
+            updateTopicDisplay(topicName, messageData);
+            updateRobotStatus(topicName, data);
+            updateTopicIndicator(topicName, true);
+            updateMessageCount(topicName, topicMessageCounts[topicName]);
+
+            console.log(`📡 ${topicName} 업데이트 완료:`, data);
+        }
+
+        // ==================== 연결 상태 업데이트 ====================
+        function updateConnectionStatus(connected) {
+            const statusElement = document.getElementById('connection-status');
+            
+            if (connected && !isConnected) {
+                statusElement.className = 'connection-status connected';
+                statusElement.innerHTML = '✅ Connected to Robot';
+                isConnected = true;
+            } else if (!connected && isConnected) {
+                statusElement.className = 'connection-status disconnected';
+                statusElement.innerHTML = '❌ Connection Lost';
+                isConnected = false;
+            }
+        }
+
+        // ==================== 토픽 디스플레이 업데이트 ====================
+        function updateTopicDisplay(topicName, messageData) {
+            const contentId = `content-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            const content = document.getElementById(contentId);
+            
+            if (!content) return;
+            
+            const timestamp = new Date(messageData.timestamp).toLocaleTimeString();
+            const dataJson = JSON.stringify(messageData.data, null, 2);
+            
+            content.innerHTML = `
+                <div class="topic-data fade-in">
+                    <div class="timestamp">Last updated: ${timestamp}</div>
+                    <div class="data-json">${dataJson}</div>
+                </div>
+            `;
+        }
+
+        // ==================== 로봇 상태 업데이트 ====================
+        function updateRobotStatus(topicName, data) {
+            console.log(`🔄 로봇 상태 업데이트: ${topicName}`, data);
+            
+            switch(topicName) {
+                case '/robot1/battery_state':
+                    // 언더스코어 필드 처리
+                    if (data._percentage !== undefined) {
+                        const percentage = (data._percentage * 100).toFixed(1);
+                        document.getElementById('battery-level').textContent = `${percentage}%`;
+                        console.log(`🔋 배터리 업데이트: ${percentage}%`);
+                    } else if (data.percentage !== undefined) {
+                        document.getElementById('battery-level').textContent = `${data.percentage}%`;
+                    } else if (data._voltage !== undefined) {
+                        document.getElementById('battery-level').textContent = `${data._voltage.toFixed(1)}V`;
+                    } else if (data.voltage !== undefined) {
+                        document.getElementById('battery-level').textContent = `${data.voltage}V`;
+                    }
+                    break;
+                    
+                case '/robot1/ip':
+                    if (data._data) {
+                        document.getElementById('robot-ip').textContent = data._data;
+                        console.log(`🌐 IP 업데이트: ${data._data}`);
+                    } else if (data.ip || data.address || data.data) {
+                        const ip = data.ip || data.address || data.data;
+                        document.getElementById('robot-ip').textContent = ip;
+                        console.log(`🌐 IP 업데이트: ${ip}`);
+                    }
+                    break;
+                    
+                case '/robot1/dock_status':
+                    let dockStatus = '❓ Unknown';
+                    
+                    // iRobot Create DockStatus 메시지 처리
+                    if (data._is_docked !== undefined) {
+                        dockStatus = data._is_docked ? '🏠 Docked' : '🚀 Free';
+                        console.log(`🏠 도킹 상태 업데이트: ${data._is_docked ? 'Docked' : 'Free'}`);
+                        
+                        // 도크 가시성 정보도 추가 표시
+                        if (data._dock_visible !== undefined) {
+                            const visibility = data._dock_visible ? ' (Visible)' : ' (Not Visible)';
+                            dockStatus += visibility;
+                        }
+                    }
+                    // 다른 형태의 도킹 상태 메시지 대비
+                    else if (data.is_docked !== undefined) {
+                        dockStatus = data.is_docked ? '🏠 Docked' : '🚀 Free';
+                    } 
+                    else if (data.docked !== undefined) {
+                        dockStatus = data.docked ? '🏠 Docked' : '🚀 Free';
+                    }
+                    else if (data._data !== undefined || data.data !== undefined) {
+                        const status = data._data || data.data;
+                        dockStatus = status ? '🏠 Docked' : '🚀 Free';
+                    }
+                    
+                    document.getElementById('dock-status').textContent = dockStatus;
+                    break;
+                    
+                case '/robot1/waypoints':
+                    let waypointCount = 0;
+                    if (data._waypoints && Array.isArray(data._waypoints)) {
+                        waypointCount = data._waypoints.length;
+                    } else if (data.waypoints && Array.isArray(data.waypoints)) {
+                        waypointCount = data.waypoints.length;
+                    } else if (data._length !== undefined) {
+                        waypointCount = data._length;
+                    } else if (data.length !== undefined) {
+                        waypointCount = data.length;
+                    } else if (data._data && Array.isArray(data._data)) {
+                        waypointCount = data._data.length;
+                    }
+                    document.getElementById('waypoint-count').textContent = waypointCount;
+                    break;
+                    
+                case '/robot1/goal_pose':
+                    updateRobotPosition(data);
+                    break;
+                    
+                case '/robot1/cmd_vel':
+                    updateRobotMovement(data);
+                    break;
+                    
+                case '/robot1/imu':
+                    // IMU 데이터는 특별한 UI 업데이트 없음 (로그만)
+                    console.log('📐 IMU 데이터 수신됨');
+                    break;
+            }
+        }
+
+        // ==================== 로봇 위치 업데이트 - 수정된 부분 ====================
+        function updateRobotPosition(poseData) {
+            // PoseStamped 메시지 구조 처리
+            if (poseData.pose && poseData.pose.position) {
+                const position = poseData.pose.position;
+                const orientation = poseData.pose.orientation;
+                
+                // 쿼터니언을 오일러 각도로 변환 (Z축 회전만)
+                let theta = 0;
+                if (orientation) {
+                    const { x: qx, y: qy, z: qz, w: qw } = orientation;
+                    theta = Math.atan2(2 * (qw * qz + qx * qy), 1 - 2 * (qy * qy + qz * qz));
+                }
+                
+                updateRobotPose({
+                    x: position.x,
+                    y: position.y,
+                    theta: theta
+                });
+            }
+            // TF Transform 메시지 처리
+            else if (poseData.translation) {
+                let theta = 0;
+                if (poseData.rotation) {
+                    const { x: qx, y: qy, z: qz, w: qw } = poseData.rotation;
+                    theta = Math.atan2(2 * (qw * qz + qx * qy), 1 - 2 * (qy * qy + qz * qz));
+                }
+                
+                updateRobotPose({
+                    x: poseData.translation.x,
+                    y: poseData.translation.y,
+                    theta: theta
+                });
+            }
+        }
+
+        // ==================== 로봇 움직임 애니메이션 ====================
+        function updateRobotMovement(cmdVel) {
+            const marker = document.getElementById('robot-marker');
+            
+            if (cmdVel.linear && (Math.abs(cmdVel.linear.x) > 0.01 || Math.abs(cmdVel.angular.z) > 0.01)) {
+                marker.style.background = '#00ff00';
+                marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                
+                setTimeout(() => {
+                    marker.style.background = '#ff4444';
+                    marker.style.transform = 'translate(-50%, -50%) scale(1.0)';
+                }, 500);
+            }
+        }
+
+        // ==================== UI 업데이트 함수들 ====================
+        function updateTopicIndicator(topicName, active) {
+            const indicatorId = `indicator-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            const indicator = document.getElementById(indicatorId);
+            
+            if (indicator) {
+                indicator.className = active ? 'status-indicator' : 'status-indicator inactive';
+            }
+        }
+
+        function updateMessageCount(topicName, count) {
+            const countId = `count-${topicName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            const countElement = document.getElementById(countId);
+            
+            if (countElement) {
+                countElement.textContent = count;
+            }
+        }
+
+        // ==================== 키보드 이벤트 ====================
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'r' || event.key === 'R') {
+                console.log('🔄 수동 새로고침 실행');
+                location.reload();
+            }
+        });
+
+        // ==================== DOM 로드 완료 시 초기화 ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM 로드 완료, 대시보드 초기화 시작');
+            initializeDashboard();
+        });
+
+        // ==================== 로그 ====================
+        console.log('🚀 Robot Dashboard 스크립트 로드 완료');
+    </script>
+</body>
+</html>
