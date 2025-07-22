@@ -16,7 +16,6 @@ from paho.mqtt import client as mqtt_client
 from geometry_msgs.msg import PointStamped
 import tf2_ros
 import tf2_geometry_msgs
-import rclpy
 from rclpy.duration import Duration
 
 
@@ -80,7 +79,7 @@ class NamespacedRobotController:
         self._lock = threading.Lock()
         self.namespace = ROBOT_CONFIG['namespace']
 
-        self.flag = 0
+        self.flag = 1
 
         #좌표
         self.tf_buffer = None
@@ -112,15 +111,12 @@ class NamespacedRobotController:
                 self.mqtt_connected = True
                 
                 # retained 메시지 클리어
-                #client.publish(MQTT_CONFIG['topic'], "", retain=True)
                 print(f"🧹 [{self.namespace}] 기존 retained 메시지 클리어 완료")
                 
                 # 토픽 구독
                 client.subscribe(MQTT_CONFIG['topic'])
                 print(f"📡 [{self.namespace}] 토픽 구독 완료: {MQTT_CONFIG['topic']}")
                 
-                # 연결 완료 메시지 발송
-                #self.publish_event("system_ready", 0, [0, 0], [0, 0])
             else:
                 print(f"❌ [{self.namespace}] MQTT 연결 실패, return code: {rc}")
                 self.mqtt_connected = False
@@ -135,16 +131,9 @@ class NamespacedRobotController:
                     print(f"📝 [{self.namespace}] 빈 메시지 무시 (retained 클리어)")
                     return
                 
-                # 정지/시작 명령 처리
-                # if payload == "1":
-                #     print(f"🛑 [{self.namespace}] 정지 명령 수신됨!")
-                #     self.set_stop_flag(True)
-                # elif payload == "0":
-                #     print(f"▶️ [{self.namespace}] 재시작 명령 수신됨!")
-                #     self.reset_stop_flag()
                 
                 #좌표
-                elif json.loads(payload).get('type') == 'crack1':
+                elif json.loads(payload).get('type') == 'crack11':
                     print('Crack detected - processing location')
                     self.stop_flag = True
                     self.navigator.cancelTask()
@@ -156,9 +145,18 @@ class NamespacedRobotController:
                         print(f"❌ 웨이포인트 {i} 이동 실패")
                     else:
                         print('목표로이동완')
-                        # self.stop_flag = False                      #######################
-                        # self.run_patrol_cycle()                     #######################
-                        # print("경로 재시작")                     ###################################
+
+                elif json.loads(payload).get('command') == '1':
+                    self.flag = 0
+                    time.sleep(0.5)
+
+                elif json.loads(payload).get('command') == '2':
+                    self.flag = 2
+                    self.stop_flag = True
+                    self.navigator.cancelTask()
+                    time.sleep(0.5)
+
+
 
                 elif json.loads(payload).get('type') == 'human11':
                     print('Crack detected - processing location')
@@ -166,16 +164,12 @@ class NamespacedRobotController:
                     self.navigator.cancelTask()
                     self.stop_flag = False
                     position = json.loads(payload).get('location')  # 예: ['-0.80', ' -0.80']
-                    #position = [float(x.strip()) for x in position_str]
 
 
                     if not self.navigate_to_waypoint(8, position, TurtleBot4Directions.NORTH):
                         print(f"❌ 웨이포인트 {i} 이동 실패")
                     else:
                         print('목표로이동완')
-                        # self.stop_flag = False                      #######################
-                        # self.run_patrol_cycle()                     #######################
-                        # print("경로 재시작")                     ###################################
 
                 elif json.loads(payload).get('type') == 'human4':
                         self.stop_flag = True
@@ -199,7 +193,7 @@ class NamespacedRobotController:
                                 print(f"❌ 웨이포인트 {i} 이동 실패")
                                 continue
                             
-                            # 360도 회전
+                            # 회전
                             if not self.perform_rotation(i):
                                 print(f"❌ 웨이포인트 {i} 회전 실패")
                                 continue
@@ -277,11 +271,6 @@ class NamespacedRobotController:
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
             
-            # result = self.mqtt_client.publish(MQTT_CONFIG['topic'], json.dumps(msg))
-            # if result.rc == mqtt_client.MQTT_ERR_SUCCESS:
-            #     print(f"📤 [{self.namespace}] MQTT 이벤트 발행 성공: {event_type}")
-            # else:
-            #     print(f"📤 [{self.namespace}] MQTT 이벤트 발행 실패: {event_type}, rc={result.rc}")
                 
         except Exception as e:
             print(f"❌ [{self.namespace}] MQTT 발행 오류: {e}")
@@ -289,8 +278,6 @@ class NamespacedRobotController:
     def check_docking_support(self):
         """도킹 기능 지원 여부 확인"""
         try:
-            # 도킹 관련 토픽이 존재하는지 확인
-            # 이것은 실제로는 더 복잡한 체크가 필요하지만, 간단히 시도해봄
             status = self.navigator.getDockedStatus()
             print(f"✅ [{self.namespace}] 도킹 기능 지원됨")
             return True
@@ -434,12 +421,6 @@ class NamespacedRobotController:
                 self.navigator.cancelTask()
                 return False
             
-            # 타임아웃 확인
-            # if time.time() - start_time > timeout:
-            #     print(f"⏰ [{self.namespace}] 작업 타임아웃: {task_description}")
-            #     # self.navigator.cancelTask()
-            #     return False
-            
             # ROS2 스핀
             rclpy.spin_once(self.navigator, timeout_sec=0.1)
         
@@ -482,17 +463,14 @@ class NamespacedRobotController:
         
         if success:
             robot_pos = self.get_current_position()
-            #self.publish_event("waypoint_arrival", waypoint_index, robot_pos, position)
             print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 도착!")
         
         return success
     
     def perform_rotation(self, waypoint_index):
         """360도 회전 수행"""
-        # if self.is_stopped():
-        #     return False
         
-        print(f"🔄 [{self.namespace}] 웨이포인트 {waypoint_index}에서 360° 회전 시작")
+        print(f"🔄 [{self.namespace}] 웨이포인트 {waypoint_index}에서 탐색 시작")
         
         # 회전 시작
         self.navigator.spin(spin_dist=ROBOT_CONFIG['spin_angle'])
@@ -502,7 +480,6 @@ class NamespacedRobotController:
         
         if success:
             robot_pos = self.get_current_position()
-            #self.publish_event("rotation_complete", waypoint_index, robot_pos, robot_pos)
             print(f"✅ [{self.namespace}] 웨이포인트 {waypoint_index} 회전 완료!")
         
         return success
@@ -536,7 +513,7 @@ class NamespacedRobotController:
                         print(f"❌ 웨이포인트 {i} 이동 실패")
                         continue
                     
-                    # 360도 회전
+                    # 회전
                     if not self.perform_rotation(i):
                         print(f"❌ 웨이포인트 {i} 회전 실패")
                         continue
@@ -546,7 +523,6 @@ class NamespacedRobotController:
                 
                 # 사이클 완료 이벤트
                 robot_pos = self.get_current_position()
-                #self.publish_event("route_complete", cycle_count, robot_pos, robot_pos)
                 print(f"✅ 패트롤 사이클 {cycle_count} 완료!\n")
                 
                 # 사이클 간 대기
@@ -565,7 +541,6 @@ class NamespacedRobotController:
         
         if self.mqtt_client:
             try:
-                #self.publish_event("system_shutdown", 0, [0, 0], [0, 0])
                 self.mqtt_client.loop_stop()
                 self.mqtt_client.disconnect()
                 print(f"✅ MQTT 연결 종료")
@@ -605,6 +580,9 @@ def main():
                 controller.run_patrol_cycle()
                 controller.flag = 1
                 time.sleep(1.0)
+            
+            elif controller.flag == 2:
+                break
 
         
     except Exception as e:
