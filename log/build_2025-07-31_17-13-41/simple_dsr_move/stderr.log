@@ -1,0 +1,16 @@
+[01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:6:5:[m[K [01;31m[Kerror: [m[K‘[01m[KDRFL[m[K’ was not declared in this scope
+    6 |     [01;31m[KDRFL[m[K robot;
+      |     [01;31m[K^~~~[m[K
+[01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:8:10:[m[K [01;31m[Kerror: [m[K‘[01m[Krobot[m[K’ was not declared in this scope
+    8 |     if (![01;31m[Krobot[m[K.OpenConnection("192.168.137.100", 12345)) {
+      |          [01;31m[K^~~~~[m[K
+[01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:18:10:[m[K [01;31m[Kerror: [m[K‘[01m[Krobot[m[K’ was not declared in this scope
+   18 |     if (![01;31m[Krobot[m[K.MoveJ(joint_target, vel, acc)) {
+      |          [01;31m[K^~~~~[m[K
+[01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:26:5:[m[K [01;31m[Kerror: [m[K‘[01m[Krobot[m[K’ was not declared in this scope
+   26 |     [01;31m[Krobot[m[K.CloseConnection();
+      |     [01;31m[K^~~~~[m[K
+gmake[2]: *** [CMakeFiles/simple_move_node.dir/build.make:76: CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/simple_move_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

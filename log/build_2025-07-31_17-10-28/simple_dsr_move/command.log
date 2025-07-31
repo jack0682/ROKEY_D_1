@@ -1,0 +1,4 @@
+Invoking command in '/home/jaeho/project_ws/build/simple_dsr_move': /usr/bin/cmake /home/jaeho/project_ws/src/simple_dsr_node -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/simple_dsr_move
+Invoked command in '/home/jaeho/project_ws/build/simple_dsr_move' returned '0': /usr/bin/cmake /home/jaeho/project_ws/src/simple_dsr_node -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/simple_dsr_move
+Invoking command in '/home/jaeho/project_ws/build/simple_dsr_move': /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8
+Invoked command in '/home/jaeho/project_ws/build/simple_dsr_move' returned '-2': /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8

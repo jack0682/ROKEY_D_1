@@ -1,0 +1,1 @@
+Invoking command in '/home/jaeho/project_ws/build/arduino_loadcell_interface': /usr/bin/cmake /home/jaeho/project_ws/src/arduino_loadcell_interface -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/arduino_loadcell_interface

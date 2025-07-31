@@ -1,0 +1,2 @@
+Invoking command in '/home/jaeho/project_ws/build/simple_dsr_move': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8
+Invoked command in '/home/jaeho/project_ws/build/simple_dsr_move' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8

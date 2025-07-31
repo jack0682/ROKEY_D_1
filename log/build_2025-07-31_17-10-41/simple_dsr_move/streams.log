@@ -1,0 +1,19 @@
+[0.013s] Invoking command in '/home/jaeho/project_ws/build/simple_dsr_move': /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8
+[0.055s] [ 50%] [32mBuilding CXX object CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o[0m
+[2.269s] [01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[2.270s] [01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:11:3:[m[K [01;31m[Kerror: [m[K‘[01m[KDRFL[m[K’ was not declared in this scope
+[2.270s]    11 |   [01;31m[KDRFL[m[K robot;
+[2.270s]       |   [01;31m[K^~~~[m[K
+[2.273s] [01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:13:8:[m[K [01;31m[Kerror: [m[K‘[01m[Krobot[m[K’ was not declared in this scope
+[2.273s]    13 |   if (![01;31m[Krobot[m[K.OpenConnection("192.168.137.100", 12345)) {
+[2.273s]       |        [01;31m[K^~~~~[m[K
+[2.277s] [01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:21:8:[m[K [01;31m[Kerror: [m[K‘[01m[Krobot[m[K’ was not declared in this scope
+[2.278s]    21 |   if (![01;31m[Krobot[m[K.MoveJ(joint_target, 30, 30)) {
+[2.278s]       |        [01;31m[K^~~~~[m[K
+[2.282s] [01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:29:3:[m[K [01;31m[Kerror: [m[K‘[01m[Krobot[m[K’ was not declared in this scope
+[2.282s]    29 |   [01;31m[Krobot[m[K.CloseConnection();
+[2.282s]       |   [01;31m[K^~~~~[m[K
+[2.675s] gmake[2]: *** [CMakeFiles/simple_move_node.dir/build.make:76: CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o] Error 1
+[2.675s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/simple_move_node.dir/all] Error 2
+[2.675s] gmake: *** [Makefile:146: all] Error 2
+[2.679s] Invoked command in '/home/jaeho/project_ws/build/simple_dsr_move' returned '2': /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8

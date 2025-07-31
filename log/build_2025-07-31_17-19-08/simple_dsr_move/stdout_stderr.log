@@ -1,0 +1,14 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jaeho/project_ws/build/simple_dsr_move
+[35m[1mConsolidate compiler generated dependencies of target simple_move_node[0m
+gmake[2]: *** No rule to make target '/home/jaeho/project_ws/src/simple_dsr_node/src/dsr_common2/lib/humble/x86_64/libDRFL.a', needed by 'simple_move_node'.  Stop.
+gmake[2]: *** Waiting for unfinished jobs....
+[ 50%] [32mBuilding CXX object CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o[0m
+[01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:10:10:[m[K [01;31m[Kfatal error: [m[KDRFL.h: No such file or directory
+   10 | #include [01;31m[K"DRFL.h"[m[K
+      |          [01;31m[K^~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/simple_move_node.dir/build.make:76: CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/simple_move_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

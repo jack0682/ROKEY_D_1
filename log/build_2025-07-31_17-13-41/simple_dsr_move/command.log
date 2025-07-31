@@ -1,0 +1,4 @@
+Invoking command in '/home/jaeho/project_ws/build/simple_dsr_move': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/simple_dsr_node -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/simple_dsr_move
+Invoked command in '/home/jaeho/project_ws/build/simple_dsr_move' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/simple_dsr_node -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/simple_dsr_move
+Invoking command in '/home/jaeho/project_ws/build/simple_dsr_move': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8
+Invoked command in '/home/jaeho/project_ws/build/simple_dsr_move' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8

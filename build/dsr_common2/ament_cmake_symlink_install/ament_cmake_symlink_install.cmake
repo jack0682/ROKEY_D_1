@@ -311,43 +311,43 @@ message(STATUS "Execute custom install script")
 # begin of custom install code
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/dsr_common2" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/dsr_common2" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/dsr_common2" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/dsr_common2" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/dsr_common2" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/dsr_common2" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
 
 # install(FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/dsr_common2/environment")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/dsr_common2/environment")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/dsr_common2/environment")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/dsr_common2/environment")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/dsr_common2/environment")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/dsr_common2/environment")
 
 # install(FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/dsr_common2/environment")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/dsr_common2/environment")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/dsr_common2/environment")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/dsr_common2/environment")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/dsr_common2/environment")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/dsr_common2/environment")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/dsr_common2")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/dsr_common2")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/dsr_common2")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/dsr_common2")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/dsr_common2")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/dsr_common2")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/dsr_common2")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/dsr_common2")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/dsr_common2")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/dsr_common2")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/dsr_common2")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/dsr_common2")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/dsr_common2")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/dsr_common2")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/dsr_common2")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/packages/dsr_common2" "DESTINATION" "share/ament_index/resource_index/packages")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/packages/dsr_common2" "DESTINATION" "share/ament_index/resource_index/packages")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_index/share/ament_index/resource_index/packages/dsr_common2" "DESTINATION" "share/ament_index/resource_index/packages")
 
 # install(FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_core/dsr_common2Config.cmake" "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_core/dsr_common2Config-version.cmake" "DESTINATION" "share/dsr_common2/cmake")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_core/dsr_common2Config.cmake" "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_core/dsr_common2Config-version.cmake" "DESTINATION" "share/dsr_common2/cmake")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_core/dsr_common2Config.cmake" "/home/jaeho/project_ws/build/dsr_common2/ament_cmake_core/dsr_common2Config-version.cmake" "DESTINATION" "share/dsr_common2/cmake")
 
-# install(FILES "/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2/package.xml" "DESTINATION" "share/dsr_common2")
-ament_cmake_symlink_install_files("/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2" FILES "/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2/package.xml" "DESTINATION" "share/dsr_common2")
+# install(FILES "/home/jaeho/project_ws/src/dsr_common2/package.xml" "DESTINATION" "share/dsr_common2")
+ament_cmake_symlink_install_files("/home/jaeho/project_ws/src/dsr_common2" FILES "/home/jaeho/project_ws/src/dsr_common2/package.xml" "DESTINATION" "share/dsr_common2")

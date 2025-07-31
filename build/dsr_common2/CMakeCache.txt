@@ -45,7 +45,7 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=Release
+CMAKE_BUILD_TYPE:STRING=
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -293,7 +293,7 @@ dsr_common2_BINARY_DIR:STATIC=/home/jaeho/project_ws/build/dsr_common2
 dsr_common2_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-dsr_common2_SOURCE_DIR:STATIC=/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2
+dsr_common2_SOURCE_DIR:STATIC=/home/jaeho/project_ws/src/dsr_common2
 
 
 ########################
@@ -380,7 +380,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/jaeho/project_ws/src/dsr_common2
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER

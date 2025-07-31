@@ -1,0 +1,2 @@
+Invoking command in '/home/jaeho/project_ws/build/chemistry_msgs': /usr/bin/cmake /home/jaeho/project_ws/src/chemistry_msgs -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/chemistry_msgs
+Invoked command in '/home/jaeho/project_ws/build/chemistry_msgs' returned '1': /usr/bin/cmake /home/jaeho/project_ws/src/chemistry_msgs -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/chemistry_msgs

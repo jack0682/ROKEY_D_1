@@ -1,0 +1,250 @@
+[0.000000] (-) TimerEvent: {}
+[0.000296] (arduino_loadcell_interface) JobQueued: {'identifier': 'arduino_loadcell_interface', 'dependencies': OrderedDict()}
+[0.000374] (chemistry_msgs) JobQueued: {'identifier': 'chemistry_msgs', 'dependencies': OrderedDict()}
+[0.000429] (dsr_common2) JobQueued: {'identifier': 'dsr_common2', 'dependencies': OrderedDict()}
+[0.000480] (chemistry_experiment_manager) JobQueued: {'identifier': 'chemistry_experiment_manager', 'dependencies': OrderedDict([('chemistry_msgs', '/home/jaeho/project_ws/install/chemistry_msgs')])}
+[0.000506] (precision_liquid_pouring) JobQueued: {'identifier': 'precision_liquid_pouring', 'dependencies': OrderedDict([('chemistry_msgs', '/home/jaeho/project_ws/install/chemistry_msgs')])}
+[0.001294] (chemistry_msgs) JobStarted: {'identifier': 'chemistry_msgs'}
+[0.008205] (arduino_loadcell_interface) JobStarted: {'identifier': 'arduino_loadcell_interface'}
+[0.014105] (dsr_common2) JobStarted: {'identifier': 'dsr_common2'}
+[0.019363] (chemistry_msgs) JobProgress: {'identifier': 'chemistry_msgs', 'progress': 'cmake'}
+[0.020348] (chemistry_msgs) Command: {'cmd': ['/usr/bin/cmake', '/home/jaeho/project_ws/src/chemistry_msgs', '-DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/chemistry_msgs'], 'cwd': '/home/jaeho/project_ws/build/chemistry_msgs', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'jaeho'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Jack-PC'), ('WSL_INTEROP', '/run/WSL/541_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/jaeho/project_ws/build/chemistry_msgs'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', '')]), 'shell': False}
+[0.028025] (arduino_loadcell_interface) JobProgress: {'identifier': 'arduino_loadcell_interface', 'progress': 'cmake'}
+[0.031092] (arduino_loadcell_interface) Command: {'cmd': ['/usr/bin/cmake', '/home/jaeho/project_ws/src/arduino_loadcell_interface', '-DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/arduino_loadcell_interface'], 'cwd': '/home/jaeho/project_ws/build/arduino_loadcell_interface', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'jaeho'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Jack-PC'), ('WSL_INTEROP', '/run/WSL/541_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/jaeho/project_ws/build/arduino_loadcell_interface'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', '')]), 'shell': False}
+[0.035150] (dsr_common2) JobProgress: {'identifier': 'dsr_common2', 'progress': 'cmake'}
+[0.038102] (dsr_common2) Command: {'cmd': ['/usr/bin/cmake', '/home/jaeho/project_ws/src/dsr_common2', '-DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/dsr_common2'], 'cwd': '/home/jaeho/project_ws/build/dsr_common2', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'jaeho'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Jack-PC'), ('WSL_INTEROP', '/run/WSL/541_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/jaeho/project_ws/build/dsr_common2'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', ''), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.099618] (-) TimerEvent: {}
+[0.160194] (dsr_common2) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.166075] (arduino_loadcell_interface) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.166550] (chemistry_msgs) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199791] (-) TimerEvent: {}
+[0.300271] (-) TimerEvent: {}
+[0.400752] (-) TimerEvent: {}
+[0.501192] (-) TimerEvent: {}
+[0.523927] (chemistry_msgs) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.601351] (-) TimerEvent: {}
+[0.632981] (dsr_common2) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.691511] (arduino_loadcell_interface) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.701623] (-) TimerEvent: {}
+[0.802304] (-) TimerEvent: {}
+[0.819350] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.902441] (-) TimerEvent: {}
+[0.996068] (dsr_common2) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.000842] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.002583] (-) TimerEvent: {}
+[1.008848] (chemistry_msgs) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.009281] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.009906] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.014613] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.101450] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.102693] (-) TimerEvent: {}
+[1.199825] (dsr_common2) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.202809] (-) TimerEvent: {}
+[1.209400] (dsr_common2) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.209936] (dsr_common2) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.210518] (dsr_common2) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.214702] (dsr_common2) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.241445] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.250230] (chemistry_msgs) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.250517] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.250956] (chemistry_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.254541] (chemistry_msgs) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[1.301403] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.302927] (-) TimerEvent: {}
+[1.310289] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.310626] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.310985] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.314397] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.403072] (-) TimerEvent: {}
+[1.429040] (dsr_common2) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.433448] (chemistry_msgs) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.437374] (dsr_common2) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.437847] (dsr_common2) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.438513] (dsr_common2) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.442023] (dsr_common2) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[1.503214] (-) TimerEvent: {}
+[1.539661] (chemistry_msgs) StdoutLine: {'line': b'-- Found std_msgs: 4.9.0 (/opt/ros/humble/share/std_msgs/cmake)\n'}
+[1.553215] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.561486] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.561972] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.562243] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.564961] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[1.603372] (-) TimerEvent: {}
+[1.623252] (dsr_common2) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.703514] (-) TimerEvent: {}
+[1.741904] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.767834] (chemistry_msgs) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.777639] (chemistry_msgs) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.787307] (chemistry_msgs) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.801444] (chemistry_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.803668] (-) TimerEvent: {}
+[1.822032] (chemistry_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.826462] (dsr_common2) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.831814] (dsr_common2) StdoutLine: {'line': b'-- Generating done\n'}
+[1.836590] (dsr_common2) StdoutLine: {'line': b'-- Build files have been written to: /home/jaeho/project_ws/build/dsr_common2\n'}
+[1.841623] (dsr_common2) CommandEnded: {'returncode': 0}
+[1.847850] (dsr_common2) JobProgress: {'identifier': 'dsr_common2', 'progress': 'build'}
+[1.848388] (dsr_common2) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/jaeho/project_ws/build/dsr_common2', '--', '-j8', '-l8'], 'cwd': '/home/jaeho/project_ws/build/dsr_common2', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'jaeho'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Jack-PC'), ('WSL_INTEROP', '/run/WSL/541_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/jaeho/project_ws/build/dsr_common2'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', ''), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[1.854929] (chemistry_msgs) StdoutLine: {'line': b'-- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)\n'}
+[1.863726] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found rclcpp: 16.0.14 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.871498] (chemistry_msgs) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[1.896675] (dsr_common2) CommandEnded: {'returncode': 0}
+[1.897246] (chemistry_msgs) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[1.899601] (dsr_common2) JobProgress: {'identifier': 'dsr_common2', 'progress': 'install'}
+[1.903831] (-) TimerEvent: {}
+[1.906341] (chemistry_msgs) StderrLine: {'line': b'\x1b[31mCMake Error at /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:93 (message):\n'}
+[1.906778] (chemistry_msgs) StderrLine: {'line': b"  rosidl_generate_interfaces() the passed file 'msg/ExperimentStatus.msg'\n"}
+[1.906871] (chemistry_msgs) StderrLine: {'line': b"  doesn't exist relative to the CMAKE_CURRENT_SOURCE_DIR\n"}
+[1.906948] (chemistry_msgs) StderrLine: {'line': b"  '/home/jaeho/project_ws/src/chemistry_msgs'\n"}
+[1.907036] (chemistry_msgs) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[1.907128] (chemistry_msgs) StderrLine: {'line': b'  CMakeLists.txt:17 (rosidl_generate_interfaces)\n'}
+[1.907189] (chemistry_msgs) StderrLine: {'line': b'\n'}
+[1.907245] (chemistry_msgs) StderrLine: {'line': b'\x1b[0m\n'}
+[1.907354] (chemistry_msgs) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.907473] (chemistry_msgs) StdoutLine: {'line': b'See also "/home/jaeho/project_ws/build/chemistry_msgs/CMakeFiles/CMakeOutput.log".\n'}
+[1.909633] (dsr_common2) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/jaeho/project_ws/build/dsr_common2'], 'cwd': '/home/jaeho/project_ws/build/dsr_common2', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'jaeho'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Jack-PC'), ('WSL_INTEROP', '/run/WSL/541_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/jaeho/project_ws/build/dsr_common2'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', ''), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[1.913858] (chemistry_msgs) CommandEnded: {'returncode': 1}
+[1.914829] (chemistry_msgs) JobEnded: {'identifier': 'chemistry_msgs', 'rc': 1}
+[1.919095] (dsr_common2) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[1.920812] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/ament_index/resource_index/package_run_dependencies/dsr_common2\n'}
+[1.921267] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/ament_index/resource_index/parent_prefix_path/dsr_common2\n'}
+[1.922099] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/environment/ament_prefix_path.sh\n'}
+[1.922435] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/environment/ament_prefix_path.dsv\n'}
+[1.922726] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/environment/path.sh\n'}
+[1.922982] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/environment/path.dsv\n'}
+[1.923422] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/local_setup.bash\n'}
+[1.923764] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/local_setup.sh\n'}
+[1.924303] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/local_setup.zsh\n'}
+[1.924569] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/local_setup.dsv\n'}
+[1.924861] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/package.dsv\n'}
+[1.925348] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/ament_index/resource_index/packages/dsr_common2\n'}
+[1.925876] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/cmake/dsr_common2Config.cmake\n'}
+[1.926109] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/cmake/dsr_common2Config-version.cmake\n'}
+[1.926307] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/package.xml\n'}
+[1.927082] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/bin\n'}
+[1.927390] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/bin/run_drcf.sh\n'}
+[1.928133] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/share/dsr_common2/bin/common2\n'}
+[1.928288] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp\n'}
+[1.929099] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_tcp_client2.py\n'}
+[1.929333] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_common2.py\n'}
+[1.929520] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DSR_util2.py\n'}
+[1.929723] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_init.py\n'}
+[1.929915] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/__init__.py\n'}
+[1.930522] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_tcp_server2.py\n'}
+[1.930812] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DSR_ROBOT2.py\n'}
+[1.932198] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_error2.py\n'}
+[1.932435] (dsr_common2) StdoutLine: {'line': b'-- Installing: /home/jaeho/project_ws/install/dsr_common2/lib/dsr_common2/imp/DRFC.py\n'}
+[1.934953] (dsr_common2) JobEnded: {'identifier': 'dsr_common2', 'rc': 'SIGINT'}
+[2.003957] (-) TimerEvent: {}
+[2.082126] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[2.087166] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[2.095266] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[2.104077] (-) TimerEvent: {}
+[2.107209] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.122246] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.204324] (-) TimerEvent: {}
+[2.251816] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[2.253952] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[2.304571] (-) TimerEvent: {}
+[2.404960] (-) TimerEvent: {}
+[2.505296] (-) TimerEvent: {}
+[2.605749] (-) TimerEvent: {}
+[2.706217] (-) TimerEvent: {}
+[2.806583] (-) TimerEvent: {}
+[2.906947] (-) TimerEvent: {}
+[3.007499] (-) TimerEvent: {}
+[3.107956] (-) TimerEvent: {}
+[3.208321] (-) TimerEvent: {}
+[3.308649] (-) TimerEvent: {}
+[3.408999] (-) TimerEvent: {}
+[3.509379] (-) TimerEvent: {}
+[3.609776] (-) TimerEvent: {}
+[3.710206] (-) TimerEvent: {}
+[3.771824] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[3.810411] (-) TimerEvent: {}
+[3.910773] (-) TimerEvent: {}
+[4.011087] (-) TimerEvent: {}
+[4.111453] (-) TimerEvent: {}
+[4.211788] (-) TimerEvent: {}
+[4.312086] (-) TimerEvent: {}
+[4.412490] (-) TimerEvent: {}
+[4.512854] (-) TimerEvent: {}
+[4.613215] (-) TimerEvent: {}
+[4.713638] (-) TimerEvent: {}
+[4.813992] (-) TimerEvent: {}
+[4.914323] (-) TimerEvent: {}
+[5.014722] (-) TimerEvent: {}
+[5.115060] (-) TimerEvent: {}
+[5.215468] (-) TimerEvent: {}
+[5.235978] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[5.315579] (-) TimerEvent: {}
+[5.415947] (-) TimerEvent: {}
+[5.516280] (-) TimerEvent: {}
+[5.616715] (-) TimerEvent: {}
+[5.717146] (-) TimerEvent: {}
+[5.817506] (-) TimerEvent: {}
+[5.917901] (-) TimerEvent: {}
+[6.018318] (-) TimerEvent: {}
+[6.118593] (-) TimerEvent: {}
+[6.218917] (-) TimerEvent: {}
+[6.319343] (-) TimerEvent: {}
+[6.419690] (-) TimerEvent: {}
+[6.519976] (-) TimerEvent: {}
+[6.620327] (-) TimerEvent: {}
+[6.720669] (-) TimerEvent: {}
+[6.821069] (-) TimerEvent: {}
+[6.921440] (-) TimerEvent: {}
+[7.021848] (-) TimerEvent: {}
+[7.122138] (-) TimerEvent: {}
+[7.222446] (-) TimerEvent: {}
+[7.322772] (-) TimerEvent: {}
+[7.423167] (-) TimerEvent: {}
+[7.523546] (-) TimerEvent: {}
+[7.623995] (-) TimerEvent: {}
+[7.724311] (-) TimerEvent: {}
+[7.743833] (arduino_loadcell_interface) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[7.750446] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[7.824457] (-) TimerEvent: {}
+[7.887250] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[7.887569] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[7.924705] (-) TimerEvent: {}
+[8.012228] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[8.013134] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[8.024880] (-) TimerEvent: {}
+[8.051149] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[8.124995] (-) TimerEvent: {}
+[8.225347] (-) TimerEvent: {}
+[8.325827] (-) TimerEvent: {}
+[8.426178] (-) TimerEvent: {}
+[8.526570] (-) TimerEvent: {}
+[8.626963] (-) TimerEvent: {}
+[8.727321] (-) TimerEvent: {}
+[8.827672] (-) TimerEvent: {}
+[8.928011] (-) TimerEvent: {}
+[9.028415] (-) TimerEvent: {}
+[9.128757] (-) TimerEvent: {}
+[9.229137] (-) TimerEvent: {}
+[9.329603] (-) TimerEvent: {}
+[9.349626] (arduino_loadcell_interface) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:13 (find_package):\n'}
+[9.349906] (arduino_loadcell_interface) StderrLine: {'line': b'  By not providing "Findserial.cmake" in CMAKE_MODULE_PATH this project has\n'}
+[9.349959] (arduino_loadcell_interface) StderrLine: {'line': b'  asked CMake to find a package configuration file provided by "serial", but\n'}
+[9.349997] (arduino_loadcell_interface) StderrLine: {'line': b'  CMake did not find one.\n'}
+[9.350034] (arduino_loadcell_interface) StderrLine: {'line': b'\n'}
+[9.350070] (arduino_loadcell_interface) StderrLine: {'line': b'  Could not find a package configuration file provided by "serial" with any\n'}
+[9.350108] (arduino_loadcell_interface) StderrLine: {'line': b'  of the following names:\n'}
+[9.350143] (arduino_loadcell_interface) StderrLine: {'line': b'\n'}
+[9.350178] (arduino_loadcell_interface) StderrLine: {'line': b'    serialConfig.cmake\n'}
+[9.350213] (arduino_loadcell_interface) StderrLine: {'line': b'    serial-config.cmake\n'}
+[9.350247] (arduino_loadcell_interface) StderrLine: {'line': b'\n'}
+[9.350282] (arduino_loadcell_interface) StderrLine: {'line': b'  Add the installation prefix of "serial" to CMAKE_PREFIX_PATH or set\n'}
+[9.350317] (arduino_loadcell_interface) StderrLine: {'line': b'  "serial_DIR" to a directory containing one of the above files.  If "serial"\n'}
+[9.350352] (arduino_loadcell_interface) StderrLine: {'line': b'  provides a separate development package or SDK, be sure it has been\n'}
+[9.350387] (arduino_loadcell_interface) StderrLine: {'line': b'  installed.\n'}
+[9.350426] (arduino_loadcell_interface) StderrLine: {'line': b'\n'}
+[9.350461] (arduino_loadcell_interface) StderrLine: {'line': b'\x1b[0m\n'}
+[9.350495] (arduino_loadcell_interface) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[9.350540] (arduino_loadcell_interface) StdoutLine: {'line': b'See also "/home/jaeho/project_ws/build/arduino_loadcell_interface/CMakeFiles/CMakeOutput.log".\n'}
+[9.357003] (arduino_loadcell_interface) JobEnded: {'identifier': 'arduino_loadcell_interface', 'rc': 'SIGINT'}
+[9.367729] (chemistry_experiment_manager) JobSkipped: {'identifier': 'chemistry_experiment_manager'}
+[9.367897] (precision_liquid_pouring) JobSkipped: {'identifier': 'precision_liquid_pouring'}
+[9.367935] (-) EventReactorShutdown: {}

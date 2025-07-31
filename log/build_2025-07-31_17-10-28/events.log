@@ -1,0 +1,149 @@
+[0.000000] (-) TimerEvent: {}
+[0.000834] (-) JobUnselected: {'identifier': 'arduino_loadcell_interface'}
+[0.000859] (-) JobUnselected: {'identifier': 'chemistry_experiment_manager'}
+[0.000894] (-) JobUnselected: {'identifier': 'chemistry_msgs'}
+[0.000909] (-) JobUnselected: {'identifier': 'dsr_common2'}
+[0.000933] (-) JobUnselected: {'identifier': 'precision_liquid_pouring'}
+[0.000946] (simple_dsr_move) JobQueued: {'identifier': 'simple_dsr_move', 'dependencies': OrderedDict()}
+[0.000960] (simple_dsr_move) JobStarted: {'identifier': 'simple_dsr_move'}
+[0.009529] (simple_dsr_move) JobProgress: {'identifier': 'simple_dsr_move', 'progress': 'cmake'}
+[0.011931] (simple_dsr_move) Command: {'cmd': ['/usr/bin/cmake', '/home/jaeho/project_ws/src/simple_dsr_node', '-DCATKIN_INSTALL_INTO_PREFIX_ROOT=0', '-DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/simple_dsr_move'], 'cwd': '/home/jaeho/project_ws/build/simple_dsr_move', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'jaeho'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho/project_ws/src/dsr_common2'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Jack-PC'), ('WSL_INTEROP', '/run/WSL/541_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/jaeho/project_ws/build/simple_dsr_move'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', '')]), 'shell': False}
+[0.099746] (-) TimerEvent: {}
+[0.154029] (simple_dsr_move) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199901] (-) TimerEvent: {}
+[0.300282] (-) TimerEvent: {}
+[0.402704] (-) TimerEvent: {}
+[0.503078] (-) TimerEvent: {}
+[0.603704] (-) TimerEvent: {}
+[0.618451] (simple_dsr_move) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.703877] (-) TimerEvent: {}
+[0.804245] (-) TimerEvent: {}
+[0.904602] (-) TimerEvent: {}
+[0.997687] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.004872] (-) TimerEvent: {}
+[1.105295] (-) TimerEvent: {}
+[1.142325] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.149121] (simple_dsr_move) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.149288] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.149559] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.151869] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.205524] (-) TimerEvent: {}
+[1.300745] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.305936] (-) TimerEvent: {}
+[1.306327] (simple_dsr_move) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.306508] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.306863] (simple_dsr_move) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.309206] (simple_dsr_move) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[1.406312] (-) TimerEvent: {}
+[1.429057] (simple_dsr_move) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.502380] (simple_dsr_move) StdoutLine: {'line': b'-- Found rclcpp: 16.0.14 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.506626] (-) TimerEvent: {}
+[1.608702] (-) TimerEvent: {}
+[1.685138] (simple_dsr_move) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.689453] (simple_dsr_move) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.696040] (simple_dsr_move) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.705643] (simple_dsr_move) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.708956] (-) TimerEvent: {}
+[1.718873] (simple_dsr_move) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.797591] (simple_dsr_move) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.799902] (simple_dsr_move) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.809265] (-) TimerEvent: {}
+[1.911000] (-) TimerEvent: {}
+[2.011638] (-) TimerEvent: {}
+[2.113295] (-) TimerEvent: {}
+[2.215055] (-) TimerEvent: {}
+[2.316433] (-) TimerEvent: {}
+[2.418208] (-) TimerEvent: {}
+[2.518953] (-) TimerEvent: {}
+[2.620697] (-) TimerEvent: {}
+[2.722468] (-) TimerEvent: {}
+[2.823869] (-) TimerEvent: {}
+[2.924269] (-) TimerEvent: {}
+[2.959884] (simple_dsr_move) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[3.024730] (-) TimerEvent: {}
+[3.125974] (-) TimerEvent: {}
+[3.227461] (-) TimerEvent: {}
+[3.328768] (-) TimerEvent: {}
+[3.430256] (-) TimerEvent: {}
+[3.531044] (-) TimerEvent: {}
+[3.632618] (-) TimerEvent: {}
+[3.734116] (-) TimerEvent: {}
+[3.835391] (-) TimerEvent: {}
+[3.936669] (-) TimerEvent: {}
+[4.037093] (-) TimerEvent: {}
+[4.137549] (-) TimerEvent: {}
+[4.238809] (-) TimerEvent: {}
+[4.248400] (simple_dsr_move) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[4.339770] (-) TimerEvent: {}
+[4.441082] (-) TimerEvent: {}
+[4.541826] (-) TimerEvent: {}
+[4.643072] (-) TimerEvent: {}
+[4.744347] (-) TimerEvent: {}
+[4.845475] (-) TimerEvent: {}
+[4.946552] (-) TimerEvent: {}
+[5.047251] (-) TimerEvent: {}
+[5.148252] (-) TimerEvent: {}
+[5.248584] (-) TimerEvent: {}
+[5.348950] (-) TimerEvent: {}
+[5.449798] (-) TimerEvent: {}
+[5.550498] (-) TimerEvent: {}
+[5.651542] (-) TimerEvent: {}
+[5.751884] (-) TimerEvent: {}
+[5.852831] (-) TimerEvent: {}
+[5.953509] (-) TimerEvent: {}
+[6.054151] (-) TimerEvent: {}
+[6.154902] (-) TimerEvent: {}
+[6.255265] (-) TimerEvent: {}
+[6.356140] (-) TimerEvent: {}
+[6.457021] (-) TimerEvent: {}
+[6.470913] (simple_dsr_move) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[6.477785] (simple_dsr_move) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[6.557233] (-) TimerEvent: {}
+[6.627454] (simple_dsr_move) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[6.627788] (simple_dsr_move) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[6.657490] (-) TimerEvent: {}
+[6.757903] (-) TimerEvent: {}
+[6.767108] (simple_dsr_move) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[6.768077] (simple_dsr_move) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[6.858364] (-) TimerEvent: {}
+[6.864914] (simple_dsr_move) StdoutLine: {'line': b'-- Configuring done\n'}
+[6.878116] (simple_dsr_move) StdoutLine: {'line': b'-- Generating done\n'}
+[6.878998] (simple_dsr_move) StderrLine: {'line': b'\x1b[33mCMake Warning:\n'}
+[6.879103] (simple_dsr_move) StderrLine: {'line': b'  Manually-specified variables were not used by the project:\n'}
+[6.879142] (simple_dsr_move) StderrLine: {'line': b'\n'}
+[6.879175] (simple_dsr_move) StderrLine: {'line': b'    CATKIN_INSTALL_INTO_PREFIX_ROOT\n'}
+[6.879224] (simple_dsr_move) StderrLine: {'line': b'\n'}
+[6.879259] (simple_dsr_move) StderrLine: {'line': b'\x1b[0m\n'}
+[6.881616] (simple_dsr_move) StdoutLine: {'line': b'-- Build files have been written to: /home/jaeho/project_ws/build/simple_dsr_move\n'}
+[6.889409] (simple_dsr_move) CommandEnded: {'returncode': 0}
+[6.891286] (simple_dsr_move) JobProgress: {'identifier': 'simple_dsr_move', 'progress': 'build'}
+[6.891381] (simple_dsr_move) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/jaeho/project_ws/build/simple_dsr_move', '--', '-j8', '-l8'], 'cwd': '/home/jaeho/project_ws/build/simple_dsr_move', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'jaeho'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho/project_ws/src/dsr_common2'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Jack-PC'), ('WSL_INTEROP', '/run/WSL/541_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/jaeho/project_ws/build/simple_dsr_move'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', '')]), 'shell': False}
+[6.934606] (simple_dsr_move) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o\x1b[0m\n'}
+[6.958517] (-) TimerEvent: {}
+[7.059043] (-) TimerEvent: {}
+[7.159689] (-) TimerEvent: {}
+[7.260460] (-) TimerEvent: {}
+[7.361177] (-) TimerEvent: {}
+[7.462089] (-) TimerEvent: {}
+[7.563005] (-) TimerEvent: {}
+[7.663837] (-) TimerEvent: {}
+[7.764783] (-) TimerEvent: {}
+[7.865628] (-) TimerEvent: {}
+[7.966086] (-) TimerEvent: {}
+[8.066802] (-) TimerEvent: {}
+[8.167608] (-) TimerEvent: {}
+[8.268310] (-) TimerEvent: {}
+[8.368980] (-) TimerEvent: {}
+[8.469601] (-) TimerEvent: {}
+[8.570317] (-) TimerEvent: {}
+[8.670980] (-) TimerEvent: {}
+[8.771678] (-) TimerEvent: {}
+[8.872384] (-) TimerEvent: {}
+[8.973004] (-) TimerEvent: {}
+[9.071222] (simple_dsr_move) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/simple_move_node.dir/build.make:76: CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o] Interrupt\n'}
+[9.071574] (simple_dsr_move) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/simple_move_node.dir/all] Interrupt\n'}
+[9.071654] (simple_dsr_move) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Interrupt\n'}
+[9.073198] (-) TimerEvent: {}
+[9.086321] (simple_dsr_move) CommandEnded: {'returncode': -2}
+[9.100978] (simple_dsr_move) JobEnded: {'identifier': 'simple_dsr_move', 'rc': 'SIGINT'}
+[9.111704] (-) EventReactorShutdown: {}

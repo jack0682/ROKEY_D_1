@@ -1,0 +1,5 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jaeho/project_ws/build/simple_dsr_move
+[35m[1mConsolidate compiler generated dependencies of target simple_move_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o[0m

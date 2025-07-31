@@ -1,0 +1,16 @@
+[0.015s] Invoking command in '/home/jaeho/project_ws/build/simple_dsr_move': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8
+[0.035s] -- Configuring done
+[0.038s] -- Generating done
+[0.040s] -- Build files have been written to: /home/jaeho/project_ws/build/simple_dsr_move
+[0.060s] [35m[1mConsolidate compiler generated dependencies of target simple_move_node[0m
+[0.065s] gmake[2]: *** No rule to make target '/home/jaeho/project_ws/src/simple_dsr_node/src/dsr_common2/lib/humble/x86_64/libDRFL.a', needed by 'simple_move_node'.  Stop.
+[0.065s] gmake[2]: *** Waiting for unfinished jobs....
+[0.071s] [ 50%] [32mBuilding CXX object CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o[0m
+[0.112s] [01m[K/home/jaeho/project_ws/src/simple_dsr_node/src/simple_move_node.cpp:10:10:[m[K [01;31m[Kfatal error: [m[KDRFL.h: No such file or directory
+[0.112s]    10 | #include [01;31m[K"DRFL.h"[m[K
+[0.112s]       |          [01;31m[K^~~~~~~~[m[K
+[0.112s] compilation terminated.
+[0.113s] gmake[2]: *** [CMakeFiles/simple_move_node.dir/build.make:76: CMakeFiles/simple_move_node.dir/src/simple_move_node.cpp.o] Error 1
+[0.114s] gmake[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/simple_move_node.dir/all] Error 2
+[0.114s] gmake: *** [Makefile:146: all] Error 2
+[0.118s] Invoked command in '/home/jaeho/project_ws/build/simple_dsr_move' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/simple_dsr_move -- -j8 -l8

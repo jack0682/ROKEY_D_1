@@ -1,4 +1,4 @@
-# Install script for directory: /home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2
+# Install script for directory: /home/jaeho/project_ws/src/dsr_common2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Release")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -47,11 +47,11 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/dsr_common2" TYPE DIRECTORY FILES "/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2/bin" REGEX "/bin\\/[^/]*$" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/dsr_common2" TYPE DIRECTORY FILES "/home/jaeho/project_ws/src/dsr_common2/bin" REGEX "/bin\\/[^/]*$" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/dsr_common2" TYPE DIRECTORY FILES "/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2/imp" FILES_MATCHING REGEX "/[^/]*\\.py$" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/dsr_common2" TYPE DIRECTORY FILES "/home/jaeho/project_ws/src/dsr_common2/imp" FILES_MATCHING REGEX "/[^/]*\\.py$" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
