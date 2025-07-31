@@ -12,8 +12,7 @@
 src/
 ├── doosan_m0609_control/           # M0609 로봇 기본 제어
 ├── arduino_loadcell_interface/     # 아두이노 HX711 로드셀 통신
-├── salt_concentration_calculator/  # 소금물 농도 계산 엔진
-├── precision_liquid_pouring/       # 정밀 액체 주입 제어
+├── precision_liquid_pouring/       # 정밀 액체 주입 제어 + 소금물 농도 계산 엔진
 ├── chemistry_experiment_manager/   # 실험 시퀀스 총괄
 ├── chemistry_msgs/                 # 커스텀 메시지/서비스 정의
 
