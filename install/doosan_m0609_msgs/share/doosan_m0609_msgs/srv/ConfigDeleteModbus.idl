@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from doosan_m0609_msgs/srv/modbus/ConfigDeleteModbus.srv
+// generated code does not contain a copyright notice
+
+
+module doosan_m0609_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "____________________________________________________________________________________________" "\n"
+      " config_delete_modbus " "\n"
+      " It is a service to delete the Modbus I / O signal information registered " "\n"
+      " in advance in the robot controller " "\n"
+      "____________________________________________________________________________________________")
+    struct ConfigDeleteModbus_Request {
+      @verbatim (language="comment", text=
+        "modbus signal symbol")
+      string name;
+    };
+    struct ConfigDeleteModbus_Response {
+      boolean success;
+    };
+  };
+};

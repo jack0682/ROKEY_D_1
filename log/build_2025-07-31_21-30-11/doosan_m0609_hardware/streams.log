@@ -1,0 +1,43 @@
+[0.156s] Invoking command in '/home/jack/project_ws/build/doosan_m0609_hardware': CMAKE_PREFIX_PATH=/home/jack/project_ws/install/doosan_m0609_msgs:/home/jack/project_ws/install/dsr_common2:/opt/ros/humble /usr/bin/cmake /home/jack/project_ws/src/doosan_m0609_hardware -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/doosan_m0609_hardware
+[0.355s] -- The CXX compiler identification is GNU 10.5.0
+[0.966s] -- Detecting CXX compiler ABI info
+[1.183s] -- Detecting CXX compiler ABI info - done
+[1.183s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.183s] -- Detecting CXX compile features
+[1.183s] -- Detecting CXX compile features - done
+[1.186s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.286s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.353s] -- Found pluginlib: 5.1.0 (/opt/ros/humble/share/pluginlib/cmake)
+[4.612s] -- Found hardware_interface: 2.51.0 (/opt/ros/humble/share/hardware_interface/cmake)
+[4.639s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[4.643s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[4.650s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[4.659s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.669s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.835s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[4.837s] -- Found rmw_cyclonedds_cpp: 1.3.4 (/opt/ros/humble/share/rmw_cyclonedds_cpp/cmake)
+[4.854s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[4.862s] -- Looking for C++ include pthread.h
+[5.078s] -- Looking for C++ include pthread.h - found
+[5.078s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[5.286s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[5.286s] -- Found Threads: TRUE  
+[5.322s] -- Found doosan_m0609_msgs: 1.1.0 (/home/jack/project_ws/install/doosan_m0609_msgs/share/doosan_m0609_msgs/cmake)
+[5.334s] -- Found moveit_msgs: 2.2.1 (/opt/ros/humble/share/moveit_msgs/cmake)
+[5.412s] -- Found controller_manager: 2.51.0 (/opt/ros/humble/share/controller_manager/cmake)
+[5.461s] -- Found kdl_parser: 2.6.4 (/opt/ros/humble/share/kdl_parser/cmake)
+[5.541s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[5.542s] -- Found Eigen3: TRUE (found version "3.3.7") 
+[5.542s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[5.546s] [0mDRCF_VERSION:2[0m
+[5.564s] [31mCMake Error at /opt/ros/humble/share/pluginlib/cmake/pluginlib_export_plugin_description_file.cmake:84 (message):
+[5.564s]   Given plugin description file
+[5.564s]   '/home/jack/project_ws/src/doosan_m0609_hardware/doosan_m0609_hardware.xml'
+[5.564s]   does not exist
+[5.564s] Call Stack (most recent call first):
+[5.565s]   CMakeLists.txt:124 (pluginlib_export_plugin_description_file)
+[5.565s] 
+[5.565s] [0m
+[5.565s] -- Configuring incomplete, errors occurred!
+[5.565s] See also "/home/jack/project_ws/build/doosan_m0609_hardware/CMakeFiles/CMakeOutput.log".
+[5.572s] Invoked command in '/home/jack/project_ws/build/doosan_m0609_hardware' returned '1': CMAKE_PREFIX_PATH=/home/jack/project_ws/install/doosan_m0609_msgs:/home/jack/project_ws/install/dsr_common2:/opt/ros/humble /usr/bin/cmake /home/jack/project_ws/src/doosan_m0609_hardware -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/doosan_m0609_hardware

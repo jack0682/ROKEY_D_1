@@ -1,0 +1,4 @@
+Invoking command in '/home/jack/project_ws/build/sugar_water_experiment': /usr/bin/cmake /home/jack/project_ws/src/sugar_water_experiment -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/sugar_water_experiment
+Invoked command in '/home/jack/project_ws/build/sugar_water_experiment' returned '0': /usr/bin/cmake /home/jack/project_ws/src/sugar_water_experiment -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/sugar_water_experiment
+Invoking command in '/home/jack/project_ws/build/sugar_water_experiment': /usr/bin/cmake --build /home/jack/project_ws/build/sugar_water_experiment -- -j6 -l6
+Invoked command in '/home/jack/project_ws/build/sugar_water_experiment' returned '2': /usr/bin/cmake --build /home/jack/project_ws/build/sugar_water_experiment -- -j6 -l6

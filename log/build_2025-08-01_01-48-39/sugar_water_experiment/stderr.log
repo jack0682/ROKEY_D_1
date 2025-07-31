@@ -1,0 +1,10 @@
+[01m[K/home/jack/project_ws/src/sugar_water_experiment/src/sugar_water_experimenter_node.cpp:[m[K In constructor ‘[01m[KSugarWaterExperimenterNode::SugarWaterExperimenterNode()[m[K’:
+[01m[K/home/jack/project_ws/src/sugar_water_experiment/src/sugar_water_experimenter_node.cpp:215:11:[m[K [01;35m[Kwarning: [m[K‘[01m[KSugarWaterExperimenterNode::current_weight_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+  215 |     float [01;35m[Kcurrent_weight_[m[K;
+      |           [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/jack/project_ws/src/sugar_water_experiment/src/sugar_water_experimenter_node.cpp:211:12:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Ksize_t SugarWaterExperimenterNode::current_pose_index_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+  211 |     size_t [01;35m[Kcurrent_pose_index_[m[K;
+      |            [01;35m[K^~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/jack/project_ws/src/sugar_water_experiment/src/sugar_water_experimenter_node.cpp:50:5:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+   50 |     [01;35m[KSugarWaterExperimenterNode[m[K() : Node("sugar_water_experimenter_node"),
+      |     [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K

@@ -1,0 +1,20 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from doosan_m0609_msgs/srv/force/ResetWorkpieceWeight.srv
+// generated code does not contain a copyright notice
+
+
+module doosan_m0609_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "____________________________________________________________________________________________" "\n"
+      " reset_workpiece_weight" "\n"
+      " Initializes the weight data of the material to initialize the algorithm before measuring the weight of the material." "\n"
+      " ____________________________________________________________________________________________")
+    struct ResetWorkpieceWeight_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    struct ResetWorkpieceWeight_Response {
+      boolean success;
+    };
+  };
+};

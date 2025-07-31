@@ -1,0 +1,4 @@
+[console_scripts]
+experiment_coordinator = chemistry_experiment_manager.main:main
+experiment_runner = chemistry_experiment_manager.experiment_runner:main
+

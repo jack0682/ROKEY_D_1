@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from doosan_m0609_msgs/srv/realtime/GetRtControlInputVersionList.srv
+// generated code does not contain a copyright notice
+
+
+module doosan_m0609_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "____________________________________________________________________________________________" "\n"
+      " get_rt_control_input_version_list" "\n"
+      "____________________________________________________________________________________________")
+    struct GetRtControlInputVersionList_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    struct GetRtControlInputVersionList_Response {
+      boolean success;
+
+      string version;
+    };
+  };
+};

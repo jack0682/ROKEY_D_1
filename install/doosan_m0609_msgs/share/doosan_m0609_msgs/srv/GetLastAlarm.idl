@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from doosan_m0609_msgs/srv/system/GetLastAlarm.srv
+// generated code does not contain a copyright notice
+
+#include "doosan_m0609_msgs/msg/LogAlarm.idl"
+
+module doosan_m0609_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "____________________________________________________________________________________________" "\n"
+      " get_last_alarm" "\n"
+      "Struct.LOG_ARARM" "\n"
+      "____________________________________________________________________________________________")
+    struct GetLastAlarm_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    struct GetLastAlarm_Response {
+      doosan_m0609_msgs::msg::LogAlarm log_alarm;
+
+      boolean success;
+    };
+  };
+};

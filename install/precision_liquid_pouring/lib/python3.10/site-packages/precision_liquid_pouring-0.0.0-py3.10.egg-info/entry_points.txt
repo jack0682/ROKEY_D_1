@@ -1,0 +1,4 @@
+[console_scripts]
+concentration_test = precision_liquid_pouring.concentration_calculator:main
+pour_control_node = precision_liquid_pouring.main:main
+

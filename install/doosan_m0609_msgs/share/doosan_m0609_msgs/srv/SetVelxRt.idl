@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from doosan_m0609_msgs/srv/realtime/SetVelxRt.srv
+// generated code does not contain a copyright notice
+
+
+module doosan_m0609_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "____________________________________________________________________________________________" "\n"
+      " set_velx_rt" "\n"
+      "____________________________________________________________________________________________")
+    struct SetVelxRt_Request {
+      double trans;
+
+      double rotation;
+    };
+    struct SetVelxRt_Response {
+      boolean success;
+    };
+  };
+};

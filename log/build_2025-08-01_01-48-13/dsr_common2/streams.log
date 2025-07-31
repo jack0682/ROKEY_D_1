@@ -1,0 +1,39 @@
+[0.009s] Invoking command in '/home/jack/project_ws/build/dsr_common2': /usr/bin/cmake /home/jack/project_ws/src/dsr_common2 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/dsr_common2
+[0.017s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.147s] -- Configuring done
+[0.151s] -- Generating done
+[0.152s] -- Build files have been written to: /home/jack/project_ws/build/dsr_common2
+[0.154s] Invoked command in '/home/jack/project_ws/build/dsr_common2' returned '0': /usr/bin/cmake /home/jack/project_ws/src/dsr_common2 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/dsr_common2
+[0.155s] Invoking command in '/home/jack/project_ws/build/dsr_common2': /usr/bin/cmake --build /home/jack/project_ws/build/dsr_common2 -- -j6 -l6
+[0.179s] Invoked command in '/home/jack/project_ws/build/dsr_common2' returned '0': /usr/bin/cmake --build /home/jack/project_ws/build/dsr_common2 -- -j6 -l6
+[0.185s] Invoking command in '/home/jack/project_ws/build/dsr_common2': /usr/bin/cmake --install /home/jack/project_ws/build/dsr_common2
+[0.189s] -- Install configuration: "Release"
+[0.191s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/ament_index/resource_index/package_run_dependencies/dsr_common2
+[0.191s] -- Installing: /home/jack/project_ws/install/dsr_common2/share/ament_index/resource_index/parent_prefix_path/dsr_common2
+[0.191s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/environment/ament_prefix_path.sh
+[0.191s] -- Installing: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/environment/ament_prefix_path.dsv
+[0.192s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/environment/path.sh
+[0.192s] -- Installing: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/environment/path.dsv
+[0.192s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/local_setup.bash
+[0.192s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/local_setup.sh
+[0.192s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/local_setup.zsh
+[0.192s] -- Installing: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/local_setup.dsv
+[0.192s] -- Installing: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/package.dsv
+[0.192s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/ament_index/resource_index/packages/dsr_common2
+[0.193s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/cmake/dsr_common2Config.cmake
+[0.193s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/cmake/dsr_common2Config-version.cmake
+[0.193s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/package.xml
+[0.194s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/bin
+[0.194s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/bin/common2
+[0.194s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/share/dsr_common2/bin/run_drcf.sh
+[0.195s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp
+[0.195s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DRFC.py
+[0.195s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_tcp_client2.py
+[0.195s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_error2.py
+[0.196s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_init.py
+[0.196s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DSR_ROBOT2.py
+[0.196s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DSR_util2.py
+[0.196s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/__init__.py
+[0.196s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_common2.py
+[0.197s] -- Up-to-date: /home/jack/project_ws/install/dsr_common2/lib/dsr_common2/imp/DR_tcp_server2.py
+[0.197s] Invoked command in '/home/jack/project_ws/build/dsr_common2' returned '0': /usr/bin/cmake --install /home/jack/project_ws/build/dsr_common2
