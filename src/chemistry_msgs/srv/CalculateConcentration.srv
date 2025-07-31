@@ -1,0 +1,14 @@
+# 농도 계산 서비스
+# Request
+float32 target_concentration_percent  # 목표 농도 (w/w%)
+float32 total_solution_weight        # 총 용액량 (grams)
+
+---
+# Response
+bool success
+string message
+
+# 계산 결과
+float32 required_salt_weight    # 필요한 소금량 (grams)
+float32 required_water_weight   # 필요한 물량 (grams)
+float32 expected_accuracy       # 예상 정확도 (%)
