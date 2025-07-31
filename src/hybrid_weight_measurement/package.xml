@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="3">
+  <n>hybrid_weight_measurement</n>
+  <version>1.0.0</version>
+  <description>M0609 토크센서 + 로드셀 융합 무게 측정 시스템 - Day 2 목표</description>
+  <maintainer email="jaeho@example.com">Jaehong Oh</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  
+  <build_depend>rclcpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>doosan_m0609_control</build_depend>
+  <build_depend>arduino_loadcell_interface</build_depend>
+  <build_depend>chemistry_msgs</build_depend>
+  
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>doosan_m0609_control</exec_depend>
+  <exec_depend>arduino_loadcell_interface</exec_depend>
+  <exec_depend>chemistry_msgs</exec_depend>
+
+  <export><build_type>ament_cmake</build_type></export>
+</package>
