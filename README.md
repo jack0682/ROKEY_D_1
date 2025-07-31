@@ -12,13 +12,11 @@
 src/
 ├── doosan_m0609_control/           # M0609 로봇 기본 제어
 ├── arduino_loadcell_interface/     # 아두이노 HX711 로드셀 통신
-├── hybrid_weight_measurement/      # M0609 토크 + 로드셀 융합 측정
 ├── salt_concentration_calculator/  # 소금물 농도 계산 엔진
 ├── precision_liquid_pouring/       # 정밀 액체 주입 제어
 ├── chemistry_experiment_manager/   # 실험 시퀀스 총괄
-├── safety_monitoring_system/       # 안전 감시 및 비상 대응
 ├── chemistry_msgs/                 # 커스텀 메시지/서비스 정의
-└── experiment_data_logger/         # 데이터 기록 및 성능 분석
+
 ```
 
 ### ⏰ 7일 개발 일정
