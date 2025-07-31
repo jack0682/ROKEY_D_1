@@ -1,0 +1,19 @@
+[0.055s] Invoking command in '/home/jaeho/project_ws/build/dsr_common2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_common2 -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/dsr_common2
+[0.436s] -- The C compiler identification is GNU 11.4.0
+[1.009s] -- The CXX compiler identification is GNU 11.4.0
+[1.350s] -- Detecting C compiler ABI info
+[1.568s] -- Detecting C compiler ABI info - done
+[1.579s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.580s] -- Detecting C compile features
+[1.580s] -- Detecting C compile features - done
+[1.584s] -- Detecting CXX compiler ABI info
+[1.870s] -- Detecting CXX compiler ABI info - done
+[1.885s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.885s] -- Detecting CXX compile features
+[1.886s] -- Detecting CXX compile features - done
+[1.892s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[2.119s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.219s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.345s] -- Configuring done
+[2.349s] -- Generating done
+[2.352s] -- Build files have been written to: /home/jaeho/project_ws/build/dsr_common2

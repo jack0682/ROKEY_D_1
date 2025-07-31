@@ -1,0 +1,233 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-70a6225728251c27c368.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"build" : "dsr_msgs2__py",
+					"jsonFile" : "directory-dsr_msgs2__py-Release-4fc1d1a3f03bb627a7fd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/jaeho/project_ws/build/dsr_msgs2/dsr_msgs2__py",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "dsr_msgs2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_dsr_msgs2_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_dsr_msgs2_egg-Release-74942481b66da5bcee80.json",
+					"name" : "ament_cmake_python_build_dsr_msgs2_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_symlink_dsr_msgs2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_symlink_dsr_msgs2-Release-400a62e43b06bd79d711.json",
+					"name" : "ament_cmake_python_symlink_dsr_msgs2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2-Release-99101f16eaacbce0938b.json",
+					"name" : "dsr_msgs2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__cpp-Release-54fd1824783464db05b8.json",
+					"name" : "dsr_msgs2__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "dsr_msgs2__py::@d516987e04a9e2a929ee",
+					"jsonFile" : "target-dsr_msgs2__py-Release-2107c483731cf5fa6f57.json",
+					"name" : "dsr_msgs2__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_generator_c-Release-52283e9ee20f834ef809.json",
+					"name" : "dsr_msgs2__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_generator_py-Release-7885dda4e744e62a9103.json",
+					"name" : "dsr_msgs2__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_c-Release-88e49a1a0e9f014377cc.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_c__pyext-Release-21d7746b79e523f9f75d.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_cpp-Release-abb8eacb04dcb693a553.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_fastrtps_c-Release-4427f17bab532cda2120.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_fastrtps_c__pyext-Release-ef2d17f1c13eecb8836a.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_fastrtps_cpp-Release-80337da10d2ebb90f299.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_introspection_c-Release-822b6f7627491b0a91b1.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_introspection_c__pyext-Release-a2f8b5b45ef04378cfb9.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2__rosidl_typesupport_introspection_cpp-Release-ccab2e97d750d8a702e1.json",
+					"name" : "dsr_msgs2__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_msgs2_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_msgs2_uninstall-Release-74c2bb93e6db4e3e5b51.json",
+					"name" : "dsr_msgs2_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-caf3a6d34892145d537f.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jaeho/project_ws/build/dsr_msgs2",
+		"source" : "/home/jaeho/project_ws/DoosanBootcamp_WS/DoosanBootcam3rdCo1/dsr_msgs2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

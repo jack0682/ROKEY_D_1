@@ -1,0 +1,8 @@
+[0.054s] Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_control': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_control -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_control
+[0.132s] [31mCMake Error at CMakeLists.txt:9:
+[0.133s]   Parse error.  Expected a command name, got unquoted argument with text
+[0.133s]   "//".
+[0.133s] 
+[0.133s] [0m
+[0.133s] -- Configuring incomplete, errors occurred!
+[0.150s] Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_control' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_control -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_control

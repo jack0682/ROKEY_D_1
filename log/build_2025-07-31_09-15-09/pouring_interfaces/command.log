@@ -1,0 +1,1 @@
+Invoking command in '/home/jaeho/project_ws/build/pouring_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/pouring_interfaces -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/pouring_interfaces
