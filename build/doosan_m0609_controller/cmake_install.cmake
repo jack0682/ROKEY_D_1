@@ -415,7 +415,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/doosan_m0609_controller/doosan_controller_node")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/doosan_m0609_controller/doosan_controller_node"
-         OLD_RPATH "/opt/ros/humble/lib:/home/jaeho/project_ws/build/doosan_m0609_controller:"
+         OLD_RPATH "/home/jaeho/project_ws/src/doosan_m0609_controller/../dsr_common2/lib/humble/x86_64:/opt/ros/humble/lib:/home/jaeho/project_ws/build/doosan_m0609_controller:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/doosan_m0609_controller/doosan_controller_node")

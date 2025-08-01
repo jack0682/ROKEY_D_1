@@ -1306,30 +1306,6 @@ src/doosan_robot_controller.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/doosan_controller_node.dir/build.make CMakeFiles/doosan_controller_node.dir/src/doosan_robot_controller.cpp.s
 .PHONY : src/doosan_robot_controller.cpp.s
 
-src/drfl_dummy.o: src/drfl_dummy.cpp.o
-.PHONY : src/drfl_dummy.o
-
-# target to build an object file
-src/drfl_dummy.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/doosan_controller_node.dir/build.make CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o
-.PHONY : src/drfl_dummy.cpp.o
-
-src/drfl_dummy.i: src/drfl_dummy.cpp.i
-.PHONY : src/drfl_dummy.i
-
-# target to preprocess a source file
-src/drfl_dummy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/doosan_controller_node.dir/build.make CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.i
-.PHONY : src/drfl_dummy.cpp.i
-
-src/drfl_dummy.s: src/drfl_dummy.cpp.s
-.PHONY : src/drfl_dummy.s
-
-# target to generate assembly for a file
-src/drfl_dummy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/doosan_controller_node.dir/build.make CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.s
-.PHONY : src/drfl_dummy.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1473,9 +1449,6 @@ help:
 	@echo "... src/doosan_robot_controller.o"
 	@echo "... src/doosan_robot_controller.i"
 	@echo "... src/doosan_robot_controller.s"
-	@echo "... src/drfl_dummy.o"
-	@echo "... src/drfl_dummy.i"
-	@echo "... src/drfl_dummy.s"
 .PHONY : help
 
 

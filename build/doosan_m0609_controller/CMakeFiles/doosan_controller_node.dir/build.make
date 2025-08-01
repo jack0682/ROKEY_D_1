@@ -97,32 +97,16 @@ CMakeFiles/doosan_controller_node.dir/src/doosan_robot_controller.cpp.s: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/doosan_controller_node.dir/src/doosan_robot_controller.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jaeho/project_ws/src/doosan_m0609_controller/src/doosan_robot_controller.cpp -o CMakeFiles/doosan_controller_node.dir/src/doosan_robot_controller.cpp.s
 
-CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o: CMakeFiles/doosan_controller_node.dir/flags.make
-CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o: /home/jaeho/project_ws/src/doosan_m0609_controller/src/drfl_dummy.cpp
-CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o: CMakeFiles/doosan_controller_node.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jaeho/project_ws/build/doosan_m0609_controller/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o -MF CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o.d -o CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o -c /home/jaeho/project_ws/src/doosan_m0609_controller/src/drfl_dummy.cpp
-
-CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jaeho/project_ws/src/doosan_m0609_controller/src/drfl_dummy.cpp > CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.i
-
-CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jaeho/project_ws/src/doosan_m0609_controller/src/drfl_dummy.cpp -o CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.s
-
 # Object files for target doosan_controller_node
 doosan_controller_node_OBJECTS = \
 "CMakeFiles/doosan_controller_node.dir/src/doosan_controller_node.cpp.o" \
-"CMakeFiles/doosan_controller_node.dir/src/doosan_robot_controller.cpp.o" \
-"CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o"
+"CMakeFiles/doosan_controller_node.dir/src/doosan_robot_controller.cpp.o"
 
 # External object files for target doosan_controller_node
 doosan_controller_node_EXTERNAL_OBJECTS =
 
 doosan_controller_node: CMakeFiles/doosan_controller_node.dir/src/doosan_controller_node.cpp.o
 doosan_controller_node: CMakeFiles/doosan_controller_node.dir/src/doosan_robot_controller.cpp.o
-doosan_controller_node: CMakeFiles/doosan_controller_node.dir/src/drfl_dummy.cpp.o
 doosan_controller_node: CMakeFiles/doosan_controller_node.dir/build.make
 doosan_controller_node: /opt/ros/humble/lib/librclcpp.so
 doosan_controller_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_c.so
@@ -135,7 +119,6 @@ doosan_controller_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport
 doosan_controller_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_cpp.so
 doosan_controller_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_cpp.so
 doosan_controller_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_py.so
-doosan_controller_node: /usr/lib/x86_64-linux-gnu/libPocoNet.so.80
 doosan_controller_node: libdoosan_m0609_controller__rosidl_typesupport_cpp.so
 doosan_controller_node: /opt/ros/humble/lib/liblibstatistics_collector.so
 doosan_controller_node: /opt/ros/humble/lib/librcl.so
@@ -195,9 +178,6 @@ doosan_controller_node: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_genera
 doosan_controller_node: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
 doosan_controller_node: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so
 doosan_controller_node: /usr/lib/x86_64-linux-gnu/libpython3.10.so
-doosan_controller_node: /usr/lib/x86_64-linux-gnu/libPocoFoundation.so.80
-doosan_controller_node: /usr/lib/x86_64-linux-gnu/libpcre.so
-doosan_controller_node: /usr/lib/x86_64-linux-gnu/libz.so
 doosan_controller_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_cpp.so
 doosan_controller_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_cpp.so
 doosan_controller_node: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_cpp.so
@@ -208,7 +188,7 @@ doosan_controller_node: /opt/ros/humble/lib/librcpputils.so
 doosan_controller_node: /opt/ros/humble/lib/librosidl_runtime_c.so
 doosan_controller_node: /opt/ros/humble/lib/librcutils.so
 doosan_controller_node: CMakeFiles/doosan_controller_node.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jaeho/project_ws/build/doosan_m0609_controller/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable doosan_controller_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jaeho/project_ws/build/doosan_m0609_controller/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable doosan_controller_node"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/doosan_controller_node.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

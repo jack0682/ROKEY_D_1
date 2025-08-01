@@ -12,7 +12,7 @@
 #include "doosan_m0609_controller/msg/robot_status.hpp"
 #include "doosan_m0609_controller/srv/move_j.hpp"
 #include "doosan_m0609_controller/srv/connect_robot.hpp"
-#include "DRFL/DRFL.h"
+#include "DRFL.h"  // 실제 Doosan DRFL 라이브러리
 
 class DoosanRobotController : public rclcpp::Node {
 public:
@@ -31,8 +31,8 @@ private:
     rclcpp::TimerBase::SharedPtr status_timer_;
     rclcpp::TimerBase::SharedPtr joint_state_timer_;
     
-    // DRFL Interface
-    std::unique_ptr<DRFL> m_drfl;
+    // DRFL Interface - 실제 Doosan API
+    std::unique_ptr<DRAFramework::CDRFL> m_drfl;
     
     // Threading
     std::thread status_thread_;
@@ -64,7 +64,7 @@ private:
     void setupPublishersAndServices();
     
     // Safety functions
-    bool validateJointLimits(const std::vector<double>& joints);
+    bool validateJointLimits(const std::array<double, 6>& joints);
     void handleEmergencyStop();
 };
 

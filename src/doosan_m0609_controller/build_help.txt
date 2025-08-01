@@ -1,0 +1,10 @@
+# 임시 더미 모드 강제 설정을 위한 스크립트
+echo "Poco 설치를 시도하는 중..."
+echo "sudo apt update && sudo apt install -y libpoco-dev"
+echo ""
+echo "만약 Poco 설치가 안 된다면, 다음과 같이 더미 모드로 강제 빌드할 수 있습니다:"
+echo "colcon build --packages-select doosan_m0609_controller --cmake-args -DHAVE_POCO=0"
+echo ""
+echo "또는 환경변수로 설정:"
+echo "export CMAKE_ARGS='-DHAVE_POCO=0'"
+echo "colcon build --packages-select doosan_m0609_controller"

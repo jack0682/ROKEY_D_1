@@ -5,6 +5,19 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# 🎯 dsr_common2 경로 설정 (절대경로로 확실하게)
+SET(COMMON_INC_FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/../dsr_common2/include
+)
+SET(COMMON_LIB_FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/../dsr_common2/lib
+)
+
+# 행텄 디버깅 정보
+message(STATUS "🔍 COMMON_INC_FILES: ${COMMON_INC_FILES}")
+message(STATUS "🔍 COMMON_LIB_FILES: ${COMMON_LIB_FILES}")
+message(STATUS "🔍 CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -16,88 +29,32 @@ find_package(rosidl_default_generators REQUIRED)
 # Message and Service generation
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/JointState.msg"
-  "msg/RobotStatus.msg"
+  "msg/RobotStatus.msg" 
   "srv/MoveJ.srv"
   "srv/ConnectRobot.srv"
   DEPENDENCIES std_msgs sensor_msgs geometry_msgs
 )
 
-# Include directories
+# Include directories - 공식 구조와 동일
 include_directories(
   include
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/DRFL
+  ${Boost_INCLUDE_DIRS}
+  ${COMMON_INC_FILES}
 )
 
-# Find Poco libraries using find_library (no pkg-config needed)
-message(STATUS "Searching for Poco libraries using find_library...")
+# 🔥 공식 예제와 동일한 라이브러리 링크 방식
+LINK_LIBRARIES(DRFL PocoFoundation PocoNet)
 
-# Try to find Poco using CMake's find_package first
-find_package(Poco QUIET COMPONENTS Foundation Net)
-
-if(Poco_FOUND)
-    message(STATUS "Found Poco using find_package")
-    set(POCO_LIBRARIES Poco::Foundation Poco::Net)
-    set(POCO_FOUND TRUE)
+if($ENV{ROS_DISTRO} STREQUAL "humble")                          
+  LINK_DIRECTORIES("${COMMON_LIB_FILES}/$ENV{ROS_DISTRO}/x86_64")
 else()
-    message(STATUS "find_package(Poco) failed, trying direct library search...")
-    
-    # Direct library search (Ubuntu standard approach)
-    find_library(POCO_FOUNDATION_LIB 
-        NAMES PocoFoundation
-        PATHS 
-            /usr/lib/x86_64-linux-gnu
-            /usr/lib
-            /usr/local/lib
-        DOC "Poco Foundation library")
-    
-    find_library(POCO_NET_LIB 
-        NAMES PocoNet
-        PATHS 
-            /usr/lib/x86_64-linux-gnu
-            /usr/lib
-            /usr/local/lib
-        DOC "Poco Net library")
-    
-    # Check if both libraries were found
-    if(POCO_FOUNDATION_LIB AND POCO_NET_LIB)
-        set(POCO_LIBRARIES ${POCO_FOUNDATION_LIB} ${POCO_NET_LIB})
-        message(STATUS "Found Poco Foundation: ${POCO_FOUNDATION_LIB}")
-        message(STATUS "Found Poco Net: ${POCO_NET_LIB}")
-        set(POCO_FOUND TRUE)
-    else()
-        message(STATUS "Poco libraries not found")
-        set(POCO_FOUND FALSE)
-        set(POCO_LIBRARIES "")
-    endif()
+  message(WARNING "Unknown ROS distro: $ENV{ROS_DISTRO}")
 endif()
 
-# Find Poco headers
-find_path(POCO_INCLUDE_DIR 
-    NAMES Poco/Foundation.h
-    PATHS 
-        /usr/include
-        /usr/local/include
-    DOC "Poco include directory")
-
-if(POCO_INCLUDE_DIR)
-    message(STATUS "Found Poco headers: ${POCO_INCLUDE_DIR}")
-    include_directories(${POCO_INCLUDE_DIR})
-endif()
-
-# Set compile definitions based on Poco availability
-if(POCO_FOUND AND POCO_INCLUDE_DIR)
-    message(STATUS "Building with full Poco support")
-    set(HAVE_POCO 1)
-else()
-    message(STATUS "Building in dummy mode (no Poco)")
-    set(HAVE_POCO 0)
-endif()
-
-# Create doosan_controller_node executable
+# Create main executable
 add_executable(doosan_controller_node
   src/doosan_controller_node.cpp
   src/doosan_robot_controller.cpp
-  src/drfl_dummy.cpp
 )
 
 # Target dependencies
@@ -108,21 +65,13 @@ ament_target_dependencies(doosan_controller_node
   geometry_msgs
 )
 
-# Link libraries
-target_link_libraries(doosan_controller_node ${POCO_LIBRARIES} pthread)
-
-# Add compile definitions
-target_compile_definitions(doosan_controller_node PRIVATE 
-  HAVE_POCO=${HAVE_POCO}
-)
-
-# Add include directories
+# Include directories for target
 target_include_directories(doosan_controller_node PRIVATE
   include
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/DRFL
+  ${COMMON_INC_FILES}
 )
 
-# Interface dependencies (this must come after the executable is defined)
+# Interface dependencies
 rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 target_link_libraries(doosan_controller_node "${cpp_typesupport_target}")
 
@@ -132,30 +81,38 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-# Install headers
+# Install directories
 install(DIRECTORY include/
   DESTINATION include
 )
 
-# Install launch files if they exist
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/launch)
   install(DIRECTORY launch/
     DESTINATION share/${PROJECT_NAME}/launch
   )
 endif()
 
-# Install config files if they exist  
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/config)
   install(DIRECTORY config/
     DESTINATION share/${PROJECT_NAME}/config
   )
 endif()
 
+# Testing
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# Export information
 ament_export_include_directories(include)
 ament_export_dependencies(rosidl_default_runtime)
 ament_package()
+
+message(STATUS "========================================")
+message(STATUS "📋 Doosan M0609 Controller Configuration:")
+message(STATUS "   • Using Official DRFL Library")
+message(STATUS "   • COMMON_INC: ${COMMON_INC_FILES}")
+message(STATUS "   • COMMON_LIB: ${COMMON_LIB_FILES}")
+message(STATUS "   • ROS_DISTRO: $ENV{ROS_DISTRO}")
+message(STATUS "========================================")
