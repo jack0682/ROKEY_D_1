@@ -1,0 +1,9 @@
+{
+  "package_name": "doosan_m0609_controller",
+  "non_idl_tuples": [
+    "/home/jaeho/project_ws/src/doosan_m0609_controller:msg/JointState.msg",
+    "/home/jaeho/project_ws/src/doosan_m0609_controller:msg/RobotStatus.msg",
+    "/home/jaeho/project_ws/src/doosan_m0609_controller:srv/MoveJ.srv",
+    "/home/jaeho/project_ws/src/doosan_m0609_controller:srv/ConnectRobot.srv"
+  ]
+}

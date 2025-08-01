@@ -1,0 +1,294 @@
+[0.279s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'doosan_m0609_description']
+[0.279s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['doosan_m0609_description'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x78eba0580df0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x78eba050e920>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x78eba050e920>>)
+[0.471s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.471s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.471s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.471s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.471s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.471s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.471s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/jaeho/project_ws'
+[0.471s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.471s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.472s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.472s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.472s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.472s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.472s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.472s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.472s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extensions ['ignore', 'ignore_ament_install']
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'ignore'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'ignore_ament_install'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extensions ['colcon_pkg']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'colcon_pkg'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extensions ['colcon_meta']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'colcon_meta'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extensions ['ros']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'ros'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extensions ['cmake', 'python']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'cmake'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'python'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extensions ['python_setup_py']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development) by extension 'python_setup_py'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'ignore'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'ignore_ament_install'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extensions ['colcon_pkg']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'colcon_pkg'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extensions ['colcon_meta']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'colcon_meta'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extensions ['ros']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'ros'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extensions ['cmake', 'python']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'cmake'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'python'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extensions ['python_setup_py']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(development/scripts) by extension 'python_setup_py'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extensions ['ignore', 'ignore_ament_install']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'ignore'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'ignore_ament_install'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extensions ['colcon_pkg']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'colcon_pkg'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extensions ['colcon_meta']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'colcon_meta'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extensions ['ros']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'ros'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extensions ['cmake', 'python']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'cmake'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'python'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extensions ['python_setup_py']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(fix_script) by extension 'python_setup_py'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extensions ['ignore', 'ignore_ament_install']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extension 'ignore'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extension 'ignore_ament_install'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extensions ['colcon_pkg']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extension 'colcon_pkg'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extensions ['colcon_meta']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extension 'colcon_meta'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extensions ['ros']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_loadcell_interface) by extension 'ros'
+[0.506s] DEBUG:colcon.colcon_core.package_identification:Package 'src/arduino_loadcell_interface' with type 'ros.ament_python' and name 'arduino_loadcell_interface'
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extensions ['ignore', 'ignore_ament_install']
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extension 'ignore'
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extension 'ignore_ament_install'
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extensions ['colcon_pkg']
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extension 'colcon_pkg'
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extensions ['colcon_meta']
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extension 'colcon_meta'
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extensions ['ros']
+[0.507s] Level 1:colcon.colcon_core.package_identification:_identify(src/chemistry_experiment_manager) by extension 'ros'
+[0.508s] DEBUG:colcon.colcon_core.package_identification:Package 'src/chemistry_experiment_manager' with type 'ros.ament_python' and name 'chemistry_experiment_manager'
+[0.508s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.508s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extension 'ignore'
+[0.508s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extension 'ignore_ament_install'
+[0.508s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extensions ['colcon_pkg']
+[0.508s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extension 'colcon_pkg'
+[0.509s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extensions ['colcon_meta']
+[0.509s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extension 'colcon_meta'
+[0.509s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extensions ['ros']
+[0.509s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_bringup) by extension 'ros'
+[0.509s] DEBUG:colcon.colcon_core.package_identification:Package 'src/doosan_m0609_bringup' with type 'ros.ament_python' and name 'doosan_m0609_bringup'
+[0.509s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.509s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extension 'ignore'
+[0.510s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extension 'ignore_ament_install'
+[0.510s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extensions ['colcon_pkg']
+[0.510s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extension 'colcon_pkg'
+[0.510s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extensions ['colcon_meta']
+[0.510s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extension 'colcon_meta'
+[0.510s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extensions ['ros']
+[0.510s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_controller) by extension 'ros'
+[0.511s] DEBUG:colcon.colcon_core.package_identification:Package 'src/doosan_m0609_controller' with type 'ros.ament_cmake' and name 'doosan_m0609_controller'
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extensions ['ignore', 'ignore_ament_install']
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extension 'ignore'
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extension 'ignore_ament_install'
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extensions ['colcon_pkg']
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extension 'colcon_pkg'
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extensions ['colcon_meta']
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extension 'colcon_meta'
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extensions ['ros']
+[0.511s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_description) by extension 'ros'
+[0.512s] DEBUG:colcon.colcon_core.package_identification:Package 'src/doosan_m0609_description' with type 'ros.ament_cmake' and name 'doosan_m0609_description'
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extensions ['ignore', 'ignore_ament_install']
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extension 'ignore'
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extension 'ignore_ament_install'
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extensions ['colcon_pkg']
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extension 'colcon_pkg'
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extensions ['colcon_meta']
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extension 'colcon_meta'
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extensions ['ros']
+[0.512s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_hardware) by extension 'ros'
+[0.514s] DEBUG:colcon.colcon_core.package_identification:Package 'src/doosan_m0609_hardware' with type 'ros.ament_cmake' and name 'doosan_m0609_hardware'
+[0.514s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.514s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extension 'ignore'
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extension 'ignore_ament_install'
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extensions ['colcon_pkg']
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extension 'colcon_pkg'
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extensions ['colcon_meta']
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extension 'colcon_meta'
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extensions ['ros']
+[0.515s] Level 1:colcon.colcon_core.package_identification:_identify(src/doosan_m0609_msgs) by extension 'ros'
+[0.516s] DEBUG:colcon.colcon_core.package_identification:Package 'src/doosan_m0609_msgs' with type 'ros.ament_cmake' and name 'doosan_m0609_msgs'
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extensions ['ignore', 'ignore_ament_install']
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extension 'ignore'
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extension 'ignore_ament_install'
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extensions ['colcon_pkg']
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extension 'colcon_pkg'
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extensions ['colcon_meta']
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extension 'colcon_meta'
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extensions ['ros']
+[0.516s] Level 1:colcon.colcon_core.package_identification:_identify(src/dsr_common2) by extension 'ros'
+[0.517s] DEBUG:colcon.colcon_core.package_identification:Package 'src/dsr_common2' with type 'ros.ament_cmake' and name 'dsr_common2'
+[0.517s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extensions ['ignore', 'ignore_ament_install']
+[0.517s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extension 'ignore'
+[0.517s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extension 'ignore_ament_install'
+[0.517s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extensions ['colcon_pkg']
+[0.517s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extension 'colcon_pkg'
+[0.517s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extensions ['colcon_meta']
+[0.517s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extension 'colcon_meta'
+[0.518s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extensions ['ros']
+[0.518s] Level 1:colcon.colcon_core.package_identification:_identify(src/precision_liquid_pouring) by extension 'ros'
+[0.518s] DEBUG:colcon.colcon_core.package_identification:Package 'src/precision_liquid_pouring' with type 'ros.ament_python' and name 'precision_liquid_pouring'
+[0.518s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extensions ['ignore', 'ignore_ament_install']
+[0.518s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extension 'ignore'
+[0.518s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extension 'ignore_ament_install'
+[0.519s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extensions ['colcon_pkg']
+[0.519s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extension 'colcon_pkg'
+[0.519s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extensions ['colcon_meta']
+[0.519s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extension 'colcon_meta'
+[0.519s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extensions ['ros']
+[0.519s] Level 1:colcon.colcon_core.package_identification:_identify(src/sugar_water_experiment) by extension 'ros'
+[0.519s] DEBUG:colcon.colcon_core.package_identification:Package 'src/sugar_water_experiment' with type 'ros.ament_cmake' and name 'sugar_water_experiment'
+[0.519s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.519s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.520s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.520s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.520s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'arduino_loadcell_interface' in 'src/arduino_loadcell_interface'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'chemistry_experiment_manager' in 'src/chemistry_experiment_manager'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'doosan_m0609_controller' in 'src/doosan_m0609_controller'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'doosan_m0609_msgs' in 'src/doosan_m0609_msgs'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'dsr_common2' in 'src/dsr_common2'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'precision_liquid_pouring' in 'src/precision_liquid_pouring'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sugar_water_experiment' in 'src/sugar_water_experiment'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'doosan_m0609_bringup' in 'src/doosan_m0609_bringup'
+[0.549s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'doosan_m0609_hardware' in 'src/doosan_m0609_hardware'
+[0.549s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.549s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.550s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/jaeho/project_ws/install/sugar_water_experiment' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/jaeho/project_ws/install/precision_liquid_pouring' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/jaeho/project_ws/install/doosan_m0609_bringup' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/jaeho/project_ws/install/doosan_m0609_hardware' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/jaeho/project_ws/install/doosan_m0609_description' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/jaeho/project_ws/install/chemistry_experiment_manager' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/jaeho/project_ws/install/arduino_loadcell_interface' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/jaeho/project_ws/install/sugar_water_experiment' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/jaeho/project_ws/install/doosan_m0609_hardware' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.551s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/jaeho/project_ws/install/doosan_m0609_description' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.553s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 2 installed packages in /home/jaeho/project_ws/install
+[0.555s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 407 installed packages in /opt/ros/humble
+[0.558s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'cmake_args' from command line to 'None'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'cmake_target' from command line to 'None'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.612s] Level 5:colcon.colcon_core.verb:set package 'doosan_m0609_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.612s] DEBUG:colcon.colcon_core.verb:Building package 'doosan_m0609_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jaeho/project_ws/build/doosan_m0609_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jaeho/project_ws/install/doosan_m0609_description', 'merge_install': False, 'path': '/home/jaeho/project_ws/src/doosan_m0609_description', 'symlink_install': False, 'test_result_base': None}
+[0.612s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.614s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.614s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/jaeho/project_ws/src/doosan_m0609_description' with build type 'ament_cmake'
+[0.614s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/jaeho/project_ws/src/doosan_m0609_description'
+[0.619s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.619s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.619s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.635s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_description -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_description
+[2.927s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_description -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_description
+[2.930s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/doosan_m0609_description -- -j8 -l8
+[2.978s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake --build /home/jaeho/project_ws/build/doosan_m0609_description -- -j8 -l8
+[2.991s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake --install /home/jaeho/project_ws/build/doosan_m0609_description
+[5.530s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(doosan_m0609_description)
+[5.531s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake --install /home/jaeho/project_ws/build/doosan_m0609_description
+[5.534s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description' for CMake module files
+[5.534s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description' for CMake config files
+[5.536s] Level 1:colcon.colcon_core.shell:create_environment_hook('doosan_m0609_description', 'cmake_prefix_path')
+[5.536s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/hook/cmake_prefix_path.ps1'
+[5.538s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/hook/cmake_prefix_path.dsv'
+[5.539s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/hook/cmake_prefix_path.sh'
+[5.540s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/bin'
+[5.540s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/lib/pkgconfig/doosan_m0609_description.pc'
+[5.541s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/lib/python3.10/site-packages'
+[5.542s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/bin'
+[5.542s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.ps1'
+[5.544s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.dsv'
+[5.545s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.sh'
+[5.546s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.bash'
+[5.547s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.zsh'
+[5.548s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jaeho/project_ws/install/doosan_m0609_description/share/colcon-core/packages/doosan_m0609_description)
+[5.551s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(doosan_m0609_description)
+[5.551s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description' for CMake module files
+[5.552s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description' for CMake config files
+[5.554s] Level 1:colcon.colcon_core.shell:create_environment_hook('doosan_m0609_description', 'cmake_prefix_path')
+[5.555s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/hook/cmake_prefix_path.ps1'
+[5.556s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/hook/cmake_prefix_path.dsv'
+[5.556s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/hook/cmake_prefix_path.sh'
+[5.558s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/bin'
+[5.558s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/lib/pkgconfig/doosan_m0609_description.pc'
+[5.558s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/lib/python3.10/site-packages'
+[5.558s] Level 1:colcon.colcon_core.environment:checking '/home/jaeho/project_ws/install/doosan_m0609_description/bin'
+[5.559s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.ps1'
+[5.560s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.dsv'
+[5.560s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.sh'
+[5.561s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.bash'
+[5.561s] INFO:colcon.colcon_core.shell:Creating package script '/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/package.zsh'
+[5.562s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jaeho/project_ws/install/doosan_m0609_description/share/colcon-core/packages/doosan_m0609_description)
+[5.562s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[5.564s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[5.564s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[5.564s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[5.639s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[5.639s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[5.639s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[5.639s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[5.640s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[5.641s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[5.641s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jaeho/project_ws/install/local_setup.ps1'
+[5.643s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jaeho/project_ws/install/_local_setup_util_ps1.py'
+[5.645s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jaeho/project_ws/install/setup.ps1'
+[5.647s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jaeho/project_ws/install/local_setup.sh'
+[5.648s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jaeho/project_ws/install/_local_setup_util_sh.py'
+[5.649s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jaeho/project_ws/install/setup.sh'
+[5.651s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jaeho/project_ws/install/local_setup.bash'
+[5.652s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jaeho/project_ws/install/setup.bash'
+[5.654s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jaeho/project_ws/install/local_setup.zsh'
+[5.654s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jaeho/project_ws/install/setup.zsh'

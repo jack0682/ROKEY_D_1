@@ -1,0 +1,6 @@
+# Connect/Disconnect robot service
+string robot_ip            # Robot IP address
+bool connect               # true: connect, false: disconnect
+---
+bool success               # Success flag
+string message            # Result message

@@ -1,2 +1,2 @@
 # CMAKE generated file: DO NOT EDIT!
-# Timestamp file for compiler generated dependencies management for doosan_m0609_controller.
+# Timestamp file for custom commands dependencies management for doosan_m0609_controller.

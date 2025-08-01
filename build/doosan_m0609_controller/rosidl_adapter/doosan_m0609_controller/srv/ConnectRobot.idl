@@ -1,0 +1,29 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from doosan_m0609_controller/srv/ConnectRobot.srv
+// generated code does not contain a copyright notice
+
+
+module doosan_m0609_controller {
+  module srv {
+    @verbatim (language="comment", text=
+      "Connect/Disconnect robot service")
+    struct ConnectRobot_Request {
+      @verbatim (language="comment", text=
+        "Robot IP address")
+      string robot_ip;
+
+      @verbatim (language="comment", text=
+        "true: connect, false: disconnect")
+      boolean connect;
+    };
+    struct ConnectRobot_Response {
+      @verbatim (language="comment", text=
+        "Success flag")
+      boolean success;
+
+      @verbatim (language="comment", text=
+        "Result message")
+      string message;
+    };
+  };
+};

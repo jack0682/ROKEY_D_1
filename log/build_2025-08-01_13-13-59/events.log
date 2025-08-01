@@ -1,0 +1,209 @@
+[0.000000] (-) TimerEvent: {}
+[0.000440] (-) JobUnselected: {'identifier': 'arduino_loadcell_interface'}
+[0.000535] (-) JobUnselected: {'identifier': 'chemistry_experiment_manager'}
+[0.000606] (-) JobUnselected: {'identifier': 'doosan_m0609_bringup'}
+[0.000635] (-) JobUnselected: {'identifier': 'doosan_m0609_description'}
+[0.000694] (-) JobUnselected: {'identifier': 'doosan_m0609_hardware'}
+[0.000724] (-) JobUnselected: {'identifier': 'doosan_m0609_msgs'}
+[0.000747] (-) JobUnselected: {'identifier': 'dsr_common2'}
+[0.000769] (-) JobUnselected: {'identifier': 'precision_liquid_pouring'}
+[0.000791] (-) JobUnselected: {'identifier': 'sugar_water_experiment'}
+[0.000818] (doosan_m0609_controller) JobQueued: {'identifier': 'doosan_m0609_controller', 'dependencies': OrderedDict()}
+[0.002646] (doosan_m0609_controller) JobStarted: {'identifier': 'doosan_m0609_controller'}
+[0.014127] (doosan_m0609_controller) JobProgress: {'identifier': 'doosan_m0609_controller', 'progress': 'cmake'}
+[0.018070] (doosan_m0609_controller) Command: {'cmd': ['/usr/bin/cmake', '/home/jaeho/project_ws/src/doosan_m0609_controller', '-DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_controller'], 'cwd': '/home/jaeho/project_ws/build/doosan_m0609_controller', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/home/jaeho/project_ws/install/doosan_m0609_description/lib'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/jaeho/project_ws/install/doosan_m0609_description/share/:/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/'), ('USER', 'jaeho'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:/home/jaeho/project_ws/install/doosan_m0609_hardware/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/jaeho'), ('OLDPWD', '/home/jaeho'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/jaeho/project_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'jaeho'), ('NAME', 'Ubuntu'), ('WSL_INTEROP', '/run/WSL/562_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('GAZEBO_MODEL_PATH', '/home/jaeho/project_ws/install/doosan_m0609_description/share:/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/jaeho/gems/bin:/home/jaeho/gems/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Bandizip/:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web:/mnt/c/Program Files (x86)/ePapyrus/Papyrus-PlugIn-web/Addins:/mnt/c/Program Files/apache-maven-3.9.9/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/ffmpeg/bin:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/jaeho/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/jaeho/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jaeho/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/jaeho/project_ws/install/sugar_water_experiment:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_description:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('IGN_GAZEBO_SYSTEM_PLUGIN_PATH', '/home/jaeho/project_ws/install/doosan_m0609_description/lib'), ('GEM_HOME', '/home/jaeho/gems'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', '/home/jaeho/project_ws/install/doosan_m0609_description/share/:/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/'), ('PWD', '/home/jaeho/project_ws/build/doosan_m0609_controller'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/jaeho/project_ws/install/precision_liquid_pouring/lib/python3.10/site-packages:/home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages:/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:/home/jaeho/project_ws/install/chemistry_experiment_manager/lib/python3.10/site-packages:/home/jaeho/project_ws/install/arduino_loadcell_interface/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('CMAKE_PREFIX_PATH', '/home/jaeho/project_ws/install/sugar_water_experiment:/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_description:/home/jaeho/project_ws/install/dsr_common2:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble'), ('WSLENV', '')]), 'shell': False}
+[0.099452] (-) TimerEvent: {}
+[0.200000] (-) TimerEvent: {}
+[0.239768] (doosan_m0609_controller) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.300140] (-) TimerEvent: {}
+[0.400648] (-) TimerEvent: {}
+[0.501149] (-) TimerEvent: {}
+[0.601693] (-) TimerEvent: {}
+[0.702115] (-) TimerEvent: {}
+[0.802545] (-) TimerEvent: {}
+[0.903028] (-) TimerEvent: {}
+[1.003439] (-) TimerEvent: {}
+[1.103943] (-) TimerEvent: {}
+[1.115367] (doosan_m0609_controller) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[1.204101] (-) TimerEvent: {}
+[1.304585] (-) TimerEvent: {}
+[1.405070] (-) TimerEvent: {}
+[1.505540] (-) TimerEvent: {}
+[1.605942] (-) TimerEvent: {}
+[1.713006] (-) TimerEvent: {}
+[1.757106] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.813173] (-) TimerEvent: {}
+[1.913626] (-) TimerEvent: {}
+[1.969651] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.977538] (doosan_m0609_controller) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.977864] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.978218] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.981604] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[2.013764] (-) TimerEvent: {}
+[2.114168] (-) TimerEvent: {}
+[2.214624] (-) TimerEvent: {}
+[2.215063] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[2.225680] (doosan_m0609_controller) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[2.226707] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[2.227320] (doosan_m0609_controller) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[2.231367] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[2.314754] (-) TimerEvent: {}
+[2.415141] (-) TimerEvent: {}
+[2.448832] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[2.515290] (-) TimerEvent: {}
+[2.596477] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found rclcpp: 16.0.14 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[2.615470] (-) TimerEvent: {}
+[2.716036] (-) TimerEvent: {}
+[2.816558] (-) TimerEvent: {}
+[2.852738] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[2.859508] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[2.871409] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[2.888699] (doosan_m0609_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.909195] (doosan_m0609_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.916658] (-) TimerEvent: {}
+[2.966739] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[2.970719] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[3.016808] (-) TimerEvent: {}
+[3.117288] (-) TimerEvent: {}
+[3.217778] (-) TimerEvent: {}
+[3.318275] (-) TimerEvent: {}
+[3.418730] (-) TimerEvent: {}
+[3.519130] (-) TimerEvent: {}
+[3.619527] (-) TimerEvent: {}
+[3.719985] (-) TimerEvent: {}
+[3.820444] (-) TimerEvent: {}
+[3.920832] (-) TimerEvent: {}
+[4.021264] (-) TimerEvent: {}
+[4.121676] (-) TimerEvent: {}
+[4.222085] (-) TimerEvent: {}
+[4.322616] (-) TimerEvent: {}
+[4.423094] (-) TimerEvent: {}
+[4.523541] (-) TimerEvent: {}
+[4.623968] (-) TimerEvent: {}
+[4.724404] (-) TimerEvent: {}
+[4.824799] (-) TimerEvent: {}
+[4.925238] (-) TimerEvent: {}
+[4.931769] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[5.025359] (-) TimerEvent: {}
+[5.125728] (-) TimerEvent: {}
+[5.226175] (-) TimerEvent: {}
+[5.326657] (-) TimerEvent: {}
+[5.427072] (-) TimerEvent: {}
+[5.527537] (-) TimerEvent: {}
+[5.628036] (-) TimerEvent: {}
+[5.728420] (-) TimerEvent: {}
+[5.828837] (-) TimerEvent: {}
+[5.929346] (-) TimerEvent: {}
+[6.029795] (-) TimerEvent: {}
+[6.130279] (-) TimerEvent: {}
+[6.231048] (-) TimerEvent: {}
+[6.331735] (-) TimerEvent: {}
+[6.432428] (-) TimerEvent: {}
+[6.533133] (-) TimerEvent: {}
+[6.633738] (-) TimerEvent: {}
+[6.734451] (-) TimerEvent: {}
+[6.834924] (-) TimerEvent: {}
+[6.935418] (-) TimerEvent: {}
+[7.035875] (-) TimerEvent: {}
+[7.136328] (-) TimerEvent: {}
+[7.236807] (-) TimerEvent: {}
+[7.289872] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[7.336958] (-) TimerEvent: {}
+[7.437359] (-) TimerEvent: {}
+[7.537882] (-) TimerEvent: {}
+[7.638356] (-) TimerEvent: {}
+[7.738904] (-) TimerEvent: {}
+[7.839265] (-) TimerEvent: {}
+[7.939619] (-) TimerEvent: {}
+[8.040078] (-) TimerEvent: {}
+[8.140511] (-) TimerEvent: {}
+[8.240884] (-) TimerEvent: {}
+[8.341343] (-) TimerEvent: {}
+[8.441735] (-) TimerEvent: {}
+[8.542103] (-) TimerEvent: {}
+[8.642521] (-) TimerEvent: {}
+[8.743059] (-) TimerEvent: {}
+[8.843477] (-) TimerEvent: {}
+[8.943956] (-) TimerEvent: {}
+[9.044376] (-) TimerEvent: {}
+[9.144893] (-) TimerEvent: {}
+[9.245473] (-) TimerEvent: {}
+[9.345895] (-) TimerEvent: {}
+[9.446286] (-) TimerEvent: {}
+[9.546688] (-) TimerEvent: {}
+[9.647097] (-) TimerEvent: {}
+[9.747438] (-) TimerEvent: {}
+[9.847857] (-) TimerEvent: {}
+[9.948246] (-) TimerEvent: {}
+[10.048702] (-) TimerEvent: {}
+[10.149192] (-) TimerEvent: {}
+[10.249653] (-) TimerEvent: {}
+[10.350243] (-) TimerEvent: {}
+[10.450759] (-) TimerEvent: {}
+[10.551274] (-) TimerEvent: {}
+[10.651757] (-) TimerEvent: {}
+[10.752252] (-) TimerEvent: {}
+[10.852859] (-) TimerEvent: {}
+[10.953251] (-) TimerEvent: {}
+[11.053643] (-) TimerEvent: {}
+[11.152603] (doosan_m0609_controller) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[11.153733] (-) TimerEvent: {}
+[11.163819] (doosan_m0609_controller) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[11.253846] (-) TimerEvent: {}
+[11.354366] (-) TimerEvent: {}
+[11.378743] (doosan_m0609_controller) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[11.379455] (doosan_m0609_controller) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[11.454485] (-) TimerEvent: {}
+[11.555138] (-) TimerEvent: {}
+[11.582720] (doosan_m0609_controller) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[11.584164] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[11.645953] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[11.655205] (-) TimerEvent: {}
+[11.684502] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[11.755340] (-) TimerEvent: {}
+[11.855723] (-) TimerEvent: {}
+[11.956123] (-) TimerEvent: {}
+[12.056515] (-) TimerEvent: {}
+[12.099558] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[12.156666] (-) TimerEvent: {}
+[12.257058] (-) TimerEvent: {}
+[12.357475] (-) TimerEvent: {}
+[12.457921] (-) TimerEvent: {}
+[12.558347] (-) TimerEvent: {}
+[12.651006] (doosan_m0609_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[12.658515] (-) TimerEvent: {}
+[12.758989] (-) TimerEvent: {}
+[12.859387] (-) TimerEvent: {}
+[12.870757] (doosan_m0609_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[12.959503] (-) TimerEvent: {}
+[13.059972] (-) TimerEvent: {}
+[13.070708] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") \n'}
+[13.072899] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)\n'}
+[13.160149] (-) TimerEvent: {}
+[13.260592] (-) TimerEvent: {}
+[13.361031] (-) TimerEvent: {}
+[13.461553] (-) TimerEvent: {}
+[13.561943] (-) TimerEvent: {}
+[13.662322] (-) TimerEvent: {}
+[13.690090] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") \n'}
+[13.690386] (doosan_m0609_controller) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[13.690448] (doosan_m0609_controller) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[13.690498] (doosan_m0609_controller) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so\n'}
+[13.716399] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[13.762454] (-) TimerEvent: {}
+[13.862865] (-) TimerEvent: {}
+[13.875301] (doosan_m0609_controller) StdoutLine: {'line': b'-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") \n'}
+[13.876677] (doosan_m0609_controller) StdoutLine: {'line': b"-- Checking for module 'libpocofoundation'\n"}
+[13.880355] (doosan_m0609_controller) StdoutLine: {'line': b"--   No package 'libpocofoundation' found\n"}
+[13.880834] (doosan_m0609_controller) StderrLine: {'line': b'\x1b[31mCMake Error at /usr/share/cmake-3.22/Modules/FindPkgConfig.cmake:603 (message):\n'}
+[13.881081] (doosan_m0609_controller) StderrLine: {'line': b'  A required package was not found\n'}
+[13.881162] (doosan_m0609_controller) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[13.881259] (doosan_m0609_controller) StderrLine: {'line': b'  /usr/share/cmake-3.22/Modules/FindPkgConfig.cmake:825 (_pkg_check_modules_internal)\n'}
+[13.881591] (doosan_m0609_controller) StderrLine: {'line': b'  CMakeLists.txt:35 (pkg_check_modules)\n'}
+[13.881742] (doosan_m0609_controller) StderrLine: {'line': b'\n'}
+[13.881833] (doosan_m0609_controller) StderrLine: {'line': b'\x1b[0m\n'}
+[13.881912] (doosan_m0609_controller) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[13.881977] (doosan_m0609_controller) StdoutLine: {'line': b'See also "/home/jaeho/project_ws/build/doosan_m0609_controller/CMakeFiles/CMakeOutput.log".\n'}
+[13.899323] (doosan_m0609_controller) CommandEnded: {'returncode': 1}
+[13.932817] (doosan_m0609_controller) JobEnded: {'identifier': 'doosan_m0609_controller', 'rc': 1}
+[13.943880] (-) EventReactorShutdown: {}

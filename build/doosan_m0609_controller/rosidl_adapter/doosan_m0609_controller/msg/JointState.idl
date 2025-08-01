@@ -1,0 +1,28 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from doosan_m0609_controller/msg/JointState.msg
+// generated code does not contain a copyright notice
+
+#include "std_msgs/msg/Header.idl"
+
+module doosan_m0609_controller {
+  module msg {
+    typedef double double__6[6];
+    @verbatim (language="comment", text=
+      "Joint state message for M0609 (6-DOF)")
+    struct JointState {
+      std_msgs::msg::Header header;
+
+      @verbatim (language="comment", text=
+        "Joint positions in radians")
+      double__6 position;
+
+      @verbatim (language="comment", text=
+        "Joint velocities in rad/s")
+      double__6 velocity;
+
+      @verbatim (language="comment", text=
+        "Joint efforts/torques in Nm")
+      double__6 effort;
+    };
+  };
+};

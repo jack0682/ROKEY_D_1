@@ -1,0 +1,10 @@
+[0.018s] Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_controller -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_controller
+[0.032s] [31mCMake Error at CMakeLists.txt:74:
+[0.032s]   Parse error.  Expected "(", got newline with text "
+[0.032s] 
+[0.032s]   ".
+[0.032s] 
+[0.032s] [0m
+[0.032s] -- Configuring incomplete, errors occurred!
+[0.032s] See also "/home/jaeho/project_ws/build/doosan_m0609_controller/CMakeFiles/CMakeOutput.log".
+[0.035s] Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_controller' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jaeho/project_ws/install/precision_liquid_pouring:/home/jaeho/project_ws/install/doosan_m0609_bringup:/home/jaeho/project_ws/install/chemistry_experiment_manager:/home/jaeho/project_ws/install/arduino_loadcell_interface:/opt/ros/humble /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_controller -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_controller

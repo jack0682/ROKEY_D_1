@@ -1,0 +1,35 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from doosan_m0609_controller/msg/RobotStatus.msg
+// generated code does not contain a copyright notice
+
+#include "std_msgs/msg/Header.idl"
+
+module doosan_m0609_controller {
+  module msg {
+    @verbatim (language="comment", text=
+      "Robot status message")
+    struct RobotStatus {
+      std_msgs::msg::Header header;
+
+      @verbatim (language="comment", text=
+        "Connection status")
+      boolean is_connected;
+
+      @verbatim (language="comment", text=
+        "Robot enabled status")
+      boolean is_enabled;
+
+      @verbatim (language="comment", text=
+        "Control authority status")
+      boolean has_control_authority;
+
+      @verbatim (language="comment", text=
+        "Robot state string")
+      string robot_state;
+
+      @verbatim (language="comment", text=
+        "Any error messages")
+      string error_message;
+    };
+  };
+};

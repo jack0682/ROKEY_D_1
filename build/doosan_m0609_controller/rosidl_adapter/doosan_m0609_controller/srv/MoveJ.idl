@@ -1,0 +1,38 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from doosan_m0609_controller/srv/MoveJ.srv
+// generated code does not contain a copyright notice
+
+
+module doosan_m0609_controller {
+  module srv {
+    typedef double double__6[6];
+    @verbatim (language="comment", text=
+      "Move Joint service")
+    struct MoveJ_Request {
+      @verbatim (language="comment", text=
+        "Target joint positions in radians")
+      double__6 target_joints;
+
+      @verbatim (language="comment", text=
+        "Velocity ratio (0.0 ~ 1.0)")
+      double velocity_ratio;
+
+      @verbatim (language="comment", text=
+        "Acceleration ratio (0.0 ~ 1.0)")
+      double acceleration_ratio;
+
+      @verbatim (language="comment", text=
+        "Timeout in seconds")
+      double time_out;
+    };
+    struct MoveJ_Response {
+      @verbatim (language="comment", text=
+        "Success flag")
+      boolean success;
+
+      @verbatim (language="comment", text=
+        "Result message")
+      string message;
+    };
+  };
+};

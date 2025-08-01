@@ -1,4 +1,0 @@
-[console_scripts]
-loadcell_node = arduino_loadcell_interface.ros_node:main
-loadcell_test = arduino_loadcell_interface.interface:main
-

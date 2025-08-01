@@ -16,7 +16,7 @@ set(_doosan_m0609_controller_CONFIG_INCLUDED TRUE)
 
 # output package information
 if(NOT doosan_m0609_controller_FIND_QUIETLY)
-  message(STATUS "Found doosan_m0609_controller: 2.33.0 (${doosan_m0609_controller_DIR})")
+  message(STATUS "Found doosan_m0609_controller: 1.0.0 (${doosan_m0609_controller_DIR})")
 endif()
 
 # warn when using a deprecated package
@@ -36,7 +36,7 @@ endif()
 set(doosan_m0609_controller_FOUND_AMENT_PACKAGE TRUE)
 
 # include all config extra files
-set(_extras "ament_cmake_export_targets-extras.cmake;ament_cmake_export_dependencies-extras.cmake")
+set(_extras "rosidl_cmake-extras.cmake;ament_cmake_export_dependencies-extras.cmake;ament_cmake_export_include_directories-extras.cmake;ament_cmake_export_libraries-extras.cmake;ament_cmake_export_targets-extras.cmake;rosidl_cmake_export_typesupport_targets-extras.cmake;rosidl_cmake_export_typesupport_libraries-extras.cmake")
 foreach(_extra ${_extras})
   include("${doosan_m0609_controller_DIR}/${_extra}")
 endforeach()

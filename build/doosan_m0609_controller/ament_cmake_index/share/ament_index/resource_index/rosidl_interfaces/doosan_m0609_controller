@@ -1,0 +1,12 @@
+msg/JointState.idl
+msg/JointState.msg
+msg/RobotStatus.idl
+msg/RobotStatus.msg
+srv/ConnectRobot.idl
+srv/ConnectRobot.srv
+srv/ConnectRobot_Request.msg
+srv/ConnectRobot_Response.msg
+srv/MoveJ.idl
+srv/MoveJ.srv
+srv/MoveJ_Request.msg
+srv/MoveJ_Response.msg

@@ -1,0 +1,5 @@
+# Move Joint service
+float64[6] target_joints    # Target joint positions in radians
+float64 velocity_ratio      # Velocity ratio (0.0 ~ 1.0)
+float64 acceleration_ratio  # Acceleration ratio (0.0 ~ 1.0)
+float64 time_out           # Timeout in seconds

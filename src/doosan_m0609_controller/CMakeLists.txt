@@ -1,151 +1,161 @@
-cmake_minimum_required(VERSION 3.16)
-project(doosan_m0609_controller LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.8)
+project(doosan_m0609_controller)
 
-if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-set(THIS_PACKAGE_INCLUDE_DEPENDS
-  forward_command_controller
-  pluginlib
-  rclcpp
-  controller_interface
-  hardware_interface
-  rclcpp_lifecycle
-  doosan_m0609_msgs
-  moveit_msgs
-  trajectory_msgs
-  control_msgs
-  std_msgs
-  doosan_m0609_hardware
-  rclcpp_components
-  ament_index_cpp
-  yaml-cpp
-)
-
+# find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(backward_ros REQUIRED)
-foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
-  find_package(${Dependency} REQUIRED)
-endforeach()
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-if(NOT DEFINED DRCF_VER)
-        set(DRCF_VER 2)
-endif()
-message(DRCF_VERSION : ${DRCF_VER})
-
-
-SET( COMMON_INC_FILES
-  ../dsr_common2/include
-)
-SET( COMMON_LIB_FILES
-  ../dsr_common2/lib
+# Message and Service generation
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/JointState.msg"
+  "msg/RobotStatus.msg"
+  "srv/MoveJ.srv"
+  "srv/ConnectRobot.srv"
+  DEPENDENCIES std_msgs sensor_msgs geometry_msgs
 )
 
+# Include directories
 include_directories(
   include
-  ${Boost_INCLUDE_DIRS}
-  ${COMMON_INC_FILES}
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/DRFL
 )
 
-# LINK_LIBRARIES(DRFL PocoFoundation PocoNet)  # 전역 링크는 문제 발생 가능
+# Find Poco libraries using find_library (no pkg-config needed)
+message(STATUS "Searching for Poco libraries using find_library...")
 
-if($ENV{ROS_DISTRO} STREQUAL "humble")                          
-  LINK_DIRECTORIES ("${COMMON_LIB_FILES}/$ENV{ROS_DISTRO}/x86_64")
+# Try to find Poco using CMake's find_package first
+find_package(Poco QUIET COMPONENTS Foundation Net)
+
+if(Poco_FOUND)
+    message(STATUS "Found Poco using find_package")
+    set(POCO_LIBRARIES Poco::Foundation Poco::Net)
+    set(POCO_FOUND TRUE)
 else()
-  message("Unknown ROS distro:")
-  message($ENV{ROS_DISTRO})
+    message(STATUS "find_package(Poco) failed, trying direct library search...")
+    
+    # Direct library search (Ubuntu standard approach)
+    find_library(POCO_FOUNDATION_LIB 
+        NAMES PocoFoundation
+        PATHS 
+            /usr/lib/x86_64-linux-gnu
+            /usr/lib
+            /usr/local/lib
+        DOC "Poco Foundation library")
+    
+    find_library(POCO_NET_LIB 
+        NAMES PocoNet
+        PATHS 
+            /usr/lib/x86_64-linux-gnu
+            /usr/lib
+            /usr/local/lib
+        DOC "Poco Net library")
+    
+    # Check if both libraries were found
+    if(POCO_FOUNDATION_LIB AND POCO_NET_LIB)
+        set(POCO_LIBRARIES ${POCO_FOUNDATION_LIB} ${POCO_NET_LIB})
+        message(STATUS "Found Poco Foundation: ${POCO_FOUNDATION_LIB}")
+        message(STATUS "Found Poco Net: ${POCO_NET_LIB}")
+        set(POCO_FOUND TRUE)
+    else()
+        message(STATUS "Poco libraries not found")
+        set(POCO_FOUND FALSE)
+        set(POCO_LIBRARIES "")
+    endif()
 endif()
-# add_executable(dsr_control_node2 src/dsr_control_node2.cpp)
-# ament_target_dependencies(
-#   dsr_control_node2 PUBLIC
-#   ${THIS_PACKAGE_INCLUDE_DEPENDS}
-# )
 
-add_library(doosan_m0609_controller SHARED
-  # src/dsr_control_node2.cpp
-  src/doosan_m0609_controller.cpp
-  # src/dsr_joint_trajectory.cpp
-)
-target_compile_definitions(doosan_m0609_controller PUBLIC DRCF_VERSION=${DRCF_VER})
-target_compile_features(doosan_m0609_controller PUBLIC cxx_std_17)
-target_include_directories(doosan_m0609_controller PUBLIC
-  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include/doosan_m0609_controller>
-)
-ament_target_dependencies(doosan_m0609_controller PUBLIC ${THIS_PACKAGE_INCLUDE_DEPENDS})
+# Find Poco headers
+find_path(POCO_INCLUDE_DIR 
+    NAMES Poco/Foundation.h
+    PATHS 
+        /usr/include
+        /usr/local/include
+    DOC "Poco include directory")
 
-# DRFL 라이브러리 직접 링크
-target_link_libraries(doosan_m0609_controller PUBLIC
-  /home/jaeho/project_ws/src/dsr_common2/lib/humble/x86_64/libDRFL.a
-  PocoFoundation
-  PocoNet
-  pthread
-)
+if(POCO_INCLUDE_DIR)
+    message(STATUS "Found Poco headers: ${POCO_INCLUDE_DIR}")
+    include_directories(${POCO_INCLUDE_DIR})
+endif()
 
-add_library(dsr_joint_trajectory SHARED
-  # src/joint_group_velocity_controller.cpp
-  src/dsr_joint_trajectory.cpp
-)
-target_compile_features(dsr_joint_trajectory PUBLIC cxx_std_17)
-target_include_directories(dsr_joint_trajectory PUBLIC
-  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include/dsr_joint_trajectory>
-)
-ament_target_dependencies(dsr_joint_trajectory PUBLIC ${THIS_PACKAGE_INCLUDE_DEPENDS})
+# Set compile definitions based on Poco availability
+if(POCO_FOUND AND POCO_INCLUDE_DIR)
+    message(STATUS "Building with full Poco support")
+    set(HAVE_POCO 1)
+else()
+    message(STATUS "Building in dummy mode (no Poco)")
+    set(HAVE_POCO 0)
+endif()
 
-# dsr_joint_trajectory에도 DRFL 라이브러리 링크
-target_link_libraries(dsr_joint_trajectory PUBLIC
-  /home/jaeho/project_ws/src/dsr_common2/lib/humble/x86_64/libDRFL.a
-  PocoFoundation
-  PocoNet
-  pthread
+# Create doosan_controller_node executable
+add_executable(doosan_controller_node
+  src/doosan_controller_node.cpp
+  src/doosan_robot_controller.cpp
+  src/drfl_dummy.cpp
 )
 
-# Causes the visibility macros to use dllexport rather than dllimport,
-# which is appropriate when building the dll but not consuming it.
-target_compile_definitions(doosan_m0609_controller PRIVATE "DSR_CONTROLLER2_BUILDING_DLL")
-target_compile_definitions(dsr_joint_trajectory PRIVATE "DSR_CONTROLLER2_BUILDING_DLL")
-
-
-pluginlib_export_plugin_description_file(controller_interface doosan_m0609_controller_plugins.xml)
-pluginlib_export_plugin_description_file(controller_interface dsr_joint_trajectory_plugin.xml)
-
-
-install(
-  DIRECTORY include/
-  DESTINATION include/doosan_m0609_controller
-)
-install(
-  DIRECTORY config launch
-  DESTINATION share/doosan_m0609_controller
-)
-# install(
-#   TARGETS dsr_control_node2
-#   # RUNTIME DESTINATION bin
-#   ARCHIVE DESTINATION lib
-#   LIBRARY DESTINATION lib
-#   RUNTIME DESTINATION lib/${PROJECT_NAME}
-# )
-
-install(
-  TARGETS
-  doosan_m0609_controller
-  EXPORT export_doosan_m0609_controller
-  RUNTIME DESTINATION bin
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-)
-install(
-  TARGETS
-  dsr_joint_trajectory
-  EXPORT export_dsr_joint_trajectory
-  RUNTIME DESTINATION bin
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
+# Target dependencies
+ament_target_dependencies(doosan_controller_node 
+  rclcpp
+  std_msgs
+  sensor_msgs
+  geometry_msgs
 )
 
-ament_export_targets(export_doosan_m0609_controller HAS_LIBRARY_TARGET)
-ament_export_targets(export_dsr_joint_trajectory HAS_LIBRARY_TARGET)
-ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+# Link libraries
+target_link_libraries(doosan_controller_node ${POCO_LIBRARIES} pthread)
+
+# Add compile definitions
+target_compile_definitions(doosan_controller_node PRIVATE 
+  HAVE_POCO=${HAVE_POCO}
+)
+
+# Add include directories
+target_include_directories(doosan_controller_node PRIVATE
+  include
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/DRFL
+)
+
+# Interface dependencies (this must come after the executable is defined)
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(doosan_controller_node "${cpp_typesupport_target}")
+
+# Install targets
+install(TARGETS
+  doosan_controller_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# Install headers
+install(DIRECTORY include/
+  DESTINATION include
+)
+
+# Install launch files if they exist
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/launch)
+  install(DIRECTORY launch/
+    DESTINATION share/${PROJECT_NAME}/launch
+  )
+endif()
+
+# Install config files if they exist  
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/config)
+  install(DIRECTORY config/
+    DESTINATION share/${PROJECT_NAME}/config
+  )
+endif()
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_export_include_directories(include)
+ament_export_dependencies(rosidl_default_runtime)
 ament_package()

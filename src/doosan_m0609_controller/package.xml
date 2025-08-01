@@ -1,40 +1,30 @@
 <?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>doosan_m0609_controller</name>
-  <version>2.33.0</version>
-  <description>Doosan M0609 Robot ROS2 Wrapper for Chemical Experiments</description>
-  <author email="minsoo.song@doosan.com">Minsoo Song</author>   
-
-  <maintainer email="minsoo.song@doosan.com">Minsoo Song</maintainer>
-  <maintainer email="ros.robotics@doosan.com">Doosan Robotics</maintainer>
-
-  <license>Apache License 2.0</license>
+  <version>1.0.0</version>
+  <description>ROS2 Controller for Doosan M0609 Robot using DRFL API</description>
+  <maintainer email="jaeho@project.com">Jaeho Developer</maintainer>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>backward_ros</depend>
-  <depend>forward_command_controller</depend>
-  <depend>pluginlib</depend>
-  <depend>controller_interface</depend>
-  <depend>rclcpp_lifecycle</depend>
-  <depend>hardware_interface</depend>
-  <depend>rclcpp</depend>
-  <depend>rclcpp_components</depend>
-  <depend>doosan_m0609_msgs</depend>
-  <depend>moveit_msgs</depend>
-  <depend>trajectory_msgs</depend>
-  <depend>control_msgs</depend>
-  <depend>std_msgs</depend>
-  <depend>doosan_m0609_hardware</depend>
-  <depend>yaml-cpp</depend> 
-  <depend>ament_index_cpp</depend>
-  <depend>libpoco-dev</depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>rosidl_default_generators</build_depend>
 
-  <test_depend>ament_cmake_gmock</test_depend>
-  <test_depend>controller_manager</test_depend>
-  <test_depend>hardware_interface_testing</test_depend>
-  <test_depend>hardware_interface</test_depend>
-  <test_depend>ros2_control_test_assets</test_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
