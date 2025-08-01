@@ -1,0 +1,25 @@
+kunwookpark@kunwookpark-960XFG:~/ros2_ws$ ros2 topic list
+/clicked_point
+/dsr01/alter_motion_stream
+/dsr01/dsr_controller2/transition_event
+/dsr01/dynamic_joint_states
+/dsr01/error
+/dsr01/joint_state_broadcaster/transition_event
+/dsr01/joint_states
+/dsr01/robot_description
+/dsr01/robot_disconnection
+/dsr01/servoj_rt_stream
+/dsr01/servoj_stream
+/dsr01/servol_rt_stream
+/dsr01/servol_stream
+/dsr01/speedj_rt_stream
+/dsr01/speedj_stream
+/dsr01/speedl_rt_stream
+/dsr01/speedl_stream
+/dsr01/torque_rt_stream
+/initialpose
+/move_base_simple/goal
+/parameter_events
+/rosout
+/tf
+/tf_static
