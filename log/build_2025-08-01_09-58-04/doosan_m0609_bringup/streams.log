@@ -1,0 +1,24 @@
+[1.448s] Invoking command in '/home/jaeho/project_ws/src/doosan_m0609_bringup': CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/sugar_water_experiment:/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_description:/home/jaeho/project_ws/install/dsr_common2 PYTHONPATH=/home/jaeho/project_ws/build/doosan_m0609_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/doosan_m0609_bringup build --build-base /home/jaeho/project_ws/build/doosan_m0609_bringup/build install --record /home/jaeho/project_ws/build/doosan_m0609_bringup/install.log --single-version-externally-managed install_data
+[1.765s] running egg_info
+[1.766s] writing ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/PKG-INFO
+[1.768s] writing dependency_links to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/dependency_links.txt
+[1.768s] writing entry points to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/entry_points.txt
+[1.769s] writing requirements to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/requires.txt
+[1.769s] writing top-level names to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/top_level.txt
+[1.772s] reading manifest file '../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/SOURCES.txt'
+[1.775s] writing manifest file '../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/SOURCES.txt'
+[1.776s] running build
+[1.776s] running build_py
+[1.777s] running install
+[1.777s] running install_lib
+[1.781s] running install_data
+[1.781s] running install_egg_info
+[1.785s] removing '/home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2-0.1.2-py3.10.egg-info' (and everything under it)
+[1.786s] Copying ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2-0.1.2-py3.10.egg-info
+[1.789s] running install_scripts
+[1.824s] Installing gazebo_connection script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.825s] Installing moveit_connection script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.825s] Installing mujoco_bridge script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.825s] Installing run_emulator script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.826s] writing list of installed files to '/home/jaeho/project_ws/build/doosan_m0609_bringup/install.log'
+[1.859s] Invoked command in '/home/jaeho/project_ws/src/doosan_m0609_bringup' returned '0': CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/sugar_water_experiment:/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_description:/home/jaeho/project_ws/install/dsr_common2 PYTHONPATH=/home/jaeho/project_ws/build/doosan_m0609_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/doosan_m0609_bringup build --build-base /home/jaeho/project_ws/build/doosan_m0609_bringup/build install --record /home/jaeho/project_ws/build/doosan_m0609_bringup/install.log --single-version-externally-managed install_data

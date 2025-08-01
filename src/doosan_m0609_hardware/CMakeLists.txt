@@ -68,7 +68,7 @@ SET( SRC_FILES
   src/dsr_hw_interface2.cpp
 )
 
-LINK_LIBRARIES(DRFL PocoFoundation PocoNet)
+#LINK_LIBRARIES(DRFL PocoFoundation PocoNet)
 
 if($ENV{ROS_DISTRO} STREQUAL "humble")                          
   LINK_DIRECTORIES ("${COMMON_LIB_FILES}/$ENV{ROS_DISTRO}/x86_64")
@@ -102,6 +102,12 @@ target_include_directories(doosan_m0609_hardware PUBLIC
   $<INSTALL_INTERFACE:include/doosan_m0609_hardware>
 )
 target_link_libraries(doosan_m0609_hardware yaml-cpp)
+target_link_libraries(doosan_m0609_hardware 
+    ${CMAKE_CURRENT_SOURCE_DIR}/../dsr_common2/lib/humble/x86_64/libDRFL.a 
+    PocoFoundation 
+    PocoNet 
+    pthread 
+)
 ament_target_dependencies(
   doosan_m0609_hardware 
   ${HW_IF_INCLUDE_DEPENDS}

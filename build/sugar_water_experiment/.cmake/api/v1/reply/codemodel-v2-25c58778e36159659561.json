@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-e4b157c2c6a87e2d60b8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "sugar_water_experiment",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "simple_sequence_controller::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-simple_sequence_controller-Release-28ce46e547536b4b784d.json",
+					"name" : "simple_sequence_controller",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sugar_water_experiment_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sugar_water_experiment_uninstall-Release-c0c568363e08a564392c.json",
+					"name" : "sugar_water_experiment_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sugar_water_experimenter_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sugar_water_experimenter_node-Release-3e25b348ab3d8c19e540.json",
+					"name" : "sugar_water_experimenter_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-a6e364b1b943f1bb571f.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jaeho/project_ws/build/sugar_water_experiment",
+		"source" : "/home/jaeho/project_ws/src/sugar_water_experiment"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

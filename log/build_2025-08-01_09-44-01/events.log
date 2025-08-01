@@ -1,0 +1,14 @@
+[0.000000] (-) TimerEvent: {}
+[0.001738] (-) JobUnselected: {'identifier': 'arduino_loadcell_interface'}
+[0.001815] (-) JobUnselected: {'identifier': 'chemistry_experiment_manager'}
+[0.001867] (-) JobUnselected: {'identifier': 'doosan_m0609_bringup'}
+[0.001929] (-) JobUnselected: {'identifier': 'doosan_m0609_description'}
+[0.001982] (-) JobUnselected: {'identifier': 'doosan_m0609_hardware'}
+[0.002036] (-) JobUnselected: {'identifier': 'doosan_m0609_msgs'}
+[0.002095] (-) JobUnselected: {'identifier': 'dsr_common2'}
+[0.002150] (-) JobUnselected: {'identifier': 'precision_liquid_pouring'}
+[0.002212] (-) JobUnselected: {'identifier': 'sugar_water_experiment'}
+[0.002279] (doosan_m0609_controller) JobQueued: {'identifier': 'doosan_m0609_controller', 'dependencies': OrderedDict([('doosan_m0609_msgs', '/home/jaeho/project_ws/install/doosan_m0609_msgs'), ('doosan_m0609_hardware', '/home/jaeho/project_ws/install/doosan_m0609_hardware')])}
+[0.002354] (doosan_m0609_controller) JobStarted: {'identifier': 'doosan_m0609_controller'}
+[0.020207] (doosan_m0609_controller) JobEnded: {'identifier': 'doosan_m0609_controller', 'rc': 1}
+[0.030973] (-) EventReactorShutdown: {}

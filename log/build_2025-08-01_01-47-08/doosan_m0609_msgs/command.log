@@ -1,6 +1,0 @@
-Invoking command in '/home/jack/project_ws/build/doosan_m0609_msgs': /usr/bin/cmake /home/jack/project_ws/src/doosan_m0609_msgs -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/doosan_m0609_msgs
-Invoked command in '/home/jack/project_ws/build/doosan_m0609_msgs' returned '0': /usr/bin/cmake /home/jack/project_ws/src/doosan_m0609_msgs -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/doosan_m0609_msgs
-Invoking command in '/home/jack/project_ws/build/doosan_m0609_msgs': /usr/bin/cmake --build /home/jack/project_ws/build/doosan_m0609_msgs -- -j6 -l6
-Invoked command in '/home/jack/project_ws/build/doosan_m0609_msgs' returned '0': /usr/bin/cmake --build /home/jack/project_ws/build/doosan_m0609_msgs -- -j6 -l6
-Invoking command in '/home/jack/project_ws/build/doosan_m0609_msgs': /usr/bin/cmake --install /home/jack/project_ws/build/doosan_m0609_msgs
-Invoked command in '/home/jack/project_ws/build/doosan_m0609_msgs' returned '0': /usr/bin/cmake --install /home/jack/project_ws/build/doosan_m0609_msgs

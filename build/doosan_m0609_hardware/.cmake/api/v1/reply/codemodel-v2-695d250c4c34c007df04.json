@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-726bfdb0caa98d5ea8ea.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "doosan_m0609_hardware",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "doosan_m0609_hardware::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-doosan_m0609_hardware-ca773b4fefc58b1a2f2c.json",
+					"name" : "doosan_m0609_hardware",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "doosan_m0609_hardware_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-doosan_m0609_hardware_uninstall-68951f21761884807b29.json",
+					"name" : "doosan_m0609_hardware_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-5980b5776c116902b49d.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jaeho/project_ws/build/doosan_m0609_hardware",
+		"source" : "/home/jaeho/project_ws/src/doosan_m0609_hardware"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

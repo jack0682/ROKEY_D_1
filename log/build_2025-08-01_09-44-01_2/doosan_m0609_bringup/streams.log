@@ -1,0 +1,83 @@
+[1.081s] Invoking command in '/home/jaeho/project_ws/src/doosan_m0609_bringup': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/build/doosan_m0609_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages:/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/doosan_m0609_bringup build --build-base /home/jaeho/project_ws/build/doosan_m0609_bringup/build install --record /home/jaeho/project_ws/build/doosan_m0609_bringup/install.log --single-version-externally-managed install_data
+[1.303s] running egg_info
+[1.304s] creating ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info
+[1.305s] writing ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/PKG-INFO
+[1.305s] writing dependency_links to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/dependency_links.txt
+[1.305s] writing entry points to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/entry_points.txt
+[1.306s] writing requirements to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/requires.txt
+[1.306s] writing top-level names to ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/top_level.txt
+[1.306s] writing manifest file '../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/SOURCES.txt'
+[1.308s] reading manifest file '../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/SOURCES.txt'
+[1.309s] writing manifest file '../../build/doosan_m0609_bringup/dsr_bringup2.egg-info/SOURCES.txt'
+[1.309s] running build
+[1.309s] running build_py
+[1.309s] creating /home/jaeho/project_ws/build/doosan_m0609_bringup/build
+[1.309s] creating /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib
+[1.310s] creating /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.310s] copying dsr_bringup2/gazebo_connection_pos.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.311s] copying dsr_bringup2/moveit_connection.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.312s] copying dsr_bringup2/run_emulator.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.313s] copying dsr_bringup2/__init__.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.313s] copying dsr_bringup2/dsr_mujoco_bridge.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.314s] copying dsr_bringup2/setup.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.314s] copying dsr_bringup2/gazebo_connection.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2
+[1.315s] creating /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2
+[1.316s] copying dsr_bringup2/dsr_bringup2/gazebo_connection_pos.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2
+[1.317s] copying dsr_bringup2/dsr_bringup2/moveit_connection.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2
+[1.317s] copying dsr_bringup2/dsr_bringup2/run_emulator.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2
+[1.318s] copying dsr_bringup2/dsr_bringup2/__init__.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2
+[1.318s] copying dsr_bringup2/dsr_bringup2/dsr_mujoco_bridge.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2
+[1.319s] copying dsr_bringup2/dsr_bringup2/gazebo_connection.py -> /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2
+[1.320s] running install
+[1.320s] running install_lib
+[1.321s] creating /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.322s] creating /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2
+[1.322s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2/gazebo_connection_pos.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2
+[1.322s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2/moveit_connection.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2
+[1.322s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2/run_emulator.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2
+[1.322s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2/__init__.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2
+[1.322s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2/dsr_mujoco_bridge.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2
+[1.323s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_bringup2/gazebo_connection.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2
+[1.323s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/gazebo_connection_pos.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.323s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/moveit_connection.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.324s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/run_emulator.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.324s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/__init__.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.324s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/dsr_mujoco_bridge.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.324s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/setup.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.324s] copying /home/jaeho/project_ws/build/doosan_m0609_bringup/build/lib/dsr_bringup2/gazebo_connection.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2
+[1.325s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2/gazebo_connection_pos.py to gazebo_connection_pos.cpython-310.pyc
+[1.326s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2/moveit_connection.py to moveit_connection.cpython-310.pyc
+[1.327s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2/run_emulator.py to run_emulator.cpython-310.pyc
+[1.328s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2/__init__.py to __init__.cpython-310.pyc
+[1.328s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2/dsr_mujoco_bridge.py to dsr_mujoco_bridge.cpython-310.pyc
+[1.329s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_bringup2/gazebo_connection.py to gazebo_connection.cpython-310.pyc
+[1.330s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/gazebo_connection_pos.py to gazebo_connection_pos.cpython-310.pyc
+[1.330s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/moveit_connection.py to moveit_connection.cpython-310.pyc
+[1.331s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/run_emulator.py to run_emulator.cpython-310.pyc
+[1.332s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/__init__.py to __init__.cpython-310.pyc
+[1.332s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/dsr_mujoco_bridge.py to dsr_mujoco_bridge.cpython-310.pyc
+[1.333s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/setup.py to setup.cpython-310.pyc
+[1.334s] byte-compiling /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2/gazebo_connection.py to gazebo_connection.cpython-310.pyc
+[1.335s] running install_data
+[1.335s] copying resource/dsr_bringup2 -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/ament_index/resource_index/packages
+[1.335s] creating /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2
+[1.336s] copying package.xml -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2
+[1.336s] creating /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.336s] copying launch/chemical_experiment_complete.launch.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.336s] copying launch/dsr_bringup2_moveit.launch.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.337s] copying launch/dsr_bringup2_mujoco.launch.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.338s] copying launch/dsr_bringup2_gazebo.launch.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.339s] copying launch/dsr_bringup2_spawn_on_gazebo.launch.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.339s] copying launch/dsr_bringup2_rviz.launch.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.339s] copying launch/chemical_experiment_system.launch.py -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/launch
+[1.340s] creating /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/rviz
+[1.340s] copying rviz/default.rviz -> /home/jaeho/project_ws/install/doosan_m0609_bringup/share/dsr_bringup2/rviz
+[1.341s] running install_egg_info
+[1.342s] Copying ../../build/doosan_m0609_bringup/dsr_bringup2.egg-info to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages/dsr_bringup2-0.1.2-py3.10.egg-info
+[1.344s] running install_scripts
+[1.365s] Installing gazebo_connection script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.366s] Installing moveit_connection script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.366s] Installing mujoco_bridge script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.366s] Installing run_emulator script to /home/jaeho/project_ws/install/doosan_m0609_bringup/lib/dsr_bringup2
+[1.366s] writing list of installed files to '/home/jaeho/project_ws/build/doosan_m0609_bringup/install.log'
+[1.394s] Invoked command in '/home/jaeho/project_ws/src/doosan_m0609_bringup' returned '0': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/build/doosan_m0609_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jaeho/project_ws/install/doosan_m0609_bringup/lib/python3.10/site-packages:/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/doosan_m0609_bringup build --build-base /home/jaeho/project_ws/build/doosan_m0609_bringup/build install --record /home/jaeho/project_ws/build/doosan_m0609_bringup/install.log --single-version-externally-managed install_data

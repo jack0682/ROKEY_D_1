@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-78acd209178e6085d352.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "doosan_m0609_controller",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "doosan_m0609_controller::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-doosan_m0609_controller-5ef3374821503e37c691.json",
+					"name" : "doosan_m0609_controller",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "doosan_m0609_controller_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-doosan_m0609_controller_uninstall-535cbcac222ba513c9e9.json",
+					"name" : "doosan_m0609_controller_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dsr_joint_trajectory::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dsr_joint_trajectory-479457b1ba0ca0034dff.json",
+					"name" : "dsr_joint_trajectory",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-ecb72043c638ae56b4ac.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jaeho/project_ws/build/doosan_m0609_controller",
+		"source" : "/home/jaeho/project_ws/src/doosan_m0609_controller"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

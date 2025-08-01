@@ -47,12 +47,12 @@ ament_target_dependencies(simple_sequence_controller
 install(TARGETS
   sugar_water_experimenter_node
   simple_sequence_controller
-  DESTINATION lib/${PROJECT_N}
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 # Install launch files
 install(DIRECTORY launch
-  DESTINATION share/${PROJECT_N}/
+  DESTINATION share/${PROJECT_NAME}/
 )
 
 if(BUILD_TESTING)

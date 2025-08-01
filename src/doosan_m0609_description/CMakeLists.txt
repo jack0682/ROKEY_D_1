@@ -12,11 +12,13 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
-ament_environment_hooks("doosan_m0609_description_path.dsv.in")
-ament_package()
-
-
-
+# Install 디렉토리들 먼저 설치
 install(DIRECTORY meshes urdf xacro config ros2_control mujoco_models DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY rviz DESTINATION share/${PROJECT_NAME})
+
+# Environment hooks 설정
+ament_environment_hooks("doosan_m0609_description_path.dsv.in")
+
+# Package 완료
+ament_package()

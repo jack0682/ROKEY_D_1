@@ -1,2 +1,0 @@
-Invoking command in '/home/jack/project_ws/build/doosan_m0609_description': /usr/bin/cmake /home/jack/project_ws/src/doosan_m0609_description -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/doosan_m0609_description
-Invoked command in '/home/jack/project_ws/build/doosan_m0609_description' returned '1': /usr/bin/cmake /home/jack/project_ws/src/doosan_m0609_description -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jack/project_ws/install/doosan_m0609_description

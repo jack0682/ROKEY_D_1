@@ -1,0 +1,99 @@
+[0.151s] Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_hardware': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_hardware -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_hardware
+[0.310s] -- The CXX compiler identification is GNU 11.4.0
+[0.811s] -- Detecting CXX compiler ABI info
+[1.002s] -- Detecting CXX compiler ABI info - done
+[1.009s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.010s] -- Detecting CXX compile features
+[1.010s] -- Detecting CXX compile features - done
+[1.021s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.178s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.284s] -- Found pluginlib: 5.1.0 (/opt/ros/humble/share/pluginlib/cmake)
+[3.926s] -- Found hardware_interface: 2.51.0 (/opt/ros/humble/share/hardware_interface/cmake)
+[3.964s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[3.969s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.978s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[3.989s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.001s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.243s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[4.246s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.271s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.322s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.325s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.490s] -- Found FastRTPS: /opt/ros/humble/include  
+[4.493s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.501s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.603s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.613s] -- Looking for C++ include pthread.h
+[4.766s] -- Looking for C++ include pthread.h - found
+[4.766s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[5.031s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[5.032s] -- Found Threads: TRUE  
+[5.078s] -- Found doosan_m0609_msgs: 1.1.0 (/home/jaeho/project_ws/install/doosan_m0609_msgs/share/doosan_m0609_msgs/cmake)
+[5.094s] -- Found moveit_msgs: 2.2.1 (/opt/ros/humble/share/moveit_msgs/cmake)
+[5.247s] -- Found controller_manager: 2.51.0 (/opt/ros/humble/share/controller_manager/cmake)
+[5.333s] -- Found kdl_parser: 2.6.4 (/opt/ros/humble/share/kdl_parser/cmake)
+[5.510s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[5.514s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[5.514s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[5.524s] [0mDRCF_VERSION:2[0m
+[5.551s] -- Found ament_cmake_pytest: 1.3.12 (/opt/ros/humble/share/ament_cmake_pytest/cmake)
+[5.621s] -- Configuring done
+[5.713s] -- Generating done
+[5.723s] -- Build files have been written to: /home/jaeho/project_ws/build/doosan_m0609_hardware
+[5.735s] Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_hardware' returned '0': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_hardware -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_hardware
+[5.739s] Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_hardware': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jaeho/project_ws/build/doosan_m0609_hardware -- -j8 -l8
+[5.789s] [ 50%] [32mBuilding CXX object CMakeFiles/doosan_m0609_hardware.dir/src/dsr_hw_interface2.cpp.o[0m
+[7.757s] In file included from [01m[K/usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/smart_ptr/detail/yield_k.hpp:23[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/smart_ptr/detail/spinlock.hpp:42[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/smart_ptr/shared_ptr.hpp:29[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/shared_ptr.hpp:17[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/date_time/time_clock.hpp:17[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/thread/thread_time.hpp:9[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/thread/lock_types.hpp:18[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/thread/pthread/thread_data.hpp:12[m[K,
+[7.757s]                  from [01m[K/usr/include/boost/thread/thread_only.hpp:17[m[K,
+[7.758s]                  from [01m[K/usr/include/boost/thread/thread.hpp:12[m[K,
+[7.758s]                  from [01m[K/home/jaeho/project_ws/src/doosan_m0609_hardware/src/dsr_hw_interface2.cpp:8[m[K:
+[7.758s] [01m[K/usr/include/boost/bind.hpp:36:1:[m[K [01;36m[Knote: [m[K‘[01m[K#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.[m[K’
+[7.758s]    36 | [01;36m[KBOOST_PRAGMA_MESSAGE[m[K(
+[7.758s]       | [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[13.948s] [100%] [32m[1mLinking CXX shared library libdoosan_m0609_hardware.so[0m
+[14.797s] [100%] Built target doosan_m0609_hardware
+[14.813s] Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_hardware' returned '0': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jaeho/project_ws/build/doosan_m0609_hardware -- -j8 -l8
+[14.814s] Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_hardware': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/jaeho/project_ws/build/doosan_m0609_hardware
+[14.822s] -- Install configuration: "Release"
+[14.822s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/doosan_m0609_hardware.xml
+[14.824s] -- Up-to-date: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/doosan_m0609_hardware.xml
+[14.824s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware
+[14.824s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware/dsr_hardware2
+[14.825s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware/dsr_hardware2/util.hpp
+[14.825s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware/dsr_hardware2/dsr_hw_interface2.h
+[14.826s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/lib/libdoosan_m0609_hardware.so
+[14.827s] -- Set runtime path of "/home/jaeho/project_ws/install/doosan_m0609_hardware/lib/libdoosan_m0609_hardware.so" to ""
+[14.827s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/library_path.sh
+[14.828s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/library_path.dsv
+[14.830s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/package_run_dependencies/doosan_m0609_hardware
+[14.830s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/parent_prefix_path/doosan_m0609_hardware
+[14.830s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/ament_prefix_path.sh
+[14.830s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/ament_prefix_path.dsv
+[14.831s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/path.sh
+[14.831s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/path.dsv
+[14.831s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.bash
+[14.831s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.sh
+[14.832s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.zsh
+[14.832s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.dsv
+[14.833s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/package.dsv
+[14.834s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/packages/doosan_m0609_hardware
+[14.834s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/doosan_m0609_hardware
+[14.835s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/controller_interface__pluginlib__plugin/doosan_m0609_hardware
+[14.835s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/export_doosan_m0609_hardwareExport.cmake
+[14.836s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/export_doosan_m0609_hardwareExport-release.cmake
+[14.836s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/ament_cmake_export_targets-extras.cmake
+[14.836s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/ament_cmake_export_dependencies-extras.cmake
+[14.837s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/doosan_m0609_hardwareConfig.cmake
+[14.837s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/doosan_m0609_hardwareConfig-version.cmake
+[14.837s] -- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/package.xml
+[14.840s] Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_hardware' returned '0': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/jaeho/project_ws/build/doosan_m0609_hardware

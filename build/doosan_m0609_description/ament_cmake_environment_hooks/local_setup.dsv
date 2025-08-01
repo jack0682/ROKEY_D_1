@@ -1,0 +1,3 @@
+source;share/doosan_m0609_description/environment/ament_prefix_path.sh
+source;share/doosan_m0609_description/environment/path.sh
+source;share/doosan_m0609_description/environment/doosan_m0609_description_path.dsv

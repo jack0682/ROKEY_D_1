@@ -1,0 +1,75 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found pluginlib: 5.1.0 (/opt/ros/humble/share/pluginlib/cmake)
+-- Found hardware_interface: 2.51.0 (/opt/ros/humble/share/hardware_interface/cmake)
+-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found doosan_m0609_msgs: 1.1.0 (/home/jaeho/project_ws/install/doosan_m0609_msgs/share/doosan_m0609_msgs/cmake)
+-- Found moveit_msgs: 2.2.1 (/opt/ros/humble/share/moveit_msgs/cmake)
+-- Found controller_manager: 2.51.0 (/opt/ros/humble/share/controller_manager/cmake)
+-- Found kdl_parser: 2.6.4 (/opt/ros/humble/share/kdl_parser/cmake)
+-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+-- Found Eigen3: TRUE (found version "3.4.0") 
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found ament_cmake_pytest: 1.3.12 (/opt/ros/humble/share/ament_cmake_pytest/cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jaeho/project_ws/build/doosan_m0609_hardware
+[ 50%] [32mBuilding CXX object CMakeFiles/doosan_m0609_hardware.dir/src/dsr_hw_interface2.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library libdoosan_m0609_hardware.so[0m
+[100%] Built target doosan_m0609_hardware
+-- Install configuration: "Release"
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/doosan_m0609_hardware.xml
+-- Up-to-date: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/doosan_m0609_hardware.xml
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware/dsr_hardware2
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware/dsr_hardware2/util.hpp
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/include/doosan_m0609_hardware/dsr_hardware2/dsr_hw_interface2.h
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/lib/libdoosan_m0609_hardware.so
+-- Set runtime path of "/home/jaeho/project_ws/install/doosan_m0609_hardware/lib/libdoosan_m0609_hardware.so" to ""
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/library_path.sh
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/library_path.dsv
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/package_run_dependencies/doosan_m0609_hardware
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/parent_prefix_path/doosan_m0609_hardware
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/ament_prefix_path.sh
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/ament_prefix_path.dsv
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/path.sh
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/environment/path.dsv
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.bash
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.sh
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.zsh
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/local_setup.dsv
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/package.dsv
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/packages/doosan_m0609_hardware
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/doosan_m0609_hardware
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/ament_index/resource_index/controller_interface__pluginlib__plugin/doosan_m0609_hardware
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/export_doosan_m0609_hardwareExport.cmake
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/export_doosan_m0609_hardwareExport-release.cmake
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/doosan_m0609_hardwareConfig.cmake
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake/doosan_m0609_hardwareConfig-version.cmake
+-- Installing: /home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/package.xml

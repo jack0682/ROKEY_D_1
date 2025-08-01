@@ -1,0 +1,8 @@
+source;share/doosan_m0609_description/hook/cmake_prefix_path.ps1
+source;share/doosan_m0609_description/hook/cmake_prefix_path.dsv
+source;share/doosan_m0609_description/hook/cmake_prefix_path.sh
+source;share/doosan_m0609_description/local_setup.bash
+source;share/doosan_m0609_description/local_setup.dsv
+source;share/doosan_m0609_description/local_setup.ps1
+source;share/doosan_m0609_description/local_setup.sh
+source;share/doosan_m0609_description/local_setup.zsh

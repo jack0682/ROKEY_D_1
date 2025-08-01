@@ -48,7 +48,7 @@ include_directories(
   ${COMMON_INC_FILES}
 )
 
-LINK_LIBRARIES(DRFL PocoFoundation PocoNet)
+# LINK_LIBRARIES(DRFL PocoFoundation PocoNet)  # 전역 링크는 문제 발생 가능
 
 if($ENV{ROS_DISTRO} STREQUAL "humble")                          
   LINK_DIRECTORIES ("${COMMON_LIB_FILES}/$ENV{ROS_DISTRO}/x86_64")
@@ -67,13 +67,21 @@ add_library(doosan_m0609_controller SHARED
   src/doosan_m0609_controller.cpp
   # src/dsr_joint_trajectory.cpp
 )
-target_compile_definitions(${PROJECT_NAME} PUBLIC DRCF_VERSION=${DRCF_VER})
+target_compile_definitions(doosan_m0609_controller PUBLIC DRCF_VERSION=${DRCF_VER})
 target_compile_features(doosan_m0609_controller PUBLIC cxx_std_17)
 target_include_directories(doosan_m0609_controller PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/doosan_m0609_controller>
 )
 ament_target_dependencies(doosan_m0609_controller PUBLIC ${THIS_PACKAGE_INCLUDE_DEPENDS})
+
+# DRFL 라이브러리 직접 링크
+target_link_libraries(doosan_m0609_controller PUBLIC
+  /home/jaeho/project_ws/src/dsr_common2/lib/humble/x86_64/libDRFL.a
+  PocoFoundation
+  PocoNet
+  pthread
+)
 
 add_library(dsr_joint_trajectory SHARED
   # src/joint_group_velocity_controller.cpp
@@ -85,6 +93,14 @@ target_include_directories(dsr_joint_trajectory PUBLIC
   $<INSTALL_INTERFACE:include/dsr_joint_trajectory>
 )
 ament_target_dependencies(dsr_joint_trajectory PUBLIC ${THIS_PACKAGE_INCLUDE_DEPENDS})
+
+# dsr_joint_trajectory에도 DRFL 라이브러리 링크
+target_link_libraries(dsr_joint_trajectory PUBLIC
+  /home/jaeho/project_ws/src/dsr_common2/lib/humble/x86_64/libDRFL.a
+  PocoFoundation
+  PocoNet
+  pthread
+)
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.

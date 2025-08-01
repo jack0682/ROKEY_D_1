@@ -1,0 +1,60 @@
+[0.427s] Invoking command in '/home/jaeho/project_ws/build/doosan_m0609_controller': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_hardware/lib:/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_controller -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_controller
+[0.665s] -- The CXX compiler identification is GNU 11.4.0
+[1.555s] -- Detecting CXX compiler ABI info
+[1.828s] -- Detecting CXX compiler ABI info - done
+[1.833s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.833s] -- Detecting CXX compile features
+[1.834s] -- Detecting CXX compile features - done
+[1.836s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.969s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.055s] -- Found forward_command_controller: 2.48.0 (/opt/ros/humble/share/forward_command_controller/cmake)
+[2.228s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.232s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.239s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.248s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.260s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.296s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.298s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[3.694s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[5.400s] -- Found FastRTPS: /opt/ros/humble/include  
+[12.752s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[12.771s] -- Looking for C++ include pthread.h
+[13.564s] -- Looking for C++ include pthread.h - found
+[13.565s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[15.997s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[16.000s] -- Found Threads: TRUE  
+[24.979s] -- Found doosan_m0609_msgs: 1.1.0 (/home/jaeho/project_ws/install/doosan_m0609_msgs/share/doosan_m0609_msgs/cmake)
+[25.037s] -- Found moveit_msgs: 2.2.1 (/opt/ros/humble/share/moveit_msgs/cmake)
+[25.202s] -- Found doosan_m0609_hardware: 0.0.0 (/home/jaeho/project_ws/install/doosan_m0609_hardware/share/doosan_m0609_hardware/cmake)
+[25.419s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[25.419s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[25.420s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[25.437s] -- Found rclcpp_components: 16.0.14 (/opt/ros/humble/share/rclcpp_components/cmake)
+[25.498s] [0mDRCF_VERSION:2[0m
+[25.510s] [31mCMake Error at CMakeLists.txt:79 (target_link_libraries):
+[25.510s]   The keyword signature for target_link_libraries has already been used with
+[25.510s]   the target "doosan_m0609_controller".  All uses of target_link_libraries
+[25.510s]   with a target must be either all-keyword or all-plain.
+[25.510s] 
+[25.510s]   The uses of the keyword signature are here:
+[25.510s] 
+[25.510s]    * /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:145 (target_link_libraries)
+[25.510s]    * /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:151 (target_link_libraries)
+[25.510s] 
+[25.511s] 
+[25.511s] [0m
+[25.545s] [31mCMake Error at CMakeLists.txt:98 (target_link_libraries):
+[25.545s]   The keyword signature for target_link_libraries has already been used with
+[25.545s]   the target "dsr_joint_trajectory".  All uses of target_link_libraries with
+[25.545s]   a target must be either all-keyword or all-plain.
+[25.545s] 
+[25.545s]   The uses of the keyword signature are here:
+[25.545s] 
+[25.545s]    * /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:145 (target_link_libraries)
+[25.545s]    * /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:151 (target_link_libraries)
+[25.546s] 
+[25.546s] 
+[25.546s] [0m
+[25.678s] -- Configuring incomplete, errors occurred!
+[25.678s] See also "/home/jaeho/project_ws/build/doosan_m0609_controller/CMakeFiles/CMakeOutput.log".
+[25.715s] Invoked command in '/home/jaeho/project_ws/build/doosan_m0609_controller' returned '1': AMENT_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jaeho/project_ws/install/doosan_m0609_hardware:/home/jaeho/project_ws/install/doosan_m0609_msgs:/home/jaeho/project_ws/install/dsr_common2:/opt/ros/humble LD_LIBRARY_PATH=/home/jaeho/project_ws/install/doosan_m0609_hardware/lib:/home/jaeho/project_ws/install/doosan_m0609_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jaeho/project_ws/install/doosan_m0609_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/jaeho/project_ws/src/doosan_m0609_controller -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/jaeho/project_ws/install/doosan_m0609_controller
