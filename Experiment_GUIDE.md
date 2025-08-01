@@ -24,7 +24,7 @@
 
 ```bash
 # 1. 설치 스크립트 실행 (Ubuntu 22.04 + ROS2 Humble 자동 설치)
-chmod +x install_system.sh
+chmod +x install_script.sh
 ./install_system.sh
 
 # 2. 터미널 재시작 (환경 변수 적용)
