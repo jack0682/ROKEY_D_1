@@ -2,18 +2,30 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>sugar_water_experiment</name>
-  <version>0.1.0</version>
-  <description>Sugar water concentration experiment using Doosan M0609 and load cell</description>
-  <maintainer email="jack@doosan.com">Jack</maintainer>
+  <version>2.0.0</version>
+  <description>
+    Doosan M0609 Sugar Water Concentration Experiment Package (Refactored)
+    
+    이 패키지는 Doosan 공식 예제 방식으로 완전히 리팩토링되었습니다:
+    - 실제 DRFL API 직접 호출
+    - 공식 Python 예제의 C++ 구현
+    - 실제 로봇 상태 피드백 기반 제어
+    - 도구 및 TCP 설정 지원
+  </description>
+  
+  <maintainer email="jack@doosan.com">Jack (Refactored by Lyra)</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <!-- ROS2 의존성 -->
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
   <depend>sensor_msgs</depend>
-
+  
+  <!-- 시스템 의존성 -->
+  <depend>libpoco-dev</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

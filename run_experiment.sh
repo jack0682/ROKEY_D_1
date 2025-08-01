@@ -85,8 +85,8 @@ initialize_robot_system() {
     echo "실행: ros2 run doosan_m0609_controller doosan_robot_controller --ros-args -p robot_ip:=\"$ROBOT_IP\" &"
     
     # 실제 명령 실행 (주석 해제하면 실제 실행)
-    # ros2 run doosan_m0609_controller doosan_robot_controller --ros-args -p robot_ip:="$ROBOT_IP" &
-    # CONTROLLER_PID=$!
+    ros2 run doosan_m0609_controller doosan_robot_controller --ros-args -p robot_ip:="$ROBOT_IP" &
+    CONTROLLER_PID=$!
     
     print_success "로봇 컨트롤러 노드 시작됨"
     sleep 2
@@ -128,7 +128,7 @@ initialize_robot_system() {
         echo "실행: ros2 service call /set_robot_mode doosan_m0609_msgs/srv/SetRobotMode \"{mode: 1}\""
         
         # 실제 명령 실행 (주석 해제하면 실제 실행)
-        # ros2 service call /set_robot_mode doosan_m0609_msgs/srv/SetRobotMode "{mode: 1}"
+        ros2 service call /set_robot_mode doosan_m0609_msgs/srv/SetRobotMode "{mode: 1}"
         
         print_success "서보 모터 활성화 명령 전송됨"
         sleep 2
@@ -138,7 +138,7 @@ initialize_robot_system() {
         echo "실행: ros2 service call /move_home doosan_m0609_msgs/srv/MoveHome"
         
         # 실제 명령 실행 (주석 해제하면 실제 실행)
-        # ros2 service call /move_home doosan_m0609_msgs/srv/MoveHome
+        ros2 service call /move_home doosan_m0609_msgs/srv/MoveHome
         
         print_success "홈 포지션 이동 완료"
         

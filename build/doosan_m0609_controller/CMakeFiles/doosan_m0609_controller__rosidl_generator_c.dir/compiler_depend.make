@@ -4,7 +4,7 @@
 CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__functions.c.o: rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__functions.c \
   /usr/include/stdc-predef.h \
   rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__functions.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -15,7 +15,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -51,7 +51,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__struct.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -68,7 +68,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rcutils/rcutils/macros.h \
   /opt/ros/humble/include/rcutils/rcutils/testing/fault_injection.h \
   /usr/include/stdio.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -85,7 +85,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
 CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.c.o: rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.c \
   /usr/include/stdc-predef.h \
   rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -96,7 +96,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -132,7 +132,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__struct.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -149,7 +149,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rcutils/rcutils/macros.h \
   /opt/ros/humble/include/rcutils/rcutils/testing/fault_injection.h \
   /usr/include/stdio.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -167,7 +167,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
 CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/doosan_m0609_controller/srv/detail/connect_robot__functions.c.o: rosidl_generator_c/doosan_m0609_controller/srv/detail/connect_robot__functions.c \
   /usr/include/stdc-predef.h \
   rosidl_generator_c/doosan_m0609_controller/srv/detail/connect_robot__functions.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -178,7 +178,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -214,7 +214,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/srv/detail/connect_robot__struct.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -229,7 +229,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rcutils/rcutils/macros.h \
   /opt/ros/humble/include/rcutils/rcutils/testing/fault_injection.h \
   /usr/include/stdio.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -245,7 +245,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
 CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/doosan_m0609_controller/srv/detail/move_j__functions.c.o: rosidl_generator_c/doosan_m0609_controller/srv/detail/move_j__functions.c \
   /usr/include/stdc-predef.h \
   rosidl_generator_c/doosan_m0609_controller/srv/detail/move_j__functions.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -256,7 +256,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -292,7 +292,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_control.h \
   rosidl_generator_c/doosan_m0609_controller/srv/detail/move_j__struct.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -307,7 +307,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_generator_c.dir/rosidl_generator_c/do
   /opt/ros/humble/include/rcutils/rcutils/macros.h \
   /opt/ros/humble/include/rcutils/rcutils/testing/fault_injection.h \
   /usr/include/stdio.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -339,11 +339,7 @@ rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.c:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
 /opt/ros/humble/include/rcutils/rcutils/testing/fault_injection.h:
 
@@ -356,8 +352,6 @@ rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.c:
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
@@ -377,11 +371,15 @@ rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.c:
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/10/include/stdarg.h:
+
 /usr/include/stdc-predef.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
@@ -389,31 +387,33 @@ rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.c:
 
 rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__functions.c:
 
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
-
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
 rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__functions.h:
 
 /usr/include/features.h:
 
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/include/alloca.h:
+
+/opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h:
+
 /opt/ros/humble/include/rcutils/rcutils/visibility_control_macros.h:
 
 /usr/include/stdlib.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
-/usr/include/stdint.h:
-
-/usr/include/features-time64.h:
-
-rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_control.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
@@ -431,13 +431,17 @@ rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
+/usr/include/features-time64.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_control.h:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
 
-/usr/include/alloca.h:
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h:
 
 rosidl_generator_c/doosan_m0609_controller/srv/detail/connect_robot__functions.h:
 
@@ -489,11 +493,7 @@ rosidl_generator_c/doosan_m0609_controller/srv/detail/move_j__struct.h:
 
 /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__struct.h:
 
-/opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 

@@ -1,11 +1,11 @@
-# Adding /home/jaeho/project_ws/install/doosan_m0609_description/share/ without the doosan_m0609_description allows both gazebo and resource_retriever to
+# Adding /home/jack/project_ws/install/doosan_m0609_description/share/ without the doosan_m0609_description allows both gazebo and resource_retriever to
 # resolve URIs of type package://
-prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/
-prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/share/
-prepend-non-duplicate;GZ_SIM_SYSTEM_PLUGIN_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/lib
-prepend-non-duplicate;IGN_GAZEBO_RESOURCE_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/
-prepend-non-duplicate;IGN_GAZEBO_SYSTEM_PLUGIN_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/lib
-prepend-non-duplicate;IGN_GAZEBO_RESOURCE_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/share/
-prepend-non-duplicate;GAZEBO_MODEL_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/
-prepend-non-duplicate;GAZEBO_MODEL_PATH;/home/jaeho/project_ws/install/doosan_m0609_description/share
-prepend-non-duplicate;AMENT_PREFIX_PATH;/home/jaeho/project_ws/install/doosan_m0609_description
+prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;/home/jack/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/
+prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;/home/jack/project_ws/install/doosan_m0609_description/share/
+prepend-non-duplicate;GZ_SIM_SYSTEM_PLUGIN_PATH;/home/jack/project_ws/install/doosan_m0609_description/lib
+prepend-non-duplicate;IGN_GAZEBO_RESOURCE_PATH;/home/jack/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/
+prepend-non-duplicate;IGN_GAZEBO_SYSTEM_PLUGIN_PATH;/home/jack/project_ws/install/doosan_m0609_description/lib
+prepend-non-duplicate;IGN_GAZEBO_RESOURCE_PATH;/home/jack/project_ws/install/doosan_m0609_description/share/
+prepend-non-duplicate;GAZEBO_MODEL_PATH;/home/jack/project_ws/install/doosan_m0609_description/share/doosan_m0609_description/
+prepend-non-duplicate;GAZEBO_MODEL_PATH;/home/jack/project_ws/install/doosan_m0609_description/share
+prepend-non-duplicate;AMENT_PREFIX_PATH;/home/jack/project_ws/install/doosan_m0609_description

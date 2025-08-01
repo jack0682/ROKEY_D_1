@@ -2,32 +2,51 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>doosan_m0609_bringup</name>
-  <version>1.1.0</version>
-  <description>Doosan M0609 Robot ROS2 Wrapper for Chemical Experiments</description>
+  <version>2.0.0</version>
+  <description>Launch package for Doosan M0609 collaborative robot with ROS2 Control</description>
+  <maintainer email="your.email@doosan.com">Doosan M0609 Team</maintainer>
+  <license>BSD-3-Clause</license>
 
-  <author email="minsoo.song@doosan.com">Minsoo Song</author>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <maintainer email="minsoo.song@doosan.com">Minsoo Song</maintainer>
-  <maintainer email="ros.robotics@doosan.com">Doosan Robotics</maintainer>
+  <!-- Core ROS2 dependencies -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  
+  <!-- Message dependencies -->
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>trajectory_msgs</depend>
+  <depend>control_msgs</depend>
+  
+  <!-- ROS2 Control ecosystem -->
+  <depend>controller_manager</depend>
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
+  <depend>joint_trajectory_controller</depend>
+  <depend>joint_state_broadcaster</depend>
+  
+  <!-- Doosan specific packages -->
+  <depend>dsr_description2</depend>
+  <depend>dsr_hardware2</depend>
+  
+  <!-- Robot state publishing -->
+  <depend>joint_state_publisher</depend>
+  <depend>robot_state_publisher</depend>
+  
+  <!-- Launch system -->
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+  <depend>xacro</depend>
+  
+  <!-- Visualization -->
+  <depend>rviz2</depend>
 
-  <license>BSD</license>
-  <url type="website">http://wiki.ros.org/doosan_robotics</url>
-
-
-  <!--build_depend>roslaunch</build_depend-->
-  <build_depend>gazebo_ros</build_depend>
-  <!--???
-  exec_depend>gazebo_ros</run_depend-->
-  <!--???
-  exec_depend>rviz</run_depend-->
-
-  <exec_depend>rclpy</exec_depend>
-  <exec_depend>doosan_m0609_msgs</exec_depend>
-  <exec_depend>ament_index_python</exec_depend>
-  <exec_depend>launch</exec_depend>
-  <exec_depend>launch_ros</exec_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
   <export>
-    <build_type>ament_python</build_type>
+    <build_type>ament_cmake</build_type>
   </export>
 </package>

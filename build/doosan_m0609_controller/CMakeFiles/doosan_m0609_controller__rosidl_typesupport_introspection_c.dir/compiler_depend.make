@@ -3,14 +3,14 @@
 
 CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/joint_state__type_support.c.o: rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/joint_state__type_support.c \
   /usr/include/stdc-predef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/joint_state__rosidl_typesupport_introspection_c.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_interface/rosidl_typesupport_interface/macros.h \
   rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/rosidl_typesupport_introspection_c__visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/field_types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -30,7 +30,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/identifier.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/message_introspection.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_initialization.h \
   rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__functions.h \
   /usr/include/stdlib.h \
@@ -77,14 +77,14 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
 
 CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/robot_status__type_support.c.o: rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/robot_status__type_support.c \
   /usr/include/stdc-predef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/robot_status__rosidl_typesupport_introspection_c.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_interface/rosidl_typesupport_interface/macros.h \
   rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/rosidl_typesupport_introspection_c__visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/field_types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -104,7 +104,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/identifier.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/message_introspection.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_initialization.h \
   rosidl_generator_c/doosan_m0609_controller/msg/detail/robot_status__functions.h \
   /usr/include/stdlib.h \
@@ -152,7 +152,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
 
 CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/connect_robot__type_support.c.o: rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/connect_robot__type_support.c \
   /usr/include/stdc-predef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/connect_robot__rosidl_typesupport_introspection_c.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
@@ -160,7 +160,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
   rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/rosidl_typesupport_introspection_c__visibility_control.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/service_type_support_struct.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/field_types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -180,7 +180,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/identifier.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/message_introspection.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_initialization.h \
   rosidl_generator_c/doosan_m0609_controller/srv/detail/connect_robot__functions.h \
   /usr/include/stdlib.h \
@@ -221,7 +221,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
 
 CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/move_j__type_support.c.o: rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/move_j__type_support.c \
   /usr/include/stdc-predef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h \
   rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/move_j__rosidl_typesupport_introspection_c.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
@@ -229,7 +229,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
   rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/rosidl_typesupport_introspection_c__visibility_control.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/service_type_support_struct.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/field_types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
@@ -249,7 +249,7 @@ CMakeFiles/doosan_m0609_controller__rosidl_typesupport_introspection_c.dir/rosid
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/identifier.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/visibility_control.h \
   /opt/ros/humble/include/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c/message_introspection.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h \
   /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_initialization.h \
   rosidl_generator_c/doosan_m0609_controller/srv/detail/move_j__functions.h \
   /usr/include/stdlib.h \
@@ -311,10 +311,6 @@ rosidl_generator_c/doosan_m0609_controller/srv/detail/connect_robot__struct.h:
 
 /opt/ros/humble/include/std_msgs/std_msgs/msg/header.h:
 
-rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/connect_robot__type_support.c:
-
-/opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h:
-
 rosidl_generator_c/doosan_m0609_controller/srv/detail/move_j__struct.h:
 
 /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__struct.h:
@@ -327,8 +323,6 @@ rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_co
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
@@ -336,6 +330,12 @@ rosidl_generator_c/doosan_m0609_controller/msg/rosidl_generator_c__visibility_co
 rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__struct.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
 /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/string_functions.h:
 
@@ -371,15 +371,17 @@ rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/robot_stat
 
 rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/rosidl_typesupport_introspection_c__visibility_control.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
-
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
 
 /usr/include/stdint.h:
 
 /usr/include/features-time64.h:
+
+rosidl_typesupport_introspection_c/doosan_m0609_controller/srv/detail/connect_robot__type_support.c:
+
+/opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h:
 
 /usr/include/features.h:
 
@@ -403,7 +405,7 @@ rosidl_generator_c/doosan_m0609_controller/msg/detail/joint_state__functions.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
+/usr/lib/gcc/x86_64-linux-gnu/10/include/stdbool.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -454,8 +456,6 @@ rosidl_typesupport_introspection_c/doosan_m0609_controller/msg/detail/joint_stat
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 

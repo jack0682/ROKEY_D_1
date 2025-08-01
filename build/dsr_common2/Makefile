@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jaeho/project_ws/src/dsr_common2
+CMAKE_SOURCE_DIR = /home/jack/project_ws/src/dsr_common2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jaeho/project_ws/build/dsr_common2
+CMAKE_BINARY_DIR = /home/jack/project_ws/build/dsr_common2
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,9 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jaeho/project_ws/build/dsr_common2/CMakeFiles /home/jaeho/project_ws/build/dsr_common2//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jack/project_ws/build/dsr_common2/CMakeFiles /home/jack/project_ws/build/dsr_common2//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jaeho/project_ws/build/dsr_common2/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jack/project_ws/build/dsr_common2/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
