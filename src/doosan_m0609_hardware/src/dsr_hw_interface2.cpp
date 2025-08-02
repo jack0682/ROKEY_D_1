@@ -250,31 +250,64 @@ CallbackReturn DRHWInterface::on_init(const hardware_interface::HardwareInfo & i
 
 	// Virtual controller doesn't support real time connection.
 	if(mode != "virtual") {
-		if(m_nVersionDRCF >= 3000000) {
-			drcf_ip = drcf_rt_ip;
+		// Use RT-specific IP if available and DRCF version >= 3.0
+		std::string rt_connection_ip = drcf_ip;
+		if(m_nVersionDRCF >= 3000000 && !drcf_rt_ip.empty()) {
+			rt_connection_ip = drcf_rt_ip;
+			RCLCPP_INFO(rclcpp::get_logger("dsr_hw_interface2"), "Using RT IP: %s", rt_connection_ip.c_str());
 		}
-		if (!Drfl.connect_rt_control(drcf_ip)) {
-			RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Unable to connect RT control stream");
+		
+		// Connect RT control with retry mechanism
+		bool rt_connected = false;
+		for(int retry = 0; retry < 3; retry++) {
+			if (Drfl.connect_rt_control(rt_connection_ip)) {
+				rt_connected = true;
+				break;
+			}
+			RCLCPP_WARN(rclcpp::get_logger("dsr_hw_interface2"), "RT control connection attempt %d failed, retrying...", retry+1);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		}
+		
+		if (!rt_connected) {
+			RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Unable to connect RT control stream after 3 attempts");
 			return CallbackReturn::FAILURE;
 		}
-		RCLCPP_INFO(rclcpp::get_logger("dsr_hw_interface2"), "Connected RT control stream");
+		RCLCPP_INFO(rclcpp::get_logger("dsr_hw_interface2"), "Successfully connected RT control stream");
+		
+		// Set RT control parameters
 		const std::string version   = "v1.0";
-		const float       period    = 0.001;
-		const int         losscount = 4;
+		const float       period    = 0.001;  // 1ms for real-time
+		const int         losscount = 4;      // Allow 4 missed packets
 		if (!Drfl.set_rt_control_output(version, period, losscount)) {
-			RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Unable to connect RT control stream");
+			RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Failed to set RT control output parameters");
+			Drfl.disconnect_rt_control();
 			return CallbackReturn::FAILURE;
 		}
 
+		// Start RT control
 		if (!Drfl.start_rt_control()) {
 			RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Unable to start RT control");
+			Drfl.disconnect_rt_control();
 			return CallbackReturn::FAILURE;
 		}
 
-		RCLCPP_INFO(rclcpp::get_logger("dsr_hw_interface2"), "Setting velocity and acceleration limits");
-		float limit[6] = {70.0f,70.0f,70.0f,70.0f,70.0f,70.0f};
-		if (!Drfl.set_velj_rt(limit)) return CallbackReturn::ERROR;
-		if (!Drfl.set_accj_rt(limit)) return CallbackReturn::ERROR;
+		RCLCPP_INFO(rclcpp::get_logger("dsr_hw_interface2"), "RT control started successfully");
+		
+		// Set conservative velocity and acceleration limits for safety
+		RCLCPP_INFO(rclcpp::get_logger("dsr_hw_interface2"), "Setting conservative velocity and acceleration limits for real robot");
+		float vel_limit[6] = {50.0f, 50.0f, 50.0f, 50.0f, 50.0f, 50.0f};  // Reduced from 70
+		float acc_limit[6] = {50.0f, 50.0f, 50.0f, 50.0f, 50.0f, 50.0f};  // Conservative limits
+		
+		if (!Drfl.set_velj_rt(vel_limit)) {
+			RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Failed to set velocity limits");
+			return CallbackReturn::ERROR;
+		}
+		if (!Drfl.set_accj_rt(acc_limit)) {
+			RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Failed to set acceleration limits");
+			return CallbackReturn::ERROR;
+		}
+		
+		RCLCPP_INFO(rclcpp::get_logger("dsr_hw_interface2"), "RT control setup completed successfully");
 	}
 
 	Drfl.set_safety_mode(SAFETY_MODE_AUTONOMOUS,SAFETY_MODE_EVENT_MOVE);
@@ -320,10 +353,44 @@ std::vector<hardware_interface::CommandInterface> DRHWInterface::export_command_
 return_type DRHWInterface::read(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
 	if(mode == "real") {
+		// Check if RT control is still active
+		if(Drfl.GetRobotState() != STATE_STANDBY) {
+			RCLCPP_WARN_THROTTLE(rclcpp::get_logger("dsr_hw_interface2"), 
+				*rclcpp::Clock{RCL_ROS_TIME}.get_clock(), 5000,
+				"Robot not in STANDBY state: %s", to_str(Drfl.GetRobotState()).c_str());
+			// Still try to read data but warn user
+		}
+		
 		const LPRT_OUTPUT_DATA_LIST data = Drfl.read_data_rt();
-		for(int i=0;i<6;i++) {
-			joint_position_[i] = static_cast<float>(data->actual_joint_position[i] * (M_PI / 180.0f));
-			joint_velocities_[i] = static_cast<float>(data->actual_joint_velocity[i] * (M_PI / 180.0f));
+		if(data == nullptr) {
+			RCLCPP_ERROR_THROTTLE(rclcpp::get_logger("dsr_hw_interface2"),
+				*rclcpp::Clock{RCL_ROS_TIME}.get_clock(), 1000,
+				"Failed to read RT data from robot");
+			// Keep last known positions instead of returning error
+			return return_type::OK;
+		}
+		
+		// Validate joint data before using
+		bool data_valid = true;
+		for(int i=0; i<6; i++) {
+			// Check for reasonable joint position values (-360 to 360 degrees)
+			if(abs(data->actual_joint_position[i]) > 360.0) {
+				RCLCPP_WARN_THROTTLE(rclcpp::get_logger("dsr_hw_interface2"),
+					*rclcpp::Clock{RCL_ROS_TIME}.get_clock(), 5000,
+					"Invalid joint %d position: %.2f degrees", i+1, data->actual_joint_position[i]);
+				data_valid = false;
+				break;
+			}
+		}
+		
+		if(data_valid) {
+			for(int i=0;i<6;i++) {
+				joint_position_[i] = static_cast<float>(data->actual_joint_position[i] * (M_PI / 180.0f));
+				joint_velocities_[i] = static_cast<float>(data->actual_joint_velocity[i] * (M_PI / 180.0f));
+			}
+		} else {
+			// Keep last known good values
+			RCLCPP_WARN(rclcpp::get_logger("dsr_hw_interface2"), "Using last known joint positions due to invalid data");
 		}
 	}else if(mode == "virtual") {
 		LPROBOT_POSE pose = Drfl.GetCurrentPose();
@@ -394,9 +461,48 @@ return_type DRHWInterface::write(const rclcpp::Time &, const rclcpp::Duration &d
 			targetVel[i] = static_cast<float>(joint_velocities_command_[i] * (180.0f / M_PI));
 		}
 		if(mode == "real") {
-			float margin = 1.5; // Setted margin since most host aren't RT. 
-			float acc[6] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f}; // Complied with internal profile.
-			Drfl.servoj_rt(pos, targetVel, acc, float(dt.seconds() * margin));
+			// Safety checks before sending RT command
+			bool safe_to_move = true;
+			
+			// Check if any joint position command is drastically different
+			for(int i = 0; i < 6; i++) {
+				float pos_diff = abs(pos[i] - static_cast<float>(joint_position_[i] * (180.0f / M_PI)));
+				if(pos_diff > 30.0f) {  // More than 30 degrees difference
+					RCLCPP_WARN(rclcpp::get_logger("dsr_hw_interface2"), 
+						"Large joint %d position change detected: %.2f degrees. Limiting to 30 deg.", i+1, pos_diff);
+					// Limit the change to maximum 30 degrees
+					float current_deg = static_cast<float>(joint_position_[i] * (180.0f / M_PI));
+					if(pos[i] > current_deg) {
+						pos[i] = current_deg + 30.0f;
+					} else {
+						pos[i] = current_deg - 30.0f;
+					}
+				}
+			}
+			
+			// Limit target velocities for safety
+			for(int i = 0; i < 6; i++) {
+				if(abs(targetVel[i]) > 45.0f) {  // Limit to 45 deg/s
+					targetVel[i] = (targetVel[i] > 0) ? 45.0f : -45.0f;
+				}
+			}
+			
+			// Use conservative timing with margin for non-RT systems
+			float time_margin = 2.0f; // Increased margin for safety
+			float execution_time = float(dt.seconds() * time_margin);
+			
+			// Ensure minimum execution time for safety
+			if(execution_time < 0.02f) { // Minimum 20ms
+				execution_time = 0.02f;
+			}
+			
+			float acc[6] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f}; // Use controller's internal profile
+			
+			// Send RT servo command
+			if(!Drfl.servoj_rt(pos, targetVel, acc, execution_time)) {
+				RCLCPP_ERROR(rclcpp::get_logger("dsr_hw_interface2"), "Failed to send RT servo command");
+				// Don't return error immediately, just log and continue
+			}
 		}
 		else { // "virtual"
 			float target_vel_acc[6] = {70.0f, 70.0f, 70.0f, 70.0f, 70.0f, 70.0f};

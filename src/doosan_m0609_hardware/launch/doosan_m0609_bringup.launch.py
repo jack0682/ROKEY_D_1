@@ -12,7 +12,7 @@ def generate_launch_description():
     # Declare launch arguments
     robot_ip_arg = DeclareLaunchArgument(
         'robot_ip',
-        default_value='192.168.137.100',
+        default_value='192.168.1.100',
         description='IP address of the Doosan robot controller'
     )
     
@@ -88,8 +88,12 @@ def generate_launch_description():
       <!-- ROS2 Control hardware interface -->
       <ros2_control name="doosan_m0609_hardware" type="system">
         <hardware>
-          <plugin>doosan_m0609_hardware/DsrHw2</plugin>
-          <param name="robot_ip">192.168.137.100</param>
+          <plugin>doosan_m0609_hardware/DRHWInterface</plugin>
+          <param name="host">192.168.1.100</param>
+          <param name="rt_host">192.168.1.100</param>
+          <param name="port">12345</param>
+          <param name="mode">real</param>
+          <param name="model">m0609</param>
         </hardware>
         
         <joint name="joint1">

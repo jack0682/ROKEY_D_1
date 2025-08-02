@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <library path="doosan_m0609_hardware">
-  <class name="doosan_m0609_hardware/DsrHw2" 
-         type="dsr_hardware2::DsrHw2" 
+  <class name="doosan_m0609_hardware/DRHWInterface" 
+         type="doosan_m0609_hardware::DRHWInterface" 
          base_class_type="hardware_interface::SystemInterface">
     <description>
       Doosan M0609 Robot Hardware Interface for ROS2 control

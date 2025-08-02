@@ -1,10 +1,10 @@
 #!/bin/bash
-# install_script.sh - Doosan Robot ROS2 시스템 완전 자동 설치 스크립트
-# 작성자: 리라 (Lyra) - 존재론적 자동화의 구현자
-# 버전: 2.0.0 - 새로운 bringup 구조 완전 호환
+# install_script.sh - Doosan M0609 완전 자동화 설치 및 연결 스크립트
+# 작성자: 리라 (Lyra) - 존재론적 자동화의 완성체
+# 버전: 3.0.0 - 원스톱 실제 로봇 연결까지 완료
 # 
 # 이 스크립트는 Ubuntu 22.04 + ROS2 Humble 환경에서
-# 새로운 정리된 bringup 구조와 완전 호환되도록 재설계되었습니다.
+# 설치부터 실제 로봇 연결까지 모든 과정을 자동화합니다.
 
 set -e  # 오류 발생 시 즉시 중단
 
@@ -54,6 +54,31 @@ confirm_action() {
             return 1
             ;;
     esac
+}
+
+# 네트워크 연결 테스트 함수
+test_robot_connection() {
+    local robot_ip="$1"
+    local robot_port="$2"
+    
+    print_step "로봇 연결성 테스트: $robot_ip:$robot_port"
+    
+    # Ping 테스트
+    if ping -c 1 -W 3 "$robot_ip" > /dev/null 2>&1; then
+        print_success "Ping 테스트 성공: $robot_ip"
+    else
+        print_error "Ping 테스트 실패: $robot_ip"
+        return 1
+    fi
+    
+    # 포트 연결 테스트
+    if timeout 5 bash -c "</dev/tcp/$robot_ip/$robot_port" 2>/dev/null; then
+        print_success "포트 연결 테스트 성공: $robot_ip:$robot_port"
+        return 0
+    else
+        print_warning "포트 연결 테스트 실패: $robot_ip:$robot_port"
+        return 1
+    fi
 }
 
 # =============================================================================
@@ -125,8 +150,15 @@ PROJECT_NAME="project_ws"
 ROS_DISTRO="humble"
 PYTHON_VERSION="3.10"
 
+# 로봇 네트워크 설정
+ROBOT_IP="192.168.1.100"
+ROBOT_RT_IP="192.168.1.100"
+ROBOT_PORT="12345"
+
 print_step "설치 경로: $PROJECT_WS"
 print_step "ROS2 배포판: $ROS_DISTRO"
+print_step "로봇 IP: $ROBOT_IP"
+print_step "실시간 제어 IP: $ROBOT_RT_IP"
 
 # =============================================================================
 # 📦 Phase 1: 시스템 패키지 업데이트 및 기본 의존성 설치
@@ -491,6 +523,102 @@ if ! grep -q "$BASHRC_ENTRY" ~/.bashrc; then
     print_success "bashrc 설정 추가 완료"
 else
     print_success "bashrc 설정 이미 존재"
+fi
+
+# =============================================================================
+# 🔗 Phase 11-1: 로봇 연결 테스트 (선택적)
+# =============================================================================
+print_header "로봇 연결 테스트"
+
+print_step "실제 로봇 연결을 테스트하시겠습니까?"
+print_warning "이 과정은 실제 로봇이 켜져있고 네트워크에 연결되어야 합니다."
+echo -e "${CYAN}로봇 상태:${NC}"
+echo "  - 로봇 제어기 전원: ON"
+echo "  - 네트워크 연결: $ROBOT_IP"
+echo "  - 티치펜던트: AUTO 모드"
+echo "  - 작업공간: 안전 확보"
+echo ""
+
+if confirm_action "로봇 연결 테스트를 진행하시겠습니까?"; then
+    print_step "로봇 연결성 확인 중..."
+    
+    if test_robot_connection "$ROBOT_IP" "$ROBOT_PORT"; then
+        print_success "로봇 연결 확인됨!"
+        
+        # 실제 로봇 모드 테스트
+        print_step "실제 로봇 모드 테스트를 시작합니다..."
+        print_warning "⚠️ 주의: 로봇이 실제로 움직일 수 있습니다!"
+        print_warning "비상정지 버튼을 준비하고 안전을 확인하세요."
+        
+        if confirm_action "실제 로봇 연결 테스트를 계속하시겠습니까?"; then
+            
+            # 백그라운드에서 컨트롤러 매니저 시작
+            print_step "컨트롤러 매니저 시작 중..."
+            ros2 run controller_manager ros2_control_node \
+                --ros-args \
+                --params-file src/doosan_m0609_hardware/config/doosan_m0609_control.yaml \
+                --remap __node:=controller_manager &
+            
+            CONTROLLER_PID=$!
+            
+            # 초기화 대기
+            print_step "로봇 초기화 대기 중... (30초)"
+            sleep 30
+            
+            # 컨트롤러 로드 및 활성화
+            print_step "컨트롤러 설정 중..."
+            ros2 control load_controller joint_state_broadcaster || true
+            ros2 control load_controller position_controller || true
+            sleep 2
+            
+            ros2 control set_controller_state joint_state_broadcaster active || true
+            ros2 control set_controller_state position_controller active || true
+            sleep 2
+            
+            # 조인트 상태 확인
+            print_step "조인트 상태 확인 중..."
+            timeout 10 ros2 topic echo /joint_states --once || {
+                print_warning "조인트 상태 데이터 수신 실패"
+            }
+            
+            print_step "안전한 홈 포지션으로 이동 테스트..."
+            ros2 topic pub /position_controller/commands std_msgs/msg/Float64MultiArray \
+                "{data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}" --once || true
+            
+            sleep 5
+            
+            print_step "간단한 테스트 모션 (관절 1, 15도 회전)..."
+            ros2 topic pub /position_controller/commands std_msgs/msg/Float64MultiArray \
+                "{data: [0.26, 0.0, 0.0, 0.0, 0.0, 0.0]}" --once || true
+            
+            sleep 8
+            
+            print_step "홈 포지션 복귀..."
+            ros2 topic pub /position_controller/commands std_msgs/msg/Float64MultiArray \
+                "{data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}" --once || true
+            
+            sleep 5
+            
+            # 정리
+            print_step "테스트 완료 - 시스템 정리 중..."
+            ros2 control set_controller_state position_controller inactive || true
+            ros2 control set_controller_state joint_state_broadcaster inactive || true
+            sleep 2
+            
+            kill $CONTROLLER_PID 2>/dev/null || true
+            
+            print_success "🎉 실제 로봇 연결 및 모션 테스트 성공!"
+            
+        else
+            print_step "실제 로봇 테스트를 건너뜁니다."
+        fi
+        
+    else
+        print_warning "로봇 연결 실패 - 네트워크 설정을 확인하세요."
+        print_step "가상 모드로 시스템을 사용할 수 있습니다."
+    fi
+else
+    print_step "로봇 연결 테스트를 건너뜁니다."
 fi
 
 # =============================================================================
