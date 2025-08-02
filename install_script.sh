@@ -214,7 +214,7 @@ sudo apt install -y \
     python3-argcomplete \
     python3-vcstool \
     ros-$ROS_DISTRO-rmw-fastrtps-cpp \
-    ros-$ROS_DISTRO-rmw-cyclonedx-cpp
+    ros-$ROS_DISTRO-rmw-cyclonedds-cpp
 
 print_success "ROS2 개발 도구 설치 완료"
 
@@ -258,10 +258,8 @@ print_success "로봇 제어 패키지 설치 완료"
 print_header "Doosan 로봇 전용 의존성 설치"
 
 print_step "DRFL 의존성 - Poco 라이브러리 설치 중..."
-sudo apt install -y \
-    libpoco-dev \
-    libpoco-foundation-dev \
-    libpoco-net-dev
+sudo apt install -y libpoco-dev
+
 
 print_step "YAML 처리 라이브러리 설치 중..."
 sudo apt install -y \

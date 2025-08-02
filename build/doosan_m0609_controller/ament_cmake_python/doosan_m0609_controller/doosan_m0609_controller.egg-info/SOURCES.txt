@@ -4,9 +4,3 @@ doosan_m0609_controller.egg-info/PKG-INFO
 doosan_m0609_controller.egg-info/SOURCES.txt
 doosan_m0609_controller.egg-info/dependency_links.txt
 doosan_m0609_controller.egg-info/top_level.txt
-doosan_m0609_controller/msg/__init__.py
-doosan_m0609_controller/msg/_joint_state.py
-doosan_m0609_controller/msg/_robot_status.py
-doosan_m0609_controller/srv/__init__.py
-doosan_m0609_controller/srv/_connect_robot.py
-doosan_m0609_controller/srv/_move_j.py
