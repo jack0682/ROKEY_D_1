@@ -1,0 +1,171 @@
+import ssl
+import random
+import threading
+import time
+import paho.mqtt.client as mqtt
+
+import rclpy
+import DR_init
+
+# =====================
+# MQTT 설정
+# =====================
+MQTT_CONFIG = {
+    'broker': 'p021f2cb.ala.asia-southeast1.emqxsl.com',
+    'port': 8883,
+    'username': 'Rokey',
+    'password': '1234567',
+    'topic': "test",
+    'client_id': f'python-mqtt-{random.randint(0, 100)}',
+    'keepalive': 60
+}
+
+# =====================
+# MQTT 콜백 함수
+# =====================
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("[MQTT] 브로커 연결 성공")
+        client.subscribe(MQTT_CONFIG['topic'])
+        print(f"[MQTT] '{MQTT_CONFIG['topic']}' 토픽 구독 시작")
+    else:
+        print(f"[MQTT] 연결 실패. 코드: {rc}")
+
+def on_message(client, userdata, msg):
+    payload = msg.payload.decode()
+    print(f"[MQTT 수신] 토픽: {msg.topic} | 메시지: {payload}")
+
+def mqtt_listener():
+    client = mqtt.Client(client_id=MQTT_CONFIG['client_id'])
+    client.username_pw_set(MQTT_CONFIG['username'], MQTT_CONFIG['password'])
+
+    # TLS 인증 (테스트용: 인증서 검증 끔)
+    client.tls_set(cert_reqs=ssl.CERT_NONE)
+    client.tls_insecure_set(True)
+
+    client.on_connect = on_connect
+    client.on_message = on_message
+
+    client.connect(
+        MQTT_CONFIG['broker'],
+        MQTT_CONFIG['port'],
+        MQTT_CONFIG['keepalive']
+    )
+
+    client.loop_forever()
+
+# =====================
+# 로봇 제어 코드
+# =====================
+ROBOT_ID = "dsr01"
+ROBOT_MODEL = "m0609"
+VELOCITY, ACC = 60, 60
+
+DR_init.__dsr__id = ROBOT_ID
+DR_init.__dsr__model = ROBOT_MODEL
+
+def main(args=None):
+    mqtt_thread = threading.Thread(target=mqtt_listener, daemon=True)
+    mqtt_thread.start()
+
+    rclpy.init(args=args)
+    node = rclpy.create_node("rokey_move", namespace=ROBOT_ID)
+    DR_init.__dsr__node = node
+
+    try:
+        from DSR_ROBOT2 import (
+            set_tool,
+            set_tcp,
+            movej,
+            set_digital_output,
+            movel,
+        )
+        from DR_common2 import posx, posj
+    except ImportError as e:
+        print(f"Error importing DSR_ROBOT2 : {e}")
+        return
+
+    def release():
+        set_digital_output(1, 0)
+        set_digital_output(2, 1)
+
+    def grip():
+        set_digital_output(2, 0)
+        set_digital_output(1, 1)
+
+    set_tool("Tool Weight_2FG")
+    set_tcp("2FG_TCP")
+
+    JReady = posj([0.0, 0.0, 90.0, 0.0, 90.0, 0.0]) 
+    pos1 = posx([416.26, 74.73, 48.42, 174.5, -179.59, -91.68]) #빈컵잡기 
+    pos1_1 = posx([416.26, 74.73, 200.42, 174.5, -179.59, -91.68])
+    pos2 = posx([672.05, 146.11, 83.49, 11.42, 180, 100.68]) #빈컵놓기
+    pos2_1 = posx([664.05, 146.11, 150.49, 11.42, 180, 100.68]) #빈컵놓기 전에 위
+    pos3 = posx([393.78, -313.01, 22.34, 103.45, -169.61, -78.61])#스푼 잡기
+    pos3_1 = posx([393.0, -447.0, 173.0, 96.0, -178.0, 100.0])
+    pos4 = posx([516.4, -30.72, 241.8, 118.46, -139.79, -91.38])#설탕퍼기직전
+    pos5 = posx([563.94, -114.13, 161.17, 112.95, -142.83, -90.62])#설탕담음
+    pos6 = posx([555.41, -69.15, 211.1, 109.81, -124.78, -91.08])#담고들음
+    pos7 = posx([597.91, 198.87, 156.25, 139.14, -108.22, -95.49])#설탕든채로 컵위
+    pos8 = posx([597.47, 180.63, 164.45, 137.01, -107.33, 134.82])#설탕부음
+    pos9 = posx([620.62, 183.2, 287.19, 4.42, 127.24, 129.72])#스푼복귀중
+    pos10 = posx([399.0, -189.0, 379.0, 151.0, -164.0, -115.0])#스푼 복귀하면서 좀 위로
+    pos11 = posx([393.44, -313.19, 30.19, 15.46, 176.25, -163.03])#스푼복귀완
+    pos12 = posx([696.14, -49.48, 362.64, 171.6, -94.24, -8.46])#주전자잡기1초전
+    pos13 = posx([802.13, -58.95, 346.45, 178.56, -86.88, 0.44])#주전자잡기
+    pos14 = posx([668.98, 340.02, 499.41, 26.5, 86.37, -178.1])#주전자붓기전
+    pos15 = posx([593.42, 352.19, 263.66, 23.69, 90.46, 179.7])#물붓기전
+    pouring = posj([36.36, 13.39, 123.34, 17.77, -47.68, 167.52])#물붓기시작할때j
+    pos16 = posx([798.24, -49.89, 498.92, 175.71, -86.68, -0.46])#주전자 복귀
+
+    set_digital_output(2, 1)
+    set_digital_output(1, 1)
+
+    # 기존 로봇 동작 루프
+    while rclpy.ok():
+        movej(JReady, vel=VELOCITY, acc=ACC)
+        movel(pos1, vel=VELOCITY, acc=ACC)
+        grip()
+        time.sleep(1.0)
+        movel(pos1_1, vel=VELOCITY, acc=ACC)
+        movel(pos2_1, vel=VELOCITY, acc=ACC)
+        movel(pos2, vel=VELOCITY, acc=ACC)
+        time.sleep(0.5)
+        release()
+        time.sleep(0.5)
+        movel(pos10, vel=VELOCITY, acc=ACC)
+        movel(pos3, vel=VELOCITY, acc=ACC)
+        grip()
+        time.sleep(2.5)
+        movel(pos3_1, vel=VELOCITY, acc=ACC)
+        movel(pos4, vel=VELOCITY, acc=ACC)
+        movel(pos5, vel=VELOCITY, acc=ACC)
+        movel(pos6, vel=VELOCITY, acc=ACC)
+        movel(pos7, vel=VELOCITY, acc=ACC)
+        movel(pos8, vel=VELOCITY, acc=ACC)
+        movel(pos9, vel=VELOCITY, acc=ACC)
+        movel(pos3_1, vel=VELOCITY, acc=ACC)
+        movel(pos11, vel=VELOCITY, acc=ACC)
+        release()
+        movel(pos12, vel=VELOCITY, acc=ACC)
+        movel(pos13, vel=VELOCITY, acc=ACC)
+        grip()
+        time.sleep(2.5)
+        movel(pos14, vel=VELOCITY, acc=ACC)
+        movel(pos15, vel=VELOCITY, acc=ACC)
+        # while 1:
+        #     movej(popourings15, vel=VELOCITY, acc=ACC)
+
+        movel(pos16, vel=VELOCITY, acc=ACC)
+        movel(pos13, vel=VELOCITY, acc=ACC)
+        time.sleep(1.0)
+        release()
+        time.sleep(1.0)
+
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    
+
+    # 로봇 제어 메인 실행
+    main()
