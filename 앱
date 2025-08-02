@@ -83,17 +83,17 @@
     let totalWeight = 0;
 
     function updateCup(data) {
+      // event 수신 처리
       if (data.event !== undefined) {
         console.log(`event 수신됨: ${data.event}`);
+        if (data.event === "1" || data.event === 1) {
+          isNextSugar = true;
+          console.log("event 1 수신, 설탕 무게 모드 활성화");
+        }
+        return; // event만 있는 경우 weight 갱신하지 않음
       }
 
-      // event가 "1" 또는 1 이면 설탕 입력 모드 활성화
-      if (data.event === "1" || data.event === 1) {
-        isNextSugar = true;
-        console.log("event 1 수신, 설탕 무게 모드 활성화");
-        return;
-      }
-
+      // 무게 데이터 처리
       let rawWeight = data.weight || 0;
       let weight = Math.max(0, Math.min(rawWeight, MAX_WEIGHT));
       let percent = (weight / MAX_WEIGHT) * 100;
@@ -101,6 +101,7 @@
       document.getElementById("water").style.height = percent + "%";
       document.getElementById("weight-value").innerText = weight;
 
+      // 설탕 모드일 때
       if (isNextSugar) {
         sugarWeight = weight;
         isNextSugar = false;
@@ -111,8 +112,10 @@
         return;
       }
 
+      // 전체 무게 저장
       totalWeight = weight;
 
+      // 농도 계산
       if (sugarWeight > 0 && totalWeight > 0) {
         const concentration = ((sugarWeight / totalWeight) * 100).toFixed(1);
         document.getElementById("salt-output").innerText = `설탕 무게: ${sugarWeight} g`;
@@ -122,9 +125,11 @@
         document.getElementById("concentration-output").innerText = "";
       }
 
+      // JSON 출력창 갱신
       document.getElementById("json-output").innerText = `무게: ${weight} g`;
     }
 
+    // MQTT 연결
     const client = mqtt.connect("wss://p021f2cb.ala.asia-southeast1.emqxsl.com:8084/mqtt", {
       username: "Rokey",
       password: "1234567",
@@ -148,10 +153,12 @@
       console.log("받은 메시지:", message.toString());
       try {
         const data = JSON.parse(message.toString());
-        if (data.sensor_type === "scale") {
+
+        // event 메시지거나 scale 센서 데이터면 처리
+        if (data.event !== undefined || data.sensor_type === "scale") {
           updateCup(data);
         } else {
-          console.log("sensor_type이 'scale'이 아닙니다.");
+          console.log("처리할 수 없는 메시지 형식");
         }
       } catch (err) {
         console.error("메시지 파싱 오류:", err);
