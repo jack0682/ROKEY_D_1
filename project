@@ -54,7 +54,7 @@ def on_message(client, userdata, msg):
 
         if current_weight > weight:
             flag = 2
-        elif current_weight > weight * 0.8:
+        elif flag != 2 and current_weight > weight * 0.8:
             flag = 1
 
         if current_weight > start_weight:
@@ -100,7 +100,7 @@ def main(args=None):
     DR_init.__dsr__node = node
 
     try:
-        from DSR_ROBOT2 import set_tool, set_tcp, movej, set_digital_output, movel
+        from DSR_ROBOT2 import set_tool, set_tcp, movej, set_digital_output, movel, check_force_condition, DR_AXIS_Z, task_compliance_ctrl, set_desired_force, DR_FC_MOD_REL
         from DR_common2 import posx, posj
     except ImportError as e:
         print(f"Error importing DSR_ROBOT2 : {e}")
@@ -133,13 +133,13 @@ def main(args=None):
     pos9 = posx([620.62, 183.2, 287.19, 4.42, 127.24, 129.72]) #스푼복귀중
     pos10 = posx([399.0, -189.0, 379.0, 151.0, -164.0, -115.0]) #스푼복귀하는중에 좀 위로
     pos11 = posx([393.44, -313.19, 30.19, 15.46, 176.25, -163.03]) # 스푼복귀완
-    pos12 = posx([696.14, -49.48, 362.64, 171.6, -94.24, -8.46]) #주전자잡기1초전
-    pos13 = posx([802.13, -58.95, 346.45, 178.56, -86.88, 0.44]) #주전자잡기
+    pos12 = posx([582.2, -41.25, 197.8, 171.72, -113.12, 10.08]) #주전자잡기1초전
+    pos13 = posx([816.14, -62.07, 298.77, 175.91, -90.0, 0.0]) #주전자잡기
     pos14 = posx([668.98, 340.02, 499.41, 26.5, 86.37, -178.1]) #주전자붓기전
     pos15 = posx([593.42, 352.19, 263.66, 23.69, 90.46, 179.7]) #물붓기전
-    pouring = posj([36.36, 13.39, 123.34, 17.77, -47.68, 167.52]) #물붓기시작할때j
-    pos16 = posx([798.24, -49.89, 498.92, 175.71, -86.68, -0.46]) #주전자복귀
-
+    pouring = posj([35.86, 13.39, 123.34, 17.77, -47.68, 167.52]) #물붓기시작할때j
+    pos16 = posx([808.24, -49.89, 451.92, 175.71, -86.68, -0.46]) #주전자복귀시작
+    
     set_digital_output(2, 1)
     set_digital_output(1, 1)
 
@@ -154,13 +154,7 @@ def main(args=None):
         time.sleep(0.5)
         set_digital_output(2, 1)
         time.sleep(0.5)
-        if mqtt_client:
-            payload = {
-                "event": "2",
 
-            }
-            mqtt_client.publish("test", json.dumps(payload))
-            print(f"[MQTT 발행] {payload}")
         movel(pos10, vel=VELOCITY, acc=ACC)
         movel(pos3, vel=VELOCITY, acc=ACC)
         grip()
@@ -176,7 +170,6 @@ def main(args=None):
         if mqtt_client:
             payload = {
                 "event": "1",
-
             }
             mqtt_client.publish("test", json.dumps(payload))
             print(f"[MQTT 발행] {payload}")
@@ -184,16 +177,35 @@ def main(args=None):
         movel(pos9, vel=VELOCITY, acc=ACC)
         movel(pos3_1, vel=VELOCITY, acc=ACC)
         movel(pos11, vel=VELOCITY, acc=ACC)
+        task_compliance_ctrl(stx=[500, 500, 500, 100, 100, 100])
+        time.sleep(0.1)
+        set_desired_force(fd=[0, 0, -20, 0, 0, 0], dir=[0, 0, 1, 0, 0, 0], mod=DR_FC_MOD_REL)
+        time.sleep(0.1)
+        force_condition = 0
+        while (force_condition > -1): # 힘제어로 블럭 놓기
+            force_condition = check_force_condition(DR_AXIS_Z, max=15.0)  # 숫자 낮을수록 빨리 멈춤
+            time.sleep(0.1)
         set_digital_output(2, 1)
-        movel(pos12, vel=VELOCITY, acc=ACC)
+        time.sleep(1.0)
+        movel(posx(0, 0, 100, 0, 0, 0), vel=VELOCITY, acc=ACC)
+        movel(pos12, vel=VELOCITY, acc=ACC) #원래 여기서 덜컹
         movel(pos13, vel=VELOCITY, acc=ACC)
+        pos13[2] += 50.0
+
         grip()
         time.sleep(2.5)
+        movel(pos13, vel=VELOCITY, acc=ACC)
+        pos13[2] -= 50.0
         movel(pos14, vel=VELOCITY, acc=ACC)
         movel(pos15, vel=VELOCITY, acc=ACC)
         flag = 0
         flag_start = 0
-
+        if mqtt_client:
+            payload = {
+                "event": "2",
+            }
+            mqtt_client.publish("test", json.dumps(payload))
+            print(f"[MQTT 발행] {payload}")
         # 붓기 전
         while True:
             if flag_start == 1:
@@ -222,14 +234,22 @@ def main(args=None):
         while True:
             if flag == 2:
                 break
-
+        if mqtt_client:
+            payload = {
+                "event": "3",
+            }
+            mqtt_client.publish("test", json.dumps(payload))
+            print(f"[MQTT 발행] {payload}")
         pouring[5] = 167.52
         movej(pouring, vel=VELOCITY, acc=ACC)
         movel(pos16, vel=VELOCITY, acc=ACC)
         movel(pos13, vel=VELOCITY, acc=ACC)
+
         time.sleep(1.0)
         set_digital_output(2, 1)
         time.sleep(1.0)
+        movel(pos12, vel=VELOCITY, acc=ACC)
+
 
     rclpy.shutdown()
 
