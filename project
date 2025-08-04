@@ -58,7 +58,6 @@ def on_message(client, userdata, msg):
                 flag = 2
             elif flag != 2 and current_weight > weight * 0.85:
                 flag = 1
-
             if current_weight > start_weight:
                 flag_start = 1
 
@@ -67,7 +66,6 @@ def on_message(client, userdata, msg):
                 flag = 2
             elif flag != 2 and current_weight > weight * 0.7:
                 flag = 1
-
             if current_weight > start_weight:
                 flag_start = 1
 
@@ -165,8 +163,8 @@ def main(args=None):
         movel(pos1, vel=VELOCITY, acc=ACC)
         set_digital_output(2, 0)
         time.sleep(1.0)
-        movel(pos2_1, vel=VELOCITY, acc=ACC, radius=40, ref=DR_BASE, mod=DR_MV_MOD_ABS)
-        movel(pos2, vel=VELOCITY, acc=ACC, radius=40, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        movel(pos2_1, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        movel(pos2, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
         time.sleep(0.5)
         set_digital_output(2, 1)
         time.sleep(0.5)
