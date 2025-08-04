@@ -24,7 +24,7 @@ MQTT_CONFIG = {
 # =====================
 # 제어 변수
 # =====================
-weight = 130.0
+weight = 60.0
 start_weight = 5.0
 flag = 0
 flag_start = 0
@@ -54,7 +54,7 @@ def on_message(client, userdata, msg):
 
         if current_weight > weight:
             flag = 2
-        elif flag != 2 and current_weight > weight * 0.8:
+        elif flag != 2 and current_weight > weight * 0.85:
             flag = 1
 
         if current_weight > start_weight:
@@ -85,7 +85,7 @@ def mqtt_listener():
 # =====================
 ROBOT_ID = "dsr01"
 ROBOT_MODEL = "m0609"
-VELOCITY, ACC = 60, 60
+VELOCITY, ACC = 80, 80
 DR_init.__dsr__id = ROBOT_ID
 DR_init.__dsr__model = ROBOT_MODEL
 
@@ -100,7 +100,7 @@ def main(args=None):
     DR_init.__dsr__node = node
 
     try:
-        from DSR_ROBOT2 import set_tool, set_tcp, movej, set_digital_output, movel, check_force_condition, DR_AXIS_Z, task_compliance_ctrl, set_desired_force, DR_FC_MOD_REL
+        from DSR_ROBOT2 import set_tool, set_tcp, movej, set_digital_output, movel, check_force_condition, DR_AXIS_Z, task_compliance_ctrl, set_desired_force, DR_FC_MOD_REL, DR_BASE,DR_MV_MOD_ABS
         from DR_common2 import posx, posj
     except ImportError as e:
         print(f"Error importing DSR_ROBOT2 : {e}")
@@ -148,9 +148,9 @@ def main(args=None):
         movel(pos1, vel=VELOCITY, acc=ACC)
         set_digital_output(2, 0)
         time.sleep(1.0)
-        movel(pos1_1, vel=VELOCITY, acc=ACC)
-        movel(pos2_1, vel=VELOCITY, acc=ACC)
-        movel(pos2, vel=VELOCITY, acc=ACC)
+        movel(pos1_1, vel=VELOCITY, acc=ACC, radius=10, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        movel(pos2_1, vel=VELOCITY, acc=ACC, radius=10, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        movel(pos2, vel=VELOCITY, acc=ACC, radius=10, ref=DR_BASE, mod=DR_MV_MOD_ABS)
         time.sleep(0.5)
         set_digital_output(2, 1)
         time.sleep(0.5)
