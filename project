@@ -24,7 +24,7 @@ MQTT_CONFIG = {
 # =====================
 # 제어 변수
 # =====================
-weight = 80.0
+weight = 0.0
 start_weight = 5.0
 flag = 0
 flag_start = 0
@@ -46,10 +46,12 @@ def on_connect(client, userdata, flags, rc):
         print(f"[MQTT] 연결 실패. 코드: {rc}")
 
 def on_message(client, userdata, msg):
-    global flag, flag_start
+    global flag, flag_start, weight
     try:
         data = json.loads(msg.payload.decode())
         print(f"[MQTT 수신] 토픽: {msg.topic} | JSON: {data}")
+        if(weight == 0.0):
+            weight = float(data.get("concentration", 0))
         current_weight = float(data.get("weight", 0))
         if weight > 100:
             if current_weight > weight:
@@ -99,7 +101,7 @@ DR_init.__dsr__id = ROBOT_ID
 DR_init.__dsr__model = ROBOT_MODEL
 
 def main(args=None):
-    global flag, flag_start
+    global flag, flag_start, weight
 
     mqtt_thread = threading.Thread(target=mqtt_listener, daemon=True)
     mqtt_thread.start()
@@ -154,6 +156,11 @@ def main(args=None):
 
     while rclpy.ok():
         movej(JReady, vel=VELOCITY, acc=ACC)
+        
+        while 1:
+            if(weight > 0):
+                print(weight)
+                break
         
         movel(pos1, vel=VELOCITY, acc=ACC)
         set_digital_output(2, 0)
