@@ -6,6 +6,15 @@ import json
 import paho.mqtt.client as mqtt
 import rclpy
 import DR_init
+from DRFC import *
+from DR_common2 import *
+
+from dsr_msgs2.msg import *
+from dsr_msgs2.srv import *
+
+
+
+
 # =====================
 # MQTT 설정
 # =====================
@@ -32,64 +41,6 @@ flag_start = 0
 # =====================
 mqtt_client = None
 
-# =====================
-# MQTT 콜백
-# =====================
-def on_connect(client, userdata, flags, rc):
-    if rc == 0:
-        print("[MQTT] 브로커 연결 성공")
-        client.subscribe(MQTT_CONFIG['topic'])
-        print(f"[MQTT] '{MQTT_CONFIG['topic']}' 토픽 구독 시작")
-    else:
-        print(f"[MQTT] 연결 실패. 코드: {rc}")
-
-def on_message(client, userdata, msg):
-    global flag, flag_start, weight
-    try:
-        data = json.loads(msg.payload.decode())
-        print(f"[MQTT 수신] 토픽: {msg.topic} | JSON: {data}")
-        if(weight == 0.0):
-            weight = float(data.get("concentration", 0))
-        current_weight = float(data.get("weight", 0))
-        if(float(data.get("stop", 0))==1):
-            #stop(DR_QSTOP)
-            rclpy.shutdown()
-
-        if weight > 100:
-            if current_weight > weight:
-                flag = 2
-            elif flag != 2 and current_weight > weight * 0.85:
-                flag = 1
-            if current_weight > start_weight:
-                flag_start = 1
-
-        else:
-            if current_weight > weight:
-                flag = 2
-            elif flag != 2 and current_weight > weight * 0.7:
-                flag = 1
-            if current_weight > start_weight:
-                flag_start = 1
-
-    except json.JSONDecodeError:
-        print(f"[MQTT 수신] JSON 변환 실패. 원본: {msg.payload.decode()}")
-
-# =====================
-# MQTT 리스너 스레드
-# =====================
-def mqtt_listener():
-    global mqtt_client
-    client = mqtt.Client(client_id=MQTT_CONFIG['client_id'])
-    client.username_pw_set(MQTT_CONFIG['username'], MQTT_CONFIG['password'])
-    client.tls_set(cert_reqs=ssl.CERT_NONE)
-    client.tls_insecure_set(True)
-
-    client.on_connect = on_connect
-    client.on_message = on_message
-
-    client.connect(MQTT_CONFIG['broker'], MQTT_CONFIG['port'], MQTT_CONFIG['keepalive'])
-    mqtt_client = client
-    client.loop_start()
 
 # =====================
 # 로봇 제어 코드
@@ -108,14 +59,11 @@ def main(args=None):
     DR_init.__dsr__node = node
 
 
-    mqtt_thread = threading.Thread(target=mqtt_listener, daemon=True)
-    mqtt_thread.start()
-
-
-
     try:
-        from DSR_ROBOT2 import set_tool, set_tcp, movej, set_digital_output, movel, check_force_condition, DR_AXIS_Z, task_compliance_ctrl, set_desired_force, DR_FC_MOD_REL, DR_BASE,DR_MV_MOD_ABS, DR_QSTOP, DR_SSTOP
+        from DSR_ROBOT2 import set_tool, set_tcp, movej, set_digital_output, movel, check_force_condition, DR_AXIS_Z, task_compliance_ctrl, set_desired_force, DR_FC_MOD_REL, DR_BASE,DR_MV_MOD_ABS, DR_QSTOP, DR_SSTOP,moveb
         from DR_common2 import posx, posj
+
+        
     except ImportError as e:
         print(f"Error importing DSR_ROBOT2 : {e}")
         return
@@ -127,6 +75,96 @@ def main(args=None):
     def grip():
         set_digital_output(2, 0)
         set_digital_output(1, 1)
+
+
+    # =====================
+    # MQTT 콜백
+    # =====================
+    def on_connect(client, userdata, flags, rc):
+        if rc == 0:
+            print("[MQTT] 브로커 연결 성공")
+            client.subscribe(MQTT_CONFIG['topic'])
+            print(f"[MQTT] '{MQTT_CONFIG['topic']}' 토픽 구독 시작")
+        else:
+            print(f"[MQTT] 연결 실패. 코드: {rc}")
+
+    def on_message(client, userdata, msg):
+        global flag, flag_start, weight
+        try:
+            data = json.loads(msg.payload.decode())
+            print(f"[MQTT 수신] 토픽: {msg.topic} | JSON: {data}")
+
+            if weight == 0.0:
+                weight = float(data.get("concentration", 0))
+            current_weight = float(data.get("weight", 0))
+
+            # stop 신호 처리
+            if float(data.get("stop", 0)) == 1:
+                try:
+                    # motion/move_stop 서비스 호출
+                    stop_cli = DR_init.__dsr__node.create_client(MoveStop, f"/{ROBOT_ID}/motion/move_stop")
+                    while not stop_cli.wait_for_service(timeout_sec=1.0):
+                        print("Waiting for motion/move_stop service...")
+
+                    stop_req = MoveStop.Request()
+                    stop_req.stop_mode = 0  # 0 = 기본 Stop, 1 = Quick Stop, 2 = Safe Stop, 3 = Hold
+                    stop_future = stop_cli.call_async(stop_req)
+
+                    rclpy.spin_until_future_complete(DR_init.__dsr__node, stop_future, timeout_sec=5.0)
+                    if stop_future.done() and stop_future.result().success:
+                        print("[STOP] motion/move_stop 성공")
+                    else:
+                        print("[STOP] motion/move_stop 실패")
+
+                    stop_cli.destroy()
+
+                except Exception as e:
+                    print(f"[STOP] motion/move_stop 호출 오류: {e}")
+
+                rclpy.shutdown()
+                return  # 이후 로직 실행 안 함
+
+            # 기존 weight / flag 로직
+            if weight > 100:
+                if current_weight > weight:
+                    flag = 2
+                elif flag != 2 and current_weight > weight * 0.85:
+                    flag = 1
+                if current_weight > start_weight:
+                    flag_start = 1
+            else:
+                if current_weight > weight:
+                    flag = 2
+                elif flag != 2 and current_weight > weight * 0.7:
+                    flag = 1
+                if current_weight > start_weight:
+                    flag_start = 1
+
+        except json.JSONDecodeError:
+            print(f"[MQTT 수신] JSON 변환 실패. 원본: {msg.payload.decode()}")
+
+
+    # =====================
+    # MQTT 리스너 스레드
+    # =====================
+    def mqtt_listener():
+        global mqtt_client
+        client = mqtt.Client(client_id=MQTT_CONFIG['client_id'])
+        client.username_pw_set(MQTT_CONFIG['username'], MQTT_CONFIG['password'])
+        client.tls_set(cert_reqs=ssl.CERT_NONE)
+        client.tls_insecure_set(True)
+
+        client.on_connect = on_connect
+        client.on_message = on_message
+
+        client.connect(MQTT_CONFIG['broker'], MQTT_CONFIG['port'], MQTT_CONFIG['keepalive'])
+        mqtt_client = client
+        client.loop_start()
+
+
+    mqtt_thread = threading.Thread(target=mqtt_listener, daemon=True)
+    mqtt_thread.start()
+
 
     set_tool("Tool Weight_2FG")
     set_tcp("2FG_TCP")
@@ -156,7 +194,7 @@ def main(args=None):
     
     set_digital_output(2, 1)
     set_digital_output(1, 1)
-
+    blist = [pos2_1,pos2]
     while rclpy.ok():
         movej(JReady, vel=VELOCITY, acc=ACC)
         
@@ -168,8 +206,15 @@ def main(args=None):
         movel(pos1, vel=VELOCITY, acc=ACC)
         set_digital_output(2, 0)
         time.sleep(1.0)
-        movel(pos2_1, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
-        movel(pos2, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        # movel(pos2_1, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        # movel(pos2, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+    #     moveb(pos2_1, pos2,
+    #   vel=VELOCITY,
+    #   acc=ACC,
+    #   ref=DR_BASE,
+    #   mod=DR_MV_MOD_ABS,
+    #   radius=40)
+    
         time.sleep(0.5)
         set_digital_output(2, 1)
         time.sleep(0.5)
