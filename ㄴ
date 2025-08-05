@@ -1,0 +1,276 @@
+import ssl
+import random
+import threading
+import time
+import json
+import paho.mqtt.client as mqtt
+import rclpy
+import DR_init
+# =====================
+# MQTT 설정
+# =====================
+MQTT_CONFIG = {
+    'broker': 'p021f2cb.ala.asia-southeast1.emqxsl.com',
+    'port': 8883,
+    'username': 'Rokey',
+    'password': '1234567',
+    'topic': "test",
+    'client_id': f'python-mqtt-{random.randint(0, 100)}',
+    'keepalive': 60
+}
+
+# =====================
+# 제어 변수
+# =====================
+weight = 0.0
+start_weight = 5.0
+flag = 0
+flag_start = 0
+
+# =====================
+# 전역 MQTT 클라이언트 변수
+# =====================
+mqtt_client = None
+
+# =====================
+# MQTT 콜백
+# =====================
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("[MQTT] 브로커 연결 성공")
+        client.subscribe(MQTT_CONFIG['topic'])
+        print(f"[MQTT] '{MQTT_CONFIG['topic']}' 토픽 구독 시작")
+    else:
+        print(f"[MQTT] 연결 실패. 코드: {rc}")
+
+def on_message(client, userdata, msg):
+    global flag, flag_start, weight
+    try:
+        data = json.loads(msg.payload.decode())
+        print(f"[MQTT 수신] 토픽: {msg.topic} | JSON: {data}")
+        if(weight == 0.0):
+            weight = float(data.get("concentration", 0))
+        current_weight = float(data.get("weight", 0))
+        if(float(data.get("stop", 0))==1):
+            #stop(DR_QSTOP)
+            rclpy.shutdown()
+
+        if weight > 100:
+            if current_weight > weight:
+                flag = 2
+            elif flag != 2 and current_weight > weight * 0.85:
+                flag = 1
+            if current_weight > start_weight:
+                flag_start = 1
+
+        else:
+            if current_weight > weight:
+                flag = 2
+            elif flag != 2 and current_weight > weight * 0.7:
+                flag = 1
+            if current_weight > start_weight:
+                flag_start = 1
+
+    except json.JSONDecodeError:
+        print(f"[MQTT 수신] JSON 변환 실패. 원본: {msg.payload.decode()}")
+
+# =====================
+# MQTT 리스너 스레드
+# =====================
+def mqtt_listener():
+    global mqtt_client
+    client = mqtt.Client(client_id=MQTT_CONFIG['client_id'])
+    client.username_pw_set(MQTT_CONFIG['username'], MQTT_CONFIG['password'])
+    client.tls_set(cert_reqs=ssl.CERT_NONE)
+    client.tls_insecure_set(True)
+
+    client.on_connect = on_connect
+    client.on_message = on_message
+
+    client.connect(MQTT_CONFIG['broker'], MQTT_CONFIG['port'], MQTT_CONFIG['keepalive'])
+    mqtt_client = client
+    client.loop_start()
+
+# =====================
+# 로봇 제어 코드
+# =====================
+ROBOT_ID = "dsr01"
+ROBOT_MODEL = "m0609"
+VELOCITY, ACC = 100, 100
+DR_init.__dsr__id = ROBOT_ID
+DR_init.__dsr__model = ROBOT_MODEL
+
+def main(args=None):
+    global flag, flag_start, weight
+
+    rclpy.init(args=args)
+    node = rclpy.create_node("rokey_move", namespace=ROBOT_ID)
+    DR_init.__dsr__node = node
+
+
+    mqtt_thread = threading.Thread(target=mqtt_listener, daemon=True)
+    mqtt_thread.start()
+
+
+
+    try:
+        from DSR_ROBOT2 import set_tool, set_tcp, movej, set_digital_output, movel, check_force_condition, DR_AXIS_Z, task_compliance_ctrl, set_desired_force, DR_FC_MOD_REL, DR_BASE,DR_MV_MOD_ABS, DR_QSTOP, DR_SSTOP
+        from DR_common2 import posx, posj
+    except ImportError as e:
+        print(f"Error importing DSR_ROBOT2 : {e}")
+        return
+
+    def release():
+        set_digital_output(1, 0)
+        set_digital_output(2, 1)
+
+    def grip():
+        set_digital_output(2, 0)
+        set_digital_output(1, 1)
+
+    set_tool("Tool Weight_2FG")
+    set_tcp("2FG_TCP")
+
+    # 위치 정의
+    JReady = posj([0.0, 0.0, 90.0, 0.0, 90.0, 0.0])
+    pos1 = posx([416.26, 74.73, 48.42, 174.5, -179.59, -91.68]) #빈컵잡기
+    pos1_1 = posx([416.26, 74.73, 200.42, 174.5, -179.59, -91.68])
+    pos2 = posx([672.05, 146.11, 83.49, 11.42, 180, 100.68]) #빈컵놓기
+    pos2_1 = posx([664.05, 146.11, 150.49, 11.42, 180, 100.68]) #빈컵놓기 전에 위
+    pos3 = posx([393.78, -313.01, 22.34, 103.45, -169.61, -78.61]) #스푼 잡기
+    pos3_1 = posx([393.0, -447.0, 173.0, 96.0, -178.0, 100.0])
+    pos4 = posx([516.4, -30.72, 241.8, 118.46, -139.79, -91.38]) #설탕푸기직전
+    pos5 = posx([563.94, -114.13, 161.17, 112.95, -142.83, -90.62]) #설탕담음
+    pos6 = posx([555.41, -69.15, 211.1, 109.81, -124.78, -91.08]) #설탕담고들음
+    pos7 = posx([597.91, 198.87, 156.25, 139.14, -108.22, -95.49]) #설탕든채로 컵위
+    pos8 = posx([597.47, 180.63, 164.45, 137.01, -107.33, 134.82])  # 설탕 부음
+    pos9 = posx([620.62, 183.2, 287.19, 4.42, 127.24, 129.72]) #스푼복귀중
+    pos10 = posx([399.0, -189.0, 379.0, 151.0, -164.0, -115.0]) #스푼복귀하는중에 좀 위로
+    pos11 = posx([393.44, -313.19, 30.19, 15.46, 176.25, -163.03]) # 스푼복귀완
+    pos12 = posx([582.2, -41.25, 197.8, 171.72, -113.12, 10.08]) #주전자잡기1초전
+    pos13 = posx([816.14, -62.07, 298.77, 175.91, -90.0, 0.0]) #주전자잡기
+    pos14 = posx([668.98, 340.02, 499.41, 26.5, 86.37, -178.1]) #주전자붓기전
+    pos15 = posx([593.42, 352.19, 263.66, 23.69, 90.46, 179.7]) #물붓기전
+    pouring = posj([35.86, 13.39, 123.34, 17.77, -47.68, 167.52]) #물붓기시작할때j
+    pos16 = posx([808.24, -49.89, 451.92, 175.71, -86.68, -0.46]) #주전자복귀시작
+    
+    set_digital_output(2, 1)
+    set_digital_output(1, 1)
+
+    while rclpy.ok():
+        movej(JReady, vel=VELOCITY, acc=ACC)
+        
+        while 1:
+            if(weight > 0):
+                print(weight)
+                break
+        
+        movel(pos1, vel=VELOCITY, acc=ACC)
+        set_digital_output(2, 0)
+        time.sleep(1.0)
+        movel(pos2_1, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        movel(pos2, vel=VELOCITY, acc=ACC, radius=100, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        time.sleep(0.5)
+        set_digital_output(2, 1)
+        time.sleep(0.5)
+
+        movel(pos10, vel=VELOCITY, acc=ACC)
+        movel(pos3, vel=VELOCITY, acc=ACC, radius=40, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        grip()
+        time.sleep(2.5)
+        movel(pos3_1, vel=VELOCITY, acc=ACC, radius=40, ref=DR_BASE, mod=DR_MV_MOD_ABS)
+        movel(pos4, vel=VELOCITY, acc=ACC)
+        movel(pos5, vel=VELOCITY, acc=ACC)
+        movel(pos6, vel=VELOCITY, acc=ACC)
+        movel(pos7, vel=VELOCITY, acc=ACC)
+        movel(pos8, vel=VELOCITY, acc=ACC)
+        time.sleep(0.5)
+        # ====== MQTT 발행 ======
+        if mqtt_client:
+            payload = {
+                "event": "1",
+            }
+            mqtt_client.publish("test", json.dumps(payload))
+            print(f"[MQTT 발행] {payload}")
+
+        movel(pos9, vel=VELOCITY, acc=ACC)
+        movel(pos3_1, vel=VELOCITY, acc=ACC)
+        movel(pos11, vel=VELOCITY, acc=ACC)
+        task_compliance_ctrl(stx=[500, 500, 500, 100, 100, 100])
+        time.sleep(0.1)
+        set_desired_force(fd=[0, 0, -20, 0, 0, 0], dir=[0, 0, 1, 0, 0, 0], mod=DR_FC_MOD_REL)
+        time.sleep(0.1)
+        force_condition = 0
+        while (force_condition > -1): # 힘제어로 블럭 놓기
+            force_condition = check_force_condition(DR_AXIS_Z, max=15.0)  # 숫자 낮을수록 빨리 멈춤
+            time.sleep(0.1)
+        set_digital_output(2, 1)
+        time.sleep(1.0)
+        movel(posx(0, 0, 100, 0, 0, 0), vel=VELOCITY, acc=ACC)
+        movel(pos12, vel=VELOCITY, acc=ACC) #원래 여기서 덜컹
+        movel(pos13, vel=VELOCITY, acc=ACC)
+        pos13[2] += 50.0
+
+        grip()
+        time.sleep(2.5)
+        movel(pos13, vel=VELOCITY, acc=ACC)
+        pos13[2] -= 50.0
+        movel(pos14, vel=VELOCITY, acc=ACC)
+        movel(pos15, vel=VELOCITY, acc=ACC)
+        flag = 0
+        flag_start = 0
+        if mqtt_client:
+            payload = {
+                "event": "2",
+            }
+            mqtt_client.publish("test", json.dumps(payload))
+            print(f"[MQTT 발행] {payload}")
+        # 붓기 전
+        while True:
+            if flag_start == 1:
+                break
+            movej(pouring, vel=VELOCITY, acc=ACC)
+            pouring[5] += 0.5
+
+        angle = 2.0
+        # 붓는 중 85%까지
+        while True:
+            movej(pouring, vel=VELOCITY, acc=ACC)
+            time.sleep(5)
+            print(flag)
+
+            if flag == 1:
+                break
+            elif pouring[5] > 200.0:
+                break
+            else:
+                pouring[5] += angle
+                print(pouring[5])
+
+            if angle > 1.0:
+                angle -= 0.1
+        
+        while True:
+            if flag == 2:
+                break
+        if mqtt_client:
+            payload = {
+                "event": "3",
+            }
+            mqtt_client.publish("test", json.dumps(payload))
+            print(f"[MQTT 발행] {payload}")
+        pouring[5] = 167.52
+        movej(pouring, vel=VELOCITY, acc=ACC)
+        movel(pos16, vel=VELOCITY, acc=ACC)
+        movel(pos13, vel=VELOCITY, acc=ACC)
+
+        time.sleep(1.0)
+        set_digital_output(2, 1)
+        time.sleep(1.0)
+        movel(pos12, vel=VELOCITY, acc=ACC)
+
+
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    main()
